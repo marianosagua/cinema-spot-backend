@@ -7,24 +7,52 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
-  id             String  @id @default(cuid())
-  email          String  @unique
-  name           String
-  password       String  @unique
-  role           String
-  emailValidated Boolean @default(false)
-  isLogged       Boolean @default(true)
+model categories {
+  id     Int      @id @default(autoincrement())
+  name   String   @unique @db.VarChar(50)
+  movies movies[]
 }
 
-// model reservations {
-//   id         String   @id @default(cuid())
-//   userId     String
-//   user       User     @relation(fields: [userId], references: [id])
-//   movie      String
-//   startTime  DateTime
-//   endTime    DateTime
-//   createdAt  DateTime @default(now())
-//   seatNumber Int
-//   state      Boolean
-// }
+model functions {
+  id                String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  movie_id          Int?
+  start_time        DateTime       @db.Timestamp(6)
+  end_time          DateTime       @db.Timestamp(6)
+  hall              Int
+  reservationscount Int?           @default(20)
+  movies            movies?        @relation(fields: [movie_id], references: [id], onUpdate: NoAction, map: "fk_movie")
+  reservations      reservations[]
+}
+
+model halls {
+  hall_number     Int @id
+  available_seats Int @default(20)
+}
+
+model movies {
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String
+  poster      String
+  category_id Int?
+  functions   functions[]
+  categories  categories? @relation(fields: [category_id], references: [id], onUpdate: NoAction, map: "fk_category")
+}
+
+model reservations {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id     String?    @db.Uuid
+  function_id String?    @db.Uuid
+  functions   functions? @relation(fields: [function_id], references: [id], onUpdate: NoAction, map: "fk_function")
+  users       users?     @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "fk_user")
+}
+
+model users {
+  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email           String         @unique @db.VarChar(100)
+  password        String         @unique @db.VarChar(100)
+  name            String         @db.VarChar(100)
+  role            String?        @default("USER") @db.VarChar(5)
+  email_validated Boolean?       @default(false)
+  reservations    reservations[]
+}

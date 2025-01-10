@@ -23,11 +23,6 @@ export class AuthService {
       if (!bcryptAdapter.compare(loginDto.password, user.password))
         throw new Error("Invalid password");
 
-      await prismaClient.users.update({
-        data: { isLogged: true },
-        where: { email: user.email },
-      });
-
       const { password, ...userData } = UserEntity.create(user);
 
       const token = JwtAdapter.generateToken({ id: user.id }, "24h");
@@ -61,7 +56,6 @@ export class AuthService {
 
       return { user: userEntity, token };
     } catch (error) {
-      console.log("Error register: " + error);
       throw new Error(String(error));
     }
   }
@@ -93,7 +87,6 @@ export class AuthService {
     try {
       const payload = JwtAdapter.verifyToken(token);
       if (!payload) throw new Error("Invalid token");
-      console.log(payload);
 
       const { email } = payload as { email: string };
       if (!email) throw new Error("Email not in token");
@@ -102,7 +95,7 @@ export class AuthService {
       if (!user) throw new Error("User not found");
 
       await prismaClient.users.update({
-        data: { emailValidated: true },
+        data: { email_validated: true },
         where: { email },
       });
     } catch (error) {
