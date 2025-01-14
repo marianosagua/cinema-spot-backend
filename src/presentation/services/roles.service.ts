@@ -1,4 +1,5 @@
 import { prismaClient } from "../../data/postgres/client-connection";
+import { CustomError } from "../../domain/errors/CustomErrors";
 
 export class RolesService {
   assignRole = async (userId: string, newRole: string) => {
@@ -10,7 +11,7 @@ export class RolesService {
       });
 
       if (!role) {
-        throw new Error("Role not found");
+        throw CustomError.badRequest(`Role ${newRole} not found!!!`);
       }
 
       await prismaClient.users.update({
@@ -22,7 +23,11 @@ export class RolesService {
         },
       });
     } catch (error) {
-      throw new Error(String(error));
+      if (error instanceof CustomError) {
+        throw error;
+      }
+      console.log("Error:\n" + error);
+      throw CustomError.internalServer("An unknown error occurred");
     }
   };
 }
