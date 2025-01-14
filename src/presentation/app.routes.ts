@@ -6,6 +6,7 @@ export class AppRoutes {
     const router = Router();
 
     router.use("/api/auth", AuthRoutes.getRoutes());
+    // router.use("/api/roles", AuthRoutes.getRoutes());
 
     return router;
   }

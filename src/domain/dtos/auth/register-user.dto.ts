@@ -4,12 +4,11 @@ export class RegisterUserDto {
   constructor(
     public email: string,
     public password: string,
-    public name: string,
-    public role: string
+    public name: string
   ) {}
 
   static create(object: { [key: string]: any }): [string?, RegisterUserDto?] {
-    const { email, password, name, role = "USER" } = object;
+    const { email, password, name } = object;
 
     if (!name) return ["Name is required"];
     if (!email) return ["Email is required"];
@@ -17,6 +16,6 @@ export class RegisterUserDto {
     if (!regularExps.email.test(email)) return ["Email is not valid"];
     if (password.length < 6) return ["Password too short"];
 
-    return [undefined, new RegisterUserDto(email, password, name, role)];
+    return [undefined, new RegisterUserDto(email, password, name)];
   }
 }

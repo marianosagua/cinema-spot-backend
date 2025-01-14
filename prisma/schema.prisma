@@ -48,11 +48,19 @@ model reservations {
 }
 
 model users {
-  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   email           String         @unique @db.VarChar(100)
-  password        String         @unique @db.VarChar(100)
   name            String         @db.VarChar(100)
-  role            String?        @default("USER") @db.VarChar(5)
+  password        String         @unique @db.VarChar(100)
   email_validated Boolean?       @default(false)
+  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  role_id         Int?           @default(2)
   reservations    reservations[]
+  roles           roles?         @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user")
+}
+
+model roles {
+  id          Int     @id @default(autoincrement())
+  role_name   String
+  description String?
+  users       users[]
 }

@@ -4,19 +4,19 @@ export const dataSeed = {
       name: "Admin 1",
       email: "ejemplo1@ejemplo1.com",
       password: "9999999",
-      role: "ADMIN",
+      role_id: "ADMIN",
     },
     {
       name: "Admin 2",
       email: "ejemplo2@ejemplo2.com",
       password: "8888888",
-      role: "ADMIN",
+      role_id: "ADMIN",
     },
     {
       name: "Admin 3",
       email: "ejemplo3@ejemplo3.com",
       password: "7777777",
-      role: "ADMIN",
+      role_id: "ADMIN",
     },
   ],
   movies: [
@@ -118,5 +118,9 @@ export const dataSeed = {
     { name: "Crime" },
     { name: "Family" },
     { name: "Sport" },
+  ],
+  roles: [
+    { id: 1, name: "ADMIN", description: "Administrator" },
+    { id: 2, name: "USER", description: "User" },
   ],
 };

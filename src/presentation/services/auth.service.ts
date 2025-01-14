@@ -42,7 +42,7 @@ export class AuthService {
 
       if (exist) throw new Error("User already exists");
 
-      const data = { ...registerDto, role: registerDto.role || "USER" };
+      const data = { ...registerDto };
       data.password = bcryptAdapter.hash(data.password);
 
       const user = await prismaClient.users.create({ data });
