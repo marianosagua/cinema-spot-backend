@@ -5,6 +5,7 @@ import { prismaClient } from "../../data/postgres/client-connection";
 import { RegisterUserDto } from "../../domain/dtos/auth";
 import { LoginDto } from "../../domain/dtos/auth/login.dto";
 import { UserEntity } from "../../domain/entities/user.entity";
+import { CustomError } from "../../domain/errors/CustomErrors";
 import { EmailService } from "./email.service";
 
 export class AuthService {
@@ -30,7 +31,11 @@ export class AuthService {
 
       return { user: userData, token };
     } catch (error) {
-      throw new Error(String(error));
+      if (error instanceof CustomError) {
+        throw error;
+      }
+      console.log("Error:\n" + error);
+      throw CustomError.internalServer("An unknown error occurred");
     }
   }
 
@@ -56,7 +61,11 @@ export class AuthService {
 
       return { user: userEntity, token };
     } catch (error) {
-      throw new Error(String(error));
+      if (error instanceof CustomError) {
+        throw error;
+      }
+      console.log("Error:\n" + error);
+      throw CustomError.internalServer("An unknown error occurred");
     }
   }
 
@@ -79,7 +88,11 @@ export class AuthService {
       });
       if (!isSent) throw new Error("Error sending email");
     } catch (error) {
-      throw new Error(String(error));
+      if (error instanceof CustomError) {
+        throw error;
+      }
+      console.log("Error:\n" + error);
+      throw CustomError.internalServer("An unknown error occurred");
     }
   }
 
@@ -99,7 +112,11 @@ export class AuthService {
         where: { email },
       });
     } catch (error) {
-      throw new Error(String(error));
+      if (error instanceof CustomError) {
+        throw error;
+      }
+      console.log("Error:\n" + error);
+      throw CustomError.internalServer("An unknown error occurred");
     }
   }
 }
