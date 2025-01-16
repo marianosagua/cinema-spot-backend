@@ -18,21 +18,21 @@ Este proyecto es el backend de un sistema de reservación de películas. Proporc
 ## Instalación
 
 1. Clona el repositorio:
-    ```bash
-    git clone https://github.com/tu-usuario/movie-reservation-system.git
-    ```
+   ```bash
+   git clone https://github.com/tu-usuario/movie-reservation-system.git
+   ```
 2. Navega al directorio del proyecto:
-    ```bash
-    cd movie-reservation-system/mrs-backend
-    ```
+   ```bash
+   cd movie-reservation-system/mrs-backend
+   ```
 3. Instala las dependencias:
-    ```bash
-    npm install
-    ```
-    o
-    ```bash
-    yarn install
-    ```
+   ```bash
+   npm install
+   ```
+   o
+   ```bash
+   yarn install
+   ```
 
 ## Configuración
 
@@ -41,12 +41,15 @@ Este proyecto es el backend de un sistema de reservación de películas. Proporc
 ## Ejecución en modo desarrollo
 
 1. Inicia el servidor:
-    ```bash
-    npm run dev
-    ```
-    o
-    ```bash
-    yarn dev
-    ```
+
+   ```bash
+   npm run dev
+   ```
+
+   o
+
+   ```bash
+   yarn dev
+   ```
 
 2. La API estará disponible en `http://localhost:PORT`.

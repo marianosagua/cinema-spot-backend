@@ -40,27 +40,26 @@ model movies {
 }
 
 model reservations {
-  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user_id     String?    @db.Uuid
-  function_id String?    @db.Uuid
-  functions   functions? @relation(fields: [function_id], references: [id], onUpdate: NoAction, map: "fk_function")
-  users       users?     @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "fk_user")
+  id                String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id           String?    @db.Uuid
+  function_id       String?    @db.Uuid
+  state_reservation Boolean?   @default(true)
+  functions         functions? @relation(fields: [function_id], references: [id], onUpdate: NoAction, map: "fk_function")
 }
 
 model users {
-  email           String         @unique @db.VarChar(100)
-  name            String         @db.VarChar(100)
-  password        String         @unique @db.VarChar(100)
-  email_validated Boolean?       @default(false)
-  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  role_id         Int?           @default(2)
-  reservations    reservations[]
-  roles           roles?         @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user")
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email           String   @unique @db.VarChar(100)
+  password        String   @unique @db.VarChar(100)
+  name            String   @db.VarChar(100)
+  email_validated Boolean?
+  role_id         Int?     @default(2)
+  roles           roles?   @relation(fields: [role_id], references: [id], onUpdate: NoAction, map: "fk_user")
 }
 
 model roles {
   id          Int     @id @default(autoincrement())
-  role_name   String
+  role_name   String  @unique
   description String?
   users       users[]
 }

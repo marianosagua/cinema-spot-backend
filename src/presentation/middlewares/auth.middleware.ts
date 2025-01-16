@@ -27,8 +27,6 @@ export class AuthMiddleware {
       const payload = JwtAdapter.verifyToken(token);
       const { id } = payload as { id: string };
 
-      console.log(id);
-
       const user = await prismaClient.users.findFirst({
         where: {
           id,
@@ -45,7 +43,11 @@ export class AuthMiddleware {
         return;
       }
 
-      req.body.user = UserEntity.create(user);
+      console.log(user);
+
+      const userEntity = UserEntity.create(user);
+
+      req.body.user = userEntity;
       next();
     } catch (error) {
       console.log("Error:\n" + error);
