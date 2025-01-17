@@ -1,5 +1,7 @@
 import { prismaClient } from "../../data/postgres/client-connection";
+import { MovieEntity } from "../../domain/entities";
 import { CustomError } from "../../domain/errors/CustomErrors";
+import { Movie } from "../../interfaces";
 
 export class MoviesService {
   async getMovies() {
@@ -30,15 +32,48 @@ export class MoviesService {
     }
   }
 
-  async addMovie() {
-    return { message: "Create movie" };
+  async addMovie(movie: Movie) {
+    try {
+      await prismaClient.movies.create({
+        data: {
+          title: movie.title,
+          description: movie.description,
+          poster: movie.poster,
+          category_id: movie.category,
+        },
+      });
+    } catch (error) {
+      throw CustomError.internalServer("Error adding movie");
+    }
   }
 
-  async updateMovie() {
-    return { message: "Update movie" };
+  async updateMovie(movie: Movie) {
+    try {
+      await prismaClient.movies.update({
+        where: {
+          id: movie.id,
+        },
+        data: {
+          title: movie.title,
+          description: movie.description,
+          poster: movie.poster,
+          category_id: movie.category,
+        },
+      });
+    } catch (error) {
+      throw CustomError.internalServer("Error updating movie");
+    }
   }
 
-  async deleteMovie() {
-    return { message: "Delete movie" };
+  async deleteMovie(id: number) {
+    try {
+      await prismaClient.movies.delete({
+        where: {
+          id,
+        },
+      });
+    } catch (error) {
+      throw CustomError.internalServer("Error deleting movie");
+    }
   }
 }

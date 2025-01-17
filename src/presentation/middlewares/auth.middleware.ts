@@ -43,10 +43,7 @@ export class AuthMiddleware {
         return;
       }
 
-      console.log(user);
-
       const userEntity = UserEntity.create(user);
-
       req.body.user = userEntity;
       next();
     } catch (error) {

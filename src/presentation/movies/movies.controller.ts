@@ -1,5 +1,6 @@
 import { Response, Request } from "express";
 import { MoviesService } from "../services/movies.service";
+import { MovieEntity } from "../../domain/entities";
 
 export class MoviesController {
   constructor(private moviesService: MoviesService) {}
@@ -18,15 +19,43 @@ export class MoviesController {
   };
 
   addMovie = async (req: Request, res: Response) => {
-    const movie = req.body;
-    res.json(movie);
+    try {
+      const movie = await MovieEntity.create(req.body);
+      await this.moviesService.addMovie(movie);
+      res.status(200).json({ message: "Movie added successfully" });
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: "An unknown error occurred" });
+      }
+    }
   };
 
   updateMovie = async (req: Request, res: Response) => {
-    res.json({ message: "Update movie" });
+    try {
+      const movie = await MovieEntity.create(req.body);
+      await this.moviesService.updateMovie(movie);
+      res.status(200).json({ message: "Movie updated successfully" });
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: "An unknown error occurred" });
+      }
+    }
   };
 
   deleteMovie = async (req: Request, res: Response) => {
-    res.json({ message: "Delete movie" });
+    try {
+      await this.moviesService.deleteMovie(req.body.id);
+      res.status(200).json({ message: "Movie deleted successfully" });
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: "An unknown error occurred" });
+      }
+    }
   };
 }
