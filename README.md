@@ -13,7 +13,7 @@ Este proyecto es el backend de un sistema de reservación de películas. Proporc
 
 - Node.js
 - npm o yarn
-- Base de datos (por ejemplo, MongoDB)
+- Base de datos PostgreSQL
 
 ## Instalación
 
