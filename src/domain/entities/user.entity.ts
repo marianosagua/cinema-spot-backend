@@ -1,16 +1,17 @@
 import { regularExps } from "../../config";
+import { prismaClient } from "../../data/postgres/client-connection";
 
 export class UserEntity {
   constructor(
     public id: string,
-    public name: string,
     public email: string,
     public password: string,
-    public role_id: number,
-    public emailValidated: boolean
+    public name: string,
+    public emailValidated: boolean,
+    public role: number
   ) {}
 
-  static create(data: { [key: string]: any }) {
+  static async create(data: { [key: string]: any }) {
     if (!data.id) {
       throw new Error("ID is required");
     }
@@ -35,13 +36,13 @@ export class UserEntity {
       throw new Error("Password must be at least 6 characters long");
     }
 
-    return new UserEntity(
-      data.id,
-      data.name,
-      data.email,
-      data.password,
-      data.role_id || 2,
-      data.emailValidated || false
-    );
+    return {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      role: data.role || 1,
+      emailValidated: data.emailValidated || false,
+    };
   }
 }

@@ -11,7 +11,7 @@ export class ReservationsRoutes {
       AuthMiddleware.isAdmin,
       ReservtionsController.getReservations
     );
-    router.get("/get-user-reservations", ReservtionsController.getReservation);
+    router.get("/get-reservation", ReservtionsController.getReservation);
     router.post("/add-reservation", ReservtionsController.addReservation);
     router.delete(
       "/delete-reservation",

@@ -38,7 +38,7 @@ export class AuthMiddleware {
         return;
       }
 
-      if (user.role_id !== 1) {
+      if (user.role !== 2) {
         res.status(401).json({ error: "User is not an admin" });
         return;
       }

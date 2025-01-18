@@ -4,19 +4,19 @@ export const dataSeed = {
       name: "Admin 1",
       email: "ejemplo1@ejemplo1.com",
       password: "9999999",
-      role_id: "ADMIN",
+      role: "ADMIN",
     },
     {
       name: "Admin 2",
       email: "ejemplo2@ejemplo2.com",
       password: "8888888",
-      role_id: "ADMIN",
+      role: "ADMIN",
     },
     {
       name: "Admin 3",
       email: "ejemplo3@ejemplo3.com",
       password: "7777777",
-      role_id: "ADMIN",
+      role: "ADMIN",
     },
   ],
   movies: [
@@ -120,7 +120,39 @@ export const dataSeed = {
     { name: "Sport" },
   ],
   roles: [
-    { id: 1, name: "ADMIN", description: "Administrator" },
-    { id: 2, name: "USER", description: "User" },
+    { id: 1, name: "USER", description: "User" },
+    { id: 2, name: "ADMIN", description: "Administrator" },
+  ],
+  showtimes: [
+    {
+      movie: "The Matrix",
+      hall: 1,
+      start_time: "2022-01-01T09:00:00",
+      end_time: "2022-01-01T12:00:00",
+    },
+    {
+      movie: "The Matrix",
+      hall: 2,
+      start_time: "2022-01-01T12:15:00",
+      end_time: "2022-01-01T15:15:00",
+    },
+    {
+      movie: "Interstellar",
+      hall: 3,
+      start_time: "2022-01-01T15:30:00",
+      end_time: "2022-01-01T18:30:00",
+    },
+    {
+      movie: "Interstellar",
+      hall: 4,
+      start_time: "2022-01-01T18:45:00",
+      end_time: "2022-01-01T21:45:00",
+    },
+    {
+      movie: "The Godfather",
+      hall: 5,
+      start_time: "2022-01-01T18:45:00",
+      end_time: "2022-01-01T21:45:00",
+    },
   ],
 };

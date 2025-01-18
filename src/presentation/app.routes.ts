@@ -3,6 +3,7 @@ import { AuthRoutes } from "./auth/auth.routes";
 import { RolesRoutes } from "./roles/roles.routes";
 import { MoviesRoutes } from "./movies/movies.routes";
 import { ReservationsRoutes } from "./reservations/reservations.routes";
+import { ShowtimesRoutes } from "./showtimes/showtimes.routes";
 
 export class AppRoutes {
   static getRoutes(): Router {
@@ -11,6 +12,7 @@ export class AppRoutes {
     router.use("/api/auth", AuthRoutes.getRoutes());
     router.use("/api/roles", RolesRoutes.getRoutes());
     router.use("/api/movies", MoviesRoutes.getRoutes());
+    router.use("/api/showtimes", ShowtimesRoutes.getRoutes());
     router.use("/api/reservations", ReservationsRoutes.getRoutes());
 
     return router;

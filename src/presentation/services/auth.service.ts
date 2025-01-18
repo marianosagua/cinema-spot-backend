@@ -24,7 +24,7 @@ export class AuthService {
       if (!bcryptAdapter.compare(loginDto.password, user.password))
         throw new Error("Invalid password");
 
-      const { password, ...userData } = UserEntity.create(user);
+      const { password, ...userData } = await UserEntity.create(user);
 
       const token = JwtAdapter.generateToken({ id: user.id }, "24h");
       if (!token) throw new Error("Error generating token");
@@ -54,7 +54,7 @@ export class AuthService {
 
       await this.sendEmailConfirmation(user.email);
 
-      const { password, ...userEntity } = UserEntity.create(user);
+      const { password, ...userEntity } = await UserEntity.create(user);
 
       const token = JwtAdapter.generateToken({ id: user.id }, "24h");
       if (!token) throw new Error("Error generating token");

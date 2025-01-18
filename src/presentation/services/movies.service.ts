@@ -1,5 +1,4 @@
 import { prismaClient } from "../../data/postgres/client-connection";
-import { MovieEntity } from "../../domain/entities";
 import { CustomError } from "../../domain/errors/CustomErrors";
 import { Movie } from "../../interfaces";
 
@@ -39,7 +38,7 @@ export class MoviesService {
           title: movie.title,
           description: movie.description,
           poster: movie.poster,
-          category_id: movie.category,
+          category: movie.category,
         },
       });
     } catch (error) {
@@ -57,7 +56,7 @@ export class MoviesService {
           title: movie.title,
           description: movie.description,
           poster: movie.poster,
-          category_id: movie.category,
+          category: movie.category,
         },
       });
     } catch (error) {

@@ -13,20 +13,10 @@ model categories {
   movies movies[]
 }
 
-model functions {
-  id                String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  movie_id          Int?
-  start_time        DateTime       @db.Timestamp(6)
-  end_time          DateTime       @db.Timestamp(6)
-  hall              Int
-  reservationscount Int?           @default(20)
-  movies            movies?        @relation(fields: [movie_id], references: [id], onUpdate: NoAction, map: "fk_movie")
-  reservations      reservations[]
-}
-
 model halls {
-  hall_number     Int @id
-  available_seats Int @default(20)
+  hall_number     Int         @id
+  available_seats Int         @default(20)
+  showtimes       showtimes[]
 }
 
 model movies {
@@ -34,32 +24,55 @@ model movies {
   title       String
   description String
   poster      String
-  category_id Int?
-  functions   functions[]
-  categories  categories? @relation(fields: [category_id], references: [id], onUpdate: NoAction, map: "fk_category")
+  category    Int?
+  categories  categories? @relation(fields: [category], references: [id], onUpdate: NoAction, map: "fk_category")
+  showtimes   showtimes[]
 }
 
 model reservations {
   id                String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user_id           String?    @db.Uuid
-  function_id       String?    @db.Uuid
+  showtime          String?    @db.Uuid
   state_reservation Boolean?   @default(true)
-  functions         functions? @relation(fields: [function_id], references: [id], onUpdate: NoAction, map: "fk_function")
+  user              String?    @db.Uuid
+  showtimes         showtimes? @relation(fields: [showtime], references: [id], onUpdate: NoAction, map: "fk_function")
 }
 
 model users {
-  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email           String   @unique @db.VarChar(100)
-  password        String   @unique @db.VarChar(100)
+  id              String   @id(map: "users_pkey1") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email           String   @unique(map: "users_email_key1") @db.VarChar(100)
+  password        String   @unique(map: "users_password_key1") @db.VarChar(255)
   name            String   @db.VarChar(100)
-  email_validated Boolean?
-  role_id         Int?     @default(2)
-  roles           roles?   @relation(fields: [role_id], references: [id], onUpdate: NoAction, map: "fk_user")
+  role            Int?     @default(2)
+  email_validated Boolean? @default(false)
+  roles           roles?   @relation(fields: [role], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_role_fkey1")
 }
 
 model roles {
-  id          Int     @id @default(autoincrement())
-  role_name   String  @unique
+  id          Int      @id @default(autoincrement())
   description String?
+  name        String   @unique(map: "roles_role_name_key")
+  rusers      rusers[]
   users       users[]
+}
+
+model showtimes {
+  id                String         @id(map: "functions_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  movie             Int?
+  start_time        DateTime       @db.Timestamp(6)
+  end_time          DateTime       @db.Timestamp(6)
+  hall              Int
+  reservationscount Int?           @default(20)
+  reservations      reservations[]
+  halls             halls          @relation(fields: [hall], references: [hall_number], onDelete: NoAction, onUpdate: NoAction, map: "fk_halls")
+  movies            movies?        @relation(fields: [movie], references: [id], onUpdate: NoAction, map: "fk_movie")
+}
+
+model rusers {
+  email           String   @unique(map: "users_email_key") @db.VarChar(100)
+  name            String   @db.VarChar(100)
+  password        String   @unique(map: "users_password_key") @db.VarChar(255)
+  email_validated Boolean? @default(false)
+  id              String   @id(map: "users_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  role            Int?     @default(2)
+  roles           roles?   @relation(fields: [role], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_role_fkey")
 }

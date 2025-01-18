@@ -6,7 +6,7 @@ export class RolesService {
     try {
       const role = await prismaClient.roles.findFirst({
         where: {
-          role_name: newRole,
+          name: newRole,
         },
       });
 
@@ -19,7 +19,7 @@ export class RolesService {
           id: userId,
         },
         data: {
-          role_id: role.id,
+          role: role.id,
         },
       });
     } catch (error) {

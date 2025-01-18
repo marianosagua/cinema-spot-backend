@@ -10,7 +10,15 @@ export class ReservtionsController {
   };
 
   static addReservation = async (req: Request, res: Response) => {
-    res.send("Add reservation");
+    try {
+      
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: "An unknown error occurred" });
+      }
+    }
   };
 
   static deleteReservation = async (req: Request, res: Response) => {
