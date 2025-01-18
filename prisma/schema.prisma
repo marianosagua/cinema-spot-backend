@@ -30,28 +30,28 @@ model movies {
 }
 
 model reservations {
-  id                String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  showtime          String?    @db.Uuid
-  state_reservation Boolean?   @default(true)
-  user              String?    @db.Uuid
-  showtimes         showtimes? @relation(fields: [showtime], references: [id], onUpdate: NoAction, map: "fk_function")
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id     String    @unique @db.Uuid
+  showtime_id String    @db.Uuid
+  showtimes   showtimes @relation(fields: [showtime_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users       users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model users {
-  id              String   @id(map: "users_pkey1") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email           String   @unique(map: "users_email_key1") @db.VarChar(100)
-  password        String   @unique(map: "users_password_key1") @db.VarChar(255)
-  name            String   @db.VarChar(100)
-  role            Int?     @default(2)
-  email_validated Boolean? @default(false)
-  roles           roles?   @relation(fields: [role], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_role_fkey1")
+  id              String        @id(map: "users_pkey1") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email           String        @unique(map: "users_email_key1") @db.VarChar(100)
+  password        String        @unique(map: "users_password_key1") @db.VarChar(255)
+  name            String        @db.VarChar(100)
+  role            Int?          @default(1)
+  email_validated Boolean?      @default(false)
+  reservations    reservations?
+  roles           roles?        @relation(fields: [role], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_role_fkey1")
 }
 
 model roles {
-  id          Int      @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   description String?
-  name        String   @unique(map: "roles_role_name_key")
-  rusers      rusers[]
+  name        String  @unique(map: "roles_role_name_key")
   users       users[]
 }
 
@@ -65,14 +65,4 @@ model showtimes {
   reservations      reservations[]
   halls             halls          @relation(fields: [hall], references: [hall_number], onDelete: NoAction, onUpdate: NoAction, map: "fk_halls")
   movies            movies?        @relation(fields: [movie], references: [id], onUpdate: NoAction, map: "fk_movie")
-}
-
-model rusers {
-  email           String   @unique(map: "users_email_key") @db.VarChar(100)
-  name            String   @db.VarChar(100)
-  password        String   @unique(map: "users_password_key") @db.VarChar(255)
-  email_validated Boolean? @default(false)
-  id              String   @id(map: "users_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  role            Int?     @default(2)
-  roles           roles?   @relation(fields: [role], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_role_fkey")
 }

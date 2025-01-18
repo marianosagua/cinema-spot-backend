@@ -10,7 +10,7 @@ export class ShowtimesRoutes {
     const showtimesController = new ShowtimesController(showtimeService);
 
     router.get("/", AuthMiddleware.isAdmin, showtimesController.getAll);
-    router.get("/:id", AuthMiddleware.isAdmin, showtimesController.getById);
+    router.get("/:id", showtimesController.getById);
     router.get("/movie/:movieId", showtimesController.getAllByMovie);
     router.post("/", AuthMiddleware.isAdmin, showtimesController.create);
     router.put("/:id", AuthMiddleware.isAdmin, showtimesController.update);

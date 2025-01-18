@@ -1,22 +1,28 @@
 import { Router } from "express";
-import { ReservtionsController } from "./reservations.controller";
+import { ReservationsController } from "./reservations.controller";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
+import { ReservationsService } from "../services";
 
 export class ReservationsRoutes {
   static getRoutes(): Router {
     const router = Router();
+    const reservationsService = new ReservationsService();
+    const reservationsController = new ReservationsController(
+      reservationsService
+    );
 
     router.get(
-      "/get-all-reservations",
+      "/",
       AuthMiddleware.isAdmin,
-      ReservtionsController.getReservations
+      reservationsController.getReservations
     );
-    router.get("/get-reservation", ReservtionsController.getReservation);
-    router.post("/add-reservation", ReservtionsController.addReservation);
-    router.delete(
-      "/delete-reservation",
-      ReservtionsController.deleteReservation
+    router.get(
+      "/:id",
+      AuthMiddleware.isAdmin,
+      reservationsController.getReservationById
     );
+    router.post("/", reservationsController.addReservation);
+    router.delete("/:id", reservationsController.deleteReservation);
 
     return router;
   }

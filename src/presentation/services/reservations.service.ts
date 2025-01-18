@@ -1,17 +1,96 @@
+import { prismaClient } from "../../data/postgres/client-connection";
+import { Reservation } from "../../interfaces";
+
 export class ReservationsService {
-  static getReservations = async () => {
-    return "Get reservations";
+  getReservations = async () => {
+    try {
+      const reservations = await prismaClient.reservations.findMany({
+        select: {
+          id: true,
+          users: {
+            select: {
+              name: true,
+            },
+          },
+          showtime_id: true,
+        },
+      });
+
+      const transformedReservations = reservations.map((reservation) => ({
+        id: reservation.id,
+        user: reservation.users.name,
+        showtime_id: reservation.showtime_id,
+      }));
+
+      return transformedReservations;
+    } catch (error) {
+      throw new Error("Error occurred while fetching reservations");
+    }
   };
 
-  static getReservation = async () => {
-    return "Get reservation";
+  getReservation = async (id: string) => {
+    try {
+      const reservation = prismaClient.reservations.findUnique({
+        where: { id },
+      });
+      return reservation;
+    } catch (error) {
+      throw new Error("Error occurred while fetching reservation");
+    }
   };
 
-  static addReservation = async () => {
-    return "Add reservation";
+  addReservation = async (reservation: Reservation) => {
+    try {
+      const showtime = await prismaClient.showtimes.findFirst({
+        where: {
+          id: reservation.showtime_id,
+        },
+      });
+
+      if (showtime?.reservationscount === 0) {
+        throw new Error("No more reservations available for this showtime");
+      }
+
+      await prismaClient.reservations.create({
+        data: {
+          user_id: reservation.user_id,
+          showtime_id: reservation.showtime_id,
+        },
+      });
+
+      await prismaClient.showtimes.update({
+        where: {
+          id: reservation.showtime_id,
+        },
+        data: {
+          reservationscount: {
+            decrement: 1,
+          },
+        },
+      });
+    } catch (error) {
+      throw new Error("Error occurred while adding reservation");
+    }
   };
 
-  static deleteReservation = async () => {
-    return "Delete reservation";
+  deleteReservation = async (id: string) => {
+    try {
+      const reservation = await prismaClient.reservations.delete({
+        where: { id },
+      });
+
+      await prismaClient.showtimes.update({
+        where: {
+          id: reservation.showtime_id,
+        },
+        data: {
+          reservationscount: {
+            increment: 1,
+          },
+        },
+      });
+    } catch (error) {
+      throw new Error("Error occurred while deleting reservation");
+    }
   };
 }
