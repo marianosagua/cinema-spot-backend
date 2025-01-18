@@ -1,55 +1,52 @@
 # Movie Reservation System Backend
 
-Este proyecto es el backend de un sistema de reservación de películas. Proporciona una API para gestionar las reservas de películas, incluyendo la creación, actualización, eliminación y consulta de reservas.
+This project is the backend of a movie reservation system. It provides an API to manage movie reservations, including creating, updating, deleting, and querying reservations.
 
-## Características
+## Features
 
-- Gestión de usuarios
-- Gestión de películas
-- Gestión de reservas
-- Autenticación y autorización
+- User management
+- Movie management
+- Reservation management
+- Authentication and authorization
 
-## Requisitos
+## Requirements
 
 - Node.js
-- npm o yarn
-- Base de datos PostgreSQL
+- npm or yarn
+- PostgreSQL database
 
-## Instalación
+## Installation
 
-1. Clona el repositorio:
+1. Clone the repository:
    ```bash
-   git clone https://github.com/tu-usuario/movie-reservation-system.git
+   git clone https://github.com/your-username/movie-reservation-system.git
    ```
-2. Navega al directorio del proyecto:
+2. Navigate to the project directory:
    ```bash
    cd movie-reservation-system/mrs-backend
    ```
-3. Instala las dependencias:
+3. Install the dependencies:
    ```bash
    npm install
    ```
-   o
+   or
    ```bash
    yarn install
    ```
 
-## Configuración
+## Configuration
 
-1. Crea un archivo `.env` en la raíz del proyecto y configura las variables de entorno necesarias
+1. Create a `.env` file in the root of the project and configure the necessary environment variables.
 
-## Ejecución en modo desarrollo
+## Running in Development Mode
 
-1. Inicia el servidor:
-
+1. Start the server:
    ```bash
    npm run dev
    ```
-
-   o
-
+   or
    ```bash
    yarn dev
    ```
 
-2. La API estará disponible en `http://localhost:PORT`.
+2. The API will be available at `http://localhost:PORT`. Movie Reservation System Backend
