@@ -9,23 +9,10 @@ export class MoviesRoutes {
     const moviesService = new MoviesService();
     const moviesController = new MoviesController(moviesService);
 
-    router.get("/get-movies", moviesController.getMovies);
-    router.post(
-      "/add-movie",
-      AuthMiddleware.isAdmin,
-      moviesController.addMovie
-    );
-    router.put(
-      "/update-movie",
-      AuthMiddleware.isAdmin,
-      moviesController.updateMovie
-    );
-
-    router.delete(
-      "/delete-movie",
-      AuthMiddleware.isAdmin,
-      moviesController.deleteMovie
-    );
+    router.get("/", moviesController.getMovies);
+    router.post("/", AuthMiddleware.isAdmin, moviesController.addMovie);
+    router.put("/", AuthMiddleware.isAdmin, moviesController.updateMovie);
+    router.delete("/:id", AuthMiddleware.isAdmin, moviesController.deleteMovie);
 
     return router;
   }

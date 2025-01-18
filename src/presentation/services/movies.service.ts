@@ -64,11 +64,11 @@ export class MoviesService {
     }
   }
 
-  async deleteMovie(id: number) {
+  async deleteMovie(id: string) {
     try {
       await prismaClient.movies.delete({
         where: {
-          id,
+          id: parseInt(id),
         },
       });
     } catch (error) {

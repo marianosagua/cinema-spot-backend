@@ -48,7 +48,7 @@ export class MoviesController {
 
   deleteMovie = async (req: Request, res: Response) => {
     try {
-      await this.moviesService.deleteMovie(req.body.id);
+      await this.moviesService.deleteMovie(req.params.id);
       res.status(200).json({ message: "Movie deleted successfully" });
     } catch (error) {
       if (error instanceof Error) {
