@@ -7,6 +7,7 @@ export class MoviesService {
     try {
       const movies = await prismaClient.movies.findMany({
         select: {
+          id: true,
           title: true,
           description: true,
           poster: true,
@@ -19,6 +20,7 @@ export class MoviesService {
       });
 
       const transformedMovies = movies.map((movie) => ({
+        id: movie.id,
         title: movie.title,
         description: movie.description,
         poster: movie.poster,
@@ -28,6 +30,44 @@ export class MoviesService {
       return transformedMovies;
     } catch (error) {
       throw CustomError.internalServer("Error getting movies");
+    }
+  }
+
+  async getMovie(id: string) {
+    try {
+      const movie = await prismaClient.movies.findFirst({
+        where: {
+          id: parseInt(id),
+        },
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          poster: true,
+          categories: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      });
+
+      if (!movie) {
+        throw CustomError.notFound("Movie not found");
+      }
+
+      return {
+        id: movie.id,
+        title: movie.title,
+        description: movie.description,
+        poster: movie.poster,
+        category: movie.categories?.name,
+      };
+    } catch (error) {
+      if (error instanceof CustomError) {
+        throw error;
+      }
+      throw CustomError.internalServer("Error getting movie");
     }
   }
 

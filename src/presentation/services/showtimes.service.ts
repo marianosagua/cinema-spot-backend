@@ -6,6 +6,7 @@ export class ShowtimesService {
     try {
       const showtimes = await prismaClient.showtimes.findMany({
         select: {
+          id: true,
           movies: {
             select: {
               title: true,
@@ -23,6 +24,7 @@ export class ShowtimesService {
       });
 
       const transformedShowtimes = showtimes.map((showtime) => ({
+        id: showtime.id,
         movie: showtime.movies?.title,
         start_time: showtime.start_time.toISOString().substring(11, 19),
         end_time: showtime.end_time.toISOString().substring(11, 19),
@@ -67,6 +69,7 @@ export class ShowtimesService {
       });
 
       return {
+        id: showtime.id,
         movie: movieTitle?.title,
         start_time: showtime.start_time.toISOString().substring(11, 19),
         end_time: showtime.end_time.toISOString().substring(11, 19),
@@ -85,6 +88,7 @@ export class ShowtimesService {
           movie: parseInt(movieId, 10),
         },
         select: {
+          id: true,
           start_time: true,
           end_time: true,
           halls: {
@@ -97,6 +101,7 @@ export class ShowtimesService {
       });
 
       const transformedShowtimes = showtimes.map((showtime) => ({
+        id: showtime.id,
         start_time: showtime.start_time.toISOString().substring(11, 19),
         end_time: showtime.end_time.toISOString().substring(11, 19),
         hall: showtime.halls?.hall_number,

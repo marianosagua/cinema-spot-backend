@@ -10,6 +10,7 @@ export class MoviesRoutes {
     const moviesController = new MoviesController(moviesService);
 
     router.get("/", moviesController.getMovies);
+    router.get("/:id", moviesController.getMovie);  
     router.post("/", AuthMiddleware.isAdmin, moviesController.addMovie);
     router.put("/", AuthMiddleware.isAdmin, moviesController.updateMovie);
     router.delete("/:id", AuthMiddleware.isAdmin, moviesController.deleteMovie);

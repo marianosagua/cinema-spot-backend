@@ -18,6 +18,19 @@ export class MoviesController {
     }
   };
 
+  getMovie = async (req: Request, res: Response) => {
+    try {
+      const movie = await this.moviesService.getMovie(req.params.id);
+      res.status(200).json(movie);
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: "An unknown error occurred" });
+      }
+    }
+  };
+
   addMovie = async (req: Request, res: Response) => {
     try {
       const movie = await MovieEntity.create(req.body);
