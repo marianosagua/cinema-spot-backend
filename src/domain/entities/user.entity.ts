@@ -1,14 +1,14 @@
 import { regularExps } from "../../config";
-import { prismaClient } from "../../data/postgres/client-connection";
 
 export class UserEntity {
   constructor(
     public id: string,
+    public first_name: string,
+    public last_name: string,
     public email: string,
     public password: string,
-    public name: string,
-    public emailValidated: boolean,
-    public role: number
+    public role: number,
+    public emailValidated: boolean
   ) {}
 
   static async create(data: { [key: string]: any }) {
@@ -16,8 +16,12 @@ export class UserEntity {
       throw new Error("ID is required");
     }
 
-    if (!data.name) {
-      throw new Error("Name is required");
+    if (!data.first_name) {
+      throw new Error("First name is required");
+    }
+
+    if (!data.last_name) {
+      throw new Error("Last name is required");
     }
 
     if (!data.email) {

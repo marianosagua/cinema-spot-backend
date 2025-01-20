@@ -14,12 +14,12 @@ export class ShowtimesService {
           },
           start_time: true,
           end_time: true,
-          halls: {
+          rooms: {
             select: {
-              hall_number: true,
+              name: true,
             },
           },
-          reservationscount: true,
+          is_full: true,
         },
       });
 
@@ -28,8 +28,8 @@ export class ShowtimesService {
         movie: showtime.movies?.title,
         start_time: showtime.start_time.toISOString().substring(11, 19),
         end_time: showtime.end_time.toISOString().substring(11, 19),
-        hall: showtime.halls?.hall_number,
-        reservationscount: showtime.reservationscount,
+        room: showtime.rooms?.name,
+        is_full: showtime.is_full,
       }));
 
       return transformedShowtimes;
@@ -59,12 +59,12 @@ export class ShowtimesService {
         },
       });
 
-      const hallNumber = await prismaClient.halls.findUnique({
+      const roomName = await prismaClient.rooms.findFirst({
         where: {
-          hall_number: showtime.hall!,
+          id: showtime.room,
         },
         select: {
-          hall_number: true,
+          name: true,
         },
       });
 
@@ -73,8 +73,8 @@ export class ShowtimesService {
         movie: movieTitle?.title,
         start_time: showtime.start_time.toISOString().substring(11, 19),
         end_time: showtime.end_time.toISOString().substring(11, 19),
-        hall: hallNumber?.hall_number,
-        reservationscount: showtime.reservationscount,
+        room: roomName?.name,
+        is_full: showtime.is_full,
       };
     } catch (error) {
       throw new Error("Error occurred while fetching showtime");
@@ -91,12 +91,12 @@ export class ShowtimesService {
           id: true,
           start_time: true,
           end_time: true,
-          halls: {
+          rooms: {
             select: {
-              hall_number: true,
+              name: true,
             },
           },
-          reservationscount: true,
+          is_full: true,
         },
       });
 
@@ -104,8 +104,8 @@ export class ShowtimesService {
         id: showtime.id,
         start_time: showtime.start_time.toISOString().substring(11, 19),
         end_time: showtime.end_time.toISOString().substring(11, 19),
-        hall: showtime.halls?.hall_number,
-        reservationscount: showtime.reservationscount,
+        room: showtime.rooms?.name,
+        is_full: showtime.is_full,
       }));
 
       return transformedShowtimes;
@@ -127,7 +127,7 @@ export class ShowtimesService {
           movie: movieTitle?.id,
           start_time: showtime.start_time,
           end_time: showtime.end_time,
-          hall: showtime.hall,
+          room: showtime.room,
         },
       });
     } catch (error) {
@@ -136,17 +136,17 @@ export class ShowtimesService {
     }
   }
 
-  async update(id: string, data: any) {
+  async update(id: string, showtimeUpdated: Showtime) {
     try {
       await prismaClient.showtimes.update({
         where: {
           id,
         },
         data: {
-          start_time: data.start_time,
-          end_time: data.end_time,
-          hall: data.hall,
-          reservationscount: data.reservationscount,
+          start_time: showtimeUpdated.start_time,
+          end_time: showtimeUpdated.end_time,
+          room: showtimeUpdated.room,
+          is_full: showtimeUpdated.is_full,
         },
       });
     } catch (error) {

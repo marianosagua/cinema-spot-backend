@@ -13,12 +13,6 @@ model categories {
   movies movies[]
 }
 
-model halls {
-  hall_number     Int         @id
-  available_seats Int         @default(20)
-  showtimes       showtimes[]
-}
-
 model movies {
   id          Int         @id @default(autoincrement())
   title       String
@@ -32,37 +26,58 @@ model movies {
 model reservations {
   id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id     String    @unique @db.Uuid
-  showtime_id String    @db.Uuid
+  showtime_id String    @unique @db.Uuid
+  seat        String    @db.Uuid
+  seats       seats     @relation(fields: [seat], references: [id], onDelete: NoAction, onUpdate: NoAction)
   showtimes   showtimes @relation(fields: [showtime_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users       users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model users {
-  id              String        @id(map: "users_pkey1") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email           String        @unique(map: "users_email_key1") @db.VarChar(100)
-  password        String        @unique(map: "users_password_key1") @db.VarChar(255)
-  name            String        @db.VarChar(100)
-  role            Int?          @default(1)
-  email_validated Boolean?      @default(false)
-  reservations    reservations?
-  roles           roles?        @relation(fields: [role], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_role_fkey1")
-}
-
 model roles {
   id          Int     @id @default(autoincrement())
-  description String?
-  name        String  @unique(map: "roles_role_name_key")
+  name        String  @unique @db.VarChar(50)
+  description String  @db.VarChar(255)
   users       users[]
 }
 
+model rooms {
+  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  seats     seats[]
+  showtimes showtimes[]
+}
+
+model seats {
+  id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  seat_number  Int
+  room         String?        @db.Uuid
+  is_available Boolean        @default(true)
+  reservations reservations[]
+  rooms        rooms?         @relation(fields: [room], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
 model showtimes {
-  id                String         @id(map: "functions_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  movie             Int?
-  start_time        DateTime       @db.Timestamp(6)
-  end_time          DateTime       @db.Timestamp(6)
-  hall              Int
-  reservationscount Int?           @default(20)
-  reservations      reservations[]
-  halls             halls          @relation(fields: [hall], references: [hall_number], onDelete: NoAction, onUpdate: NoAction, map: "fk_halls")
-  movies            movies?        @relation(fields: [movie], references: [id], onUpdate: NoAction, map: "fk_movie")
+  id           String        @id(map: "functions_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  movie        Int?
+  start_time   DateTime      @db.Timestamp(6)
+  end_time     DateTime      @db.Timestamp(6)
+  room         String        @db.Uuid
+  is_full      Boolean       @default(false)
+  reservations reservations?
+  movies       movies?       @relation(fields: [movie], references: [id], onUpdate: NoAction, map: "fk_movie")
+  rooms        rooms         @relation(fields: [room], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  id              String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  first_name      String        @db.VarChar(100)
+  last_name       String        @db.VarChar(100)
+  email           String        @unique @db.VarChar(100)
+  password        String        @unique @db.VarChar(255)
+  role            Int           @default(1)
+  created_at      DateTime?     @default(now()) @db.Timestamp(6)
+  updated_at      DateTime?     @default(now()) @db.Timestamp(6)
+  email_validated Boolean       @default(false)
+  reservations    reservations?
+  roles           roles         @relation(fields: [role], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

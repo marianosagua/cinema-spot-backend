@@ -4,14 +4,19 @@ export class RegisterUserDto {
   constructor(
     public email: string,
     public password: string,
-    public name: string
+    public first_name: string,
+    public last_name: string
   ) {}
 
   static create(object: { [key: string]: any }): [string?, RegisterUserDto?] {
-    const { email, password, name } = object;
+    const { email, password, first_name, last_name } = object;
 
-    if (!name) {
-      return ["Name is required"];
+    if (!first_name) {
+      return ["First name is required"];
+    }
+
+    if (!last_name) {
+      return ["Last name is required"];
     }
 
     if (!email) {
@@ -30,6 +35,9 @@ export class RegisterUserDto {
       return ["Password too short"];
     }
 
-    return [undefined, new RegisterUserDto(email, password, name)];
+    return [
+      undefined,
+      new RegisterUserDto(email, password, first_name, last_name),
+    ];
   }
 }

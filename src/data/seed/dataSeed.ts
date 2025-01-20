@@ -1,21 +1,17 @@
 export const dataSeed = {
   users: [
     {
-      name: "Admin 1",
+      first_name: "James",
+      last_name: "Smith",
       email: "ejemplo1@ejemplo1.com",
       password: "9999999",
       role: "ADMIN",
     },
     {
-      name: "Admin 2",
+      first_name: "Emily",
+      last_name: "Johnson",
       email: "ejemplo2@ejemplo2.com",
       password: "8888888",
-      role: "ADMIN",
-    },
-    {
-      name: "Admin 3",
-      email: "ejemplo3@ejemplo3.com",
-      password: "7777777",
       role: "ADMIN",
     },
   ],
@@ -31,7 +27,7 @@ export const dataSeed = {
       title: "The Godfather",
       description:
         "The aging patriarch of an organized crime dynasty transfers control to his son.",
-      poster: "https://i.postimg.cc/13j880rL/the-godfather-poster.jpg",
+      poster: "https://i.postimg.cc/GhN3SYB0/the-godfather-poster.png",
       category: "Crime",
     },
     {
@@ -62,7 +58,7 @@ export const dataSeed = {
     {
       title: "Titanic",
       description: "A love story set on the ill-fated Titanic.",
-      poster: "https://i.postimg.cc/ZqXjxd4Q/titanic-poster.jpg",
+      poster: "https://i.postimg.cc/fbyG4q1B/titanic-poster.jpg",
       category: "Romance",
     },
     {
@@ -120,39 +116,47 @@ export const dataSeed = {
     { name: "Sport" },
   ],
   roles: [
-    { id: 1, name: "USER", description: "User" },
-    { id: 2, name: "ADMIN", description: "Administrator" },
+    {
+      name: "USER",
+      description:
+        "A regular user with limited access to features and data, typically for general browsing and usage of the application.",
+    },
+    {
+      name: "ADMIN",
+      description:
+        "An administrative user with full access to the system, able to manage users, settings, and other critical operations.",
+    },
   ],
   showtimes: [
     {
       movie: "The Matrix",
-      hall: 1,
       start_time: "2022-01-01T09:00:00",
       end_time: "2022-01-01T12:00:00",
+      room: "A1",
     },
     {
       movie: "The Matrix",
-      hall: 2,
       start_time: "2022-01-01T12:15:00",
       end_time: "2022-01-01T15:15:00",
+      room: "B1",
     },
     {
       movie: "Interstellar",
-      hall: 3,
       start_time: "2022-01-01T15:30:00",
       end_time: "2022-01-01T18:30:00",
+      room: "C1",
     },
     {
       movie: "Interstellar",
-      hall: 4,
       start_time: "2022-01-01T18:45:00",
       end_time: "2022-01-01T21:45:00",
+      room: "A1",
     },
     {
       movie: "The Godfather",
-      hall: 5,
       start_time: "2022-01-01T18:45:00",
       end_time: "2022-01-01T21:45:00",
+      room: "B1",
     },
   ],
 };

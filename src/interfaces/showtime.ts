@@ -3,6 +3,6 @@ export interface Showtime {
   movie: string;
   start_time: string;
   end_time: string;
-  hall: number;
-  reservationscount?: number;
+  room: string;
+  is_full: boolean;
 }
