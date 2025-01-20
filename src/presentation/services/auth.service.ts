@@ -29,7 +29,10 @@ export class AuthService {
       const token = JwtAdapter.generateToken({ id: user.id }, "24h");
       if (!token) throw new Error("Error generating token");
 
-      return { user: userData, token };
+      return {
+        user: userData,
+        token,
+      };
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;

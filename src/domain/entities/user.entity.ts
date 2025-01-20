@@ -1,4 +1,5 @@
 import { regularExps } from "../../config";
+import { prismaClient } from "../../data/postgres/client-connection";
 
 export class UserEntity {
   constructor(
@@ -7,8 +8,10 @@ export class UserEntity {
     public last_name: string,
     public email: string,
     public password: string,
-    public role: number,
-    public emailValidated: boolean
+    public role?: number,
+    public emailValidated?: boolean,
+    public created_at?: Date,
+    public updated_at?: Date
   ) {}
 
   static async create(data: { [key: string]: any }) {
@@ -40,13 +43,38 @@ export class UserEntity {
       throw new Error("Password must be at least 6 characters long");
     }
 
+    const role = await prismaClient.roles.findFirst({
+      where: { id: data.role },
+    });
+    if (!role) {
+      throw new Error("Role not found");
+    }
+
+    const dataUser = await prismaClient.users.findFirst({
+      where: { id: data.id },
+      select: {
+        id: true,
+        first_name: true,
+        last_name: true,
+        email: true,
+        password: true,
+        role: true,
+        created_at: true,
+        updated_at: true,
+        email_validated: true,
+      },
+    });
+
     return {
       id: data.id,
-      name: data.name,
+      first_name: data.first_name,
+      last_name: data.last_name,
       email: data.email,
       password: data.password,
-      role: data.role || 1,
-      emailValidated: data.emailValidated || false,
+      role,
+      createdAt: dataUser?.created_at,
+      updatedAt: dataUser?.updated_at,
+      emailValidated: dataUser?.email_validated,
     };
   }
 }
