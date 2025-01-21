@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
 import { MoviesService } from "../services/movies.service";
 import { MovieEntity } from "../../domain/entities";
+import { handleError } from "../../domain/errors";
 
 export class MoviesController {
   constructor(private moviesService: MoviesService) {}
@@ -10,11 +11,7 @@ export class MoviesController {
       const movies = await this.moviesService.getMovies();
       res.status(200).json(movies);
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
@@ -23,11 +20,7 @@ export class MoviesController {
       const movie = await this.moviesService.getMovie(req.params.id);
       res.status(200).json(movie);
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
@@ -37,11 +30,7 @@ export class MoviesController {
       await this.moviesService.addMovie(movie);
       res.status(200).json({ message: "Movie added successfully" });
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
@@ -51,11 +40,7 @@ export class MoviesController {
       await this.moviesService.updateMovie(movie);
       res.status(200).json({ message: "Movie updated successfully" });
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
@@ -64,11 +49,7 @@ export class MoviesController {
       await this.moviesService.deleteMovie(req.params.id);
       res.status(200).json({ message: "Movie deleted successfully" });
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 }

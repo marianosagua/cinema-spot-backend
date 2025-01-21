@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { ReservationsService } from "../services";
+import { handleError } from "../../domain/errors";
 
 export class ReservationsController {
   constructor(private reservationsService: ReservationsService) {}
@@ -9,11 +10,7 @@ export class ReservationsController {
       const reservations = await this.reservationsService.getReservations();
       res.json(reservations);
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
@@ -24,11 +21,7 @@ export class ReservationsController {
       );
       res.json(reservation);
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
@@ -37,11 +30,7 @@ export class ReservationsController {
       await this.reservationsService.addReservation(req.body);
       res.json({ message: "Reservation added successfully" });
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
@@ -50,11 +39,7 @@ export class ReservationsController {
       await this.reservationsService.deleteReservation(req.params.id);
       res.json({ message: "Reservation deleted successfully" });
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 }

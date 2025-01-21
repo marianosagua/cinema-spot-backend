@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { AuthService } from "../services";
 import { LoginDto } from "../../domain/dtos/auth/login.dto";
 import { RegisterUserDto } from "../../domain/dtos/auth/register-user.dto";
+import { handleError } from "../../domain/errors";
 
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -17,11 +18,7 @@ export class AuthController {
       const response = await this.authService.loginUser(loginDto!);
       res.status(200).json(response);
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
@@ -37,11 +34,7 @@ export class AuthController {
       const response = await this.authService.registerUser(registerDto!);
       res.status(200).json(response);
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
@@ -52,11 +45,7 @@ export class AuthController {
       await this.authService.validateEmail(token);
       res.status(200).json({ message: "Email validated !!!" });
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 }

@@ -1,5 +1,6 @@
 import { prismaClient } from "../../data/postgres/client-connection";
 import { Movie } from "../../interfaces/movie";
+import { CustomError } from "../errors";
 
 export class MovieEntity {
   constructor(
@@ -13,18 +14,30 @@ export class MovieEntity {
   static async create(data: { [key: string]: any }): Promise<Movie> {
     let category;
 
-    if (!data.id) {
-      throw new Error("ID is required");
+    if (!data.title) {
+      throw CustomError.badRequest("Title is required");
     }
 
-    try {
-      category = await prismaClient.categories.findFirst({
-        where: {
-          name: data.category,
-        },
-      });
-    } catch (error) {
-      throw new Error("Category not found");
+    if (!data.description) {
+      throw CustomError.badRequest("Description is required");
+    }
+
+    if (!data.poster) {
+      throw CustomError.badRequest("Poster is required");
+    }
+
+    if (!data.category) {
+      throw CustomError.badRequest("Category is required");
+    }
+
+    category = await prismaClient.categories.findFirst({
+      where: {
+        name: data.category,
+      },
+    });
+
+    if (!category) {
+      throw new Error("Category not found in DB");
     }
 
     return {

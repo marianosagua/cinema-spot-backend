@@ -1,31 +1,32 @@
 import { prismaClient } from "../../data/postgres/client-connection";
+import { CustomError } from "../../domain/errors";
 
 export class SeatsService {
   async getSeatsByRoom(room: string) {
-    try {
-      const seats = await prismaClient.seats.findMany({
-        where: {
-          room,
-        },
-      });
+    const seats = await prismaClient.seats.findMany({
+      where: {
+        room,
+      },
+    });
 
-      return seats.sort((a, b) => a.seat_number - b.seat_number);
-    } catch (error) {
-      throw new Error("Error occurred while fetching seats");
+    if (!seats) {
+      throw CustomError.notFound("Seats of the room not found");
     }
+
+    return seats.sort((a, b) => a.seat_number - b.seat_number);
   }
 
   async getRoomByName(name: string) {
-    try {
-      const room = await prismaClient.rooms.findFirst({
-        where: {
-          name,
-        },
-      });
+    const room = await prismaClient.rooms.findFirst({
+      where: {
+        name,
+      },
+    });
 
-      return room;
-    } catch (error) {
-      throw new Error("Error occurred while fetching rooms");
+    if (!room) {
+      throw CustomError.notFound("Room not found");
     }
+
+    return room;
   }
 }

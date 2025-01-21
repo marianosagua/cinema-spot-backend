@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { RolesService } from "../services/roles.service";
+import { handleError } from "../../domain/errors";
 
 export class RolesController {
   constructor(private rolesService: RolesService) {}
@@ -11,11 +12,7 @@ export class RolesController {
       await this.rolesService.assignRole(userId, newRole);
       res.status(200).json({ message: "Role assigned !!!" });
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 }

@@ -9,12 +9,24 @@ export class ShowtimesRoutes {
     const showtimeService = new ShowtimesService();
     const showtimesController = new ShowtimesController(showtimeService);
 
-    router.get("/", AuthMiddleware.isAdmin, showtimesController.getAll);
-    router.get("/:id", showtimesController.getById);
-    router.get("/movie/:movieId", showtimesController.getAllByMovie);
-    router.post("/", AuthMiddleware.isAdmin, showtimesController.create);
-    router.put("/:id", AuthMiddleware.isAdmin, showtimesController.update);
-    router.delete("/:id", AuthMiddleware.isAdmin, showtimesController.delete);
+    router.get("/", AuthMiddleware.isAdmin, showtimesController.getShowtimes);
+    router.get("/:id", showtimesController.getShowtimeById);
+    router.get("/movie/:movieId", showtimesController.getShowtimesByMovie);
+    router.post(
+      "/",
+      AuthMiddleware.isAdmin,
+      showtimesController.createShowtime
+    );
+    router.put(
+      "/:id",
+      AuthMiddleware.isAdmin,
+      showtimesController.updateShowtime
+    );
+    router.delete(
+      "/:id",
+      AuthMiddleware.isAdmin,
+      showtimesController.deleteShowtime
+    );
 
     return router;
   }

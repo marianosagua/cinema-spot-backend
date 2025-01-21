@@ -1,86 +1,65 @@
 import { Request, Response } from "express";
 import { ShowtimesService } from "../services/showtimes.service";
+import { handleError } from "../../domain/errors";
 
 export class ShowtimesController {
   constructor(private showtimesService: ShowtimesService) {}
 
-  getAll = async (req: Request, res: Response) => {
+  getShowtimes = async (req: Request, res: Response) => {
     try {
-      const showtimes = await this.showtimesService.getAll();
+      const showtimes = await this.showtimesService.getShowtimes();
       res.status(200).json(showtimes);
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
-  getById = async (req: Request, res: Response) => {
+  getShowtimeById = async (req: Request, res: Response) => {
     try {
-      const showtime = await this.showtimesService.getById(req.params.id);
+      const showtime = await this.showtimesService.getShowtimesById(
+        req.params.id
+      );
       res.status(200).json(showtime);
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
-  getAllByMovie = async (req: Request, res: Response) => {
+  getShowtimesByMovie = async (req: Request, res: Response) => {
     try {
-      const showtimes = await this.showtimesService.getAllByMovie(
+      const showtimes = await this.showtimesService.getShowtimesByMovie(
         req.params.movieId
       );
       res.status(200).json(showtimes);
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
-  create = async (req: Request, res: Response) => {
+  createShowtime = async (req: Request, res: Response) => {
     try {
-      await this.showtimesService.create(req.body);
+      await this.showtimesService.createShowtime(req.body);
       res.status(200).json({ message: "Showtime created successfully" });
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
-  update = async (req: Request, res: Response) => {
+  updateShowtime = async (req: Request, res: Response) => {
     try {
-      await this.showtimesService.update(req.params.id, req.body);
+      await this.showtimesService.updateShowtime(req.params.id, req.body);
       res.status(200).json({ message: "Showtime updated successfully" });
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 
-  delete = async (req: Request, res: Response) => {
+  deleteShowtime = async (req: Request, res: Response) => {
     try {
-      await this.showtimesService.delete(req.params.id);
+      await this.showtimesService.deleteShowtime(req.params.id);
       res.status(200).json({ message: "Showtime deleted successfully" });
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+      handleError(error, res);
     }
   };
 }
