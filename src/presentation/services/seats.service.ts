@@ -27,6 +27,22 @@ export class SeatsService {
     return seat;
   }
 
+  async getSeatsByRoom(name: string) {
+    const seats = await prismaClient.seats.findMany({
+      where: {
+        rooms: {
+          name,
+        },
+      },
+    });
+
+    if (!seats) {
+      throw CustomError.notFound("Seats not found");
+    }
+
+    return seats.sort((a, b) => a.seat_number - b.seat_number);
+  }
+
   async updateSeat(id: string, data: Seat) {
     const seat = await prismaClient.seats.update({
       where: {

@@ -10,7 +10,7 @@ export class SeatsRoutes {
 
     router.get("/", seatsController.getSeats);
     router.get("/:id", seatsController.getSeatById);
-    router.put("/:id", seatsController.updateSeat);
+    router.get("/room/:name", seatsController.getSeatsByRoom);
     router.post("/", seatsController.createSeat);
     router.delete("/:id", seatsController.deleteSeat);
 

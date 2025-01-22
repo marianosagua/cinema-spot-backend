@@ -23,6 +23,15 @@ export class SeatsController {
     }
   };
 
+  getSeatsByRoom = async (req: Request, res: Response) => {
+    try {
+      const seats = await this.seatsService.getSeatsByRoom(req.params.name);
+      res.json(seats);
+    } catch (error) {
+      handleError(error, res);
+    }
+  };
+
   updateSeat = async (req: Request, res: Response) => {
     try {
       const seat = await this.seatsService.updateSeat(req.params.id, req.body);
