@@ -140,6 +140,7 @@ src/
 
 - `GET /api/seats`: Get all seats
 - `GET /api/seats/:id`: Get seat by ID
+- `GET /api/seats/room/:name`: Get seats by Room
 - `POST /api/seats`: Add a new seat
 - `PUT /api/seats/:id`: Update a seat
 - `DELETE /api/seats/:id`: Delete a seat
