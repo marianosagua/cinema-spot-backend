@@ -8,8 +8,11 @@ export class SeatsRoutes {
     const seatsService = new SeatsService();
     const seatsController = new SeatsController(seatsService);
 
-    router.get("/rooms/:name", seatsController.getRoomByName);
-    router.get("/:room", seatsController.getSeats);
+    router.get("/", seatsController.getSeats);
+    router.get("/:id", seatsController.getSeatById);
+    router.put("/:id", seatsController.updateSeat);
+    router.post("/", seatsController.createSeat);
+    router.delete("/:id", seatsController.deleteSeat);
 
     return router;
   }

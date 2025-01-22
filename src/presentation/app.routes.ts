@@ -5,6 +5,7 @@ import { MoviesRoutes } from "./movies/movies.routes";
 import { ReservationsRoutes } from "./reservations/reservations.routes";
 import { ShowtimesRoutes } from "./showtimes/showtimes.routes";
 import { SeatsRoutes } from "./seats/seats.routes";
+import { RoomsRoutes } from "./rooms/rooms.routes";
 
 export class AppRoutes {
   static getRoutes(): Router {
@@ -16,6 +17,7 @@ export class AppRoutes {
     router.use("/api/showtimes", ShowtimesRoutes.getRoutes());
     router.use("/api/reservations", ReservationsRoutes.getRoutes());
     router.use("/api/seats", SeatsRoutes.getRoutes());
+    router.use("/api/rooms", RoomsRoutes.getRoutes());
 
     return router;
   }
