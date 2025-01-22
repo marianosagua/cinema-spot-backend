@@ -1,4 +1,5 @@
 import { prismaClient } from "../../data/postgres/client-connection";
+import { CreateShowtimeDto } from "../../domain/dtos/showtimes/create-showtime.dto";
 import { CustomError } from "../../domain/errors";
 import { Showtime } from "../../interfaces";
 
@@ -119,23 +120,13 @@ export class ShowtimesService {
     return transformedShowtimes;
   }
 
-  async createShowtime(showtime: Showtime) {
-    const movieTitle = await prismaClient.movies.findFirst({
-      where: {
-        title: showtime.movie,
-      },
-    });
-
-    if (!movieTitle) {
-      throw new Error("Movie not found in DB");
-    }
-
+  async createShowtime(showtime: CreateShowtimeDto) {
     const movieCreated = await prismaClient.showtimes.create({
       data: {
-        movie: movieTitle?.id,
-        start_time: showtime.start_time,
-        end_time: showtime.end_time,
-        room: showtime.room,
+        movie: showtime.movieId,
+        start_time: showtime.startTime,
+        end_time: showtime.endTime,
+        room: showtime.roomId,
       },
     });
 

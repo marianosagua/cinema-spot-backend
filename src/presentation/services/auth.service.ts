@@ -2,8 +2,7 @@ import { envs } from "../../config";
 import { bcryptAdapter } from "../../config/bcrypt.adapter";
 import { JwtAdapter } from "../../config/jwt.adapter";
 import { prismaClient } from "../../data/postgres/client-connection";
-import { RegisterUserDto } from "../../domain/dtos/auth";
-import { LoginDto } from "../../domain/dtos/auth/login.dto";
+import { LoginUserDto, RegisterUserDto } from "../../domain/dtos/auth";
 import { UserEntity } from "../../domain/entities/user.entity";
 import { CustomError } from "../../domain/errors/CustomErrors";
 import { EmailService } from "./email.service";
@@ -12,7 +11,7 @@ export class AuthService {
   constructor(private readonly emailService: EmailService) {}
 
   public async loginUser(
-    loginDto: LoginDto
+    loginDto: LoginUserDto
   ): Promise<{ user: any; token: string }> {
     const user = await prismaClient.users.findFirst({
       where: { email: loginDto.email },

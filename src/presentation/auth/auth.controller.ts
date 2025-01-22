@@ -1,14 +1,13 @@
 import { Request, Response } from "express";
 import { AuthService } from "../services";
-import { LoginDto } from "../../domain/dtos/auth/login.dto";
-import { RegisterUserDto } from "../../domain/dtos/auth/register-user.dto";
 import { handleError } from "../../domain/errors";
+import { LoginUserDto, RegisterUserDto } from "../../domain/dtos/auth";
 
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   login = async (req: Request, res: Response) => {
-    const [error, loginDto] = LoginDto.create(req.body);
+    const [error, loginDto] = LoginUserDto.create(req.body);
     if (error) {
       res.status(400).json({ error });
       return;

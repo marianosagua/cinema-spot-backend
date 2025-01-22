@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { ShowtimesService } from "../services/showtimes.service";
 import { handleError } from "../../domain/errors";
+import { CreateShowtimeDto } from "../../domain/dtos/showtimes/create-showtime.dto";
 
 export class ShowtimesController {
   constructor(private showtimesService: ShowtimesService) {}
@@ -37,8 +38,14 @@ export class ShowtimesController {
   };
 
   createShowtime = async (req: Request, res: Response) => {
+    const [error, showtime] = await CreateShowtimeDto.fromRequest(req.body);
+    if (error) {
+      res.status(400).json({ error });
+      return;
+    }
+
     try {
-      await this.showtimesService.createShowtime(req.body);
+      await this.showtimesService.createShowtime(showtime!);
       res.status(200).json({ message: "Showtime created successfully" });
     } catch (error) {
       handleError(error, res);

@@ -4,5 +4,5 @@ export interface Showtime {
   start_time: string;
   end_time: string;
   room: string;
-  is_full: boolean;
+  is_full?: boolean;
 }
