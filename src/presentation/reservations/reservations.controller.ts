@@ -25,6 +25,17 @@ export class ReservationsController {
     }
   };
 
+  getReservationsByUser = async (req: Request, res: Response) => {
+    try {
+      const reservations = await this.reservationsService.getReservationsByUser(
+        req.params.userId
+      );
+      res.json(reservations);
+    } catch (error) {
+      handleError(error, res);
+    }
+  };
+
   addReservation = async (req: Request, res: Response) => {
     try {
       await this.reservationsService.addReservation(req.body);

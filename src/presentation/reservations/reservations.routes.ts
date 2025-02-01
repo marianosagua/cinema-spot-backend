@@ -16,11 +16,8 @@ export class ReservationsRoutes {
       AuthMiddleware.isAdmin,
       reservationsController.getReservations
     );
-    router.get(
-      "/:id",
-      AuthMiddleware.isAdmin,
-      reservationsController.getReservationById
-    );
+    router.get("/:id", reservationsController.getReservationById);
+    router.get("/user/:userId", reservationsController.getReservationsByUser);
     router.post("/", reservationsController.addReservation);
     router.delete("/:id", reservationsController.deleteReservation);
 
