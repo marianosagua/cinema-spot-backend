@@ -71,7 +71,7 @@ export class UserEntity {
       last_name: data.last_name,
       email: data.email,
       password: data.password,
-      role,
+      role: role.name,
       created_at: dataUser?.created_at,
       updated_at: dataUser?.updated_at,
       emailValidated: dataUser?.email_validated,
