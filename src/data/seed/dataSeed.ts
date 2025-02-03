@@ -106,14 +106,16 @@ export const dataSeed = {
   ],
   roles: [
     {
-      name: "USER",
-      description:
-        "A regular user with limited access to features and data, typically for general browsing and usage of the application.",
-    },
-    {
+      id: 1,
       name: "ADMIN",
       description:
         "An administrative user with full access to the system, able to manage users, settings, and other critical operations.",
+    },
+    {
+      id: 2,
+      name: "USER",
+      description:
+        "A regular user with limited access to features and data, typically for general browsing and usage of the application.",
     },
   ],
   showtimes: [
@@ -315,5 +317,39 @@ export const dataSeed = {
       end_time: "2022-01-02T18:30:00",
       room: "B1",
     },
+  ],
+  seats: [
+    { seat_number: 1, room: "A1", is_available: true },
+    { seat_number: 2, room: "A1", is_available: true },
+    { seat_number: 3, room: "A1", is_available: true },
+    { seat_number: 4, room: "A1", is_available: true },
+    { seat_number: 5, room: "A1", is_available: true },
+    { seat_number: 6, room: "A1", is_available: true },
+    { seat_number: 7, room: "A1", is_available: true },
+    { seat_number: 8, room: "A1", is_available: true },
+    { seat_number: 9, room: "A1", is_available: true },
+    { seat_number: 10, room: "A1", is_available: true },
+
+    { seat_number: 1, room: "B1", is_available: true },
+    { seat_number: 2, room: "B1", is_available: true },
+    { seat_number: 3, room: "B1", is_available: true },
+    { seat_number: 4, room: "B1", is_available: true },
+    { seat_number: 5, room: "B1", is_available: true },
+    { seat_number: 6, room: "B1", is_available: true },
+    { seat_number: 7, room: "B1", is_available: true },
+    { seat_number: 8, room: "B1", is_available: true },
+    { seat_number: 9, room: "B1", is_available: true },
+    { seat_number: 10, room: "B1", is_available: true },
+
+    { seat_number: 1, room: "C1", is_available: true },
+    { seat_number: 2, room: "C1", is_available: true },
+    { seat_number: 3, room: "C1", is_available: true },
+    { seat_number: 4, room: "C1", is_available: true },
+    { seat_number: 5, room: "C1", is_available: true },
+    { seat_number: 6, room: "C1", is_available: true },
+    { seat_number: 7, room: "C1", is_available: true },
+    { seat_number: 8, room: "C1", is_available: true },
+    { seat_number: 9, room: "C1", is_available: true },
+    { seat_number: 10, room: "C1", is_available: true },
   ],
 };

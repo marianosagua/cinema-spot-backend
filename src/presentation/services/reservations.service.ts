@@ -293,13 +293,15 @@ export class ReservationsService {
       });
     }
 
-    await prismaClient.reservations.create({
-      data: {
-        user_id: reservation.user_id,
-        showtime_id: reservation.showtime_id,
-        seat: reservation.seat,
-      },
-    });
+    for (const seat_id of reservation.seat_ids) {
+      await prismaClient.reservations.create({
+        data: {
+          user_id: reservation.user_id,
+          showtime_id: reservation.showtime_id,
+          seat_id,
+        },
+      });
+    }
   };
 
   deleteReservation = async (id: string) => {

@@ -43,7 +43,7 @@ export class AuthController {
     try {
       await this.authService.validateEmail(token);
       res.render("successEmailValidation", {
-        urlHomePage: "http://localhost:5174/",
+        urlHomePage: "http://localhost:5173/",
       });
     } catch (error) {
       handleError(error, res);

@@ -10,14 +10,22 @@ import { dataSeed } from "./dataSeed";
 
 async function seed() {
   await Promise.all([
-    prismaClient.users.deleteMany(),
     prismaClient.movies.deleteMany(),
     prismaClient.categories.deleteMany(),
-    prismaClient.reservations.deleteMany(),
-    prismaClient.rooms.deleteMany(),
-    prismaClient.roles.deleteMany(),
     prismaClient.showtimes.deleteMany(),
+    prismaClient.seats.deleteMany(),
+    prismaClient.rooms.deleteMany(),
+    prismaClient.users.deleteMany(),
+    prismaClient.roles.deleteMany(),
   ]);
+
+  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."seats_id_seq" RESTART WITH 1`;
+  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."users_id_seq" RESTART WITH 1`;
+  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."roles_id_seq" RESTART WITH 1`;
+  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."showtimes_id_seq" RESTART WITH 1`;
+  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."movies_id_seq" RESTART WITH 1`;
+  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."rooms_id_seq" RESTART WITH 1`;
+  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."categories_id_seq" RESTART WITH 1`;
 
   const categories = await Promise.all(
     dataSeed.categories.map((category) =>
@@ -48,7 +56,7 @@ async function seed() {
   const roles = await Promise.all(
     dataSeed.roles.map((role) =>
       prismaClient.roles.create({
-        data: { name: role.name, description: role.description },
+        data: { id: role.id, name: role.name, description: role.description },
       })
     )
   );
@@ -75,6 +83,19 @@ async function seed() {
           room: room?.id!,
           start_time: new Date(showtime.start_time),
           end_time: new Date(showtime.end_time),
+        },
+      });
+    })
+  );
+
+  await Promise.all(
+    dataSeed.seats.map((seat) => {
+      const room = rooms.find((room) => room.name === seat.room);
+      return prismaClient.seats.create({
+        data: {
+          seat_number: seat.seat_number,
+          room: room?.id!,
+          is_available: seat.is_available,
         },
       });
     })
