@@ -6,6 +6,9 @@ import { LoginUserDto, RegisterUserDto } from "../../domain/dtos/auth";
 import { UserEntity } from "../../domain/entities/user.entity";
 import { CustomError } from "../../domain/errors/CustomErrors";
 import { EmailService } from "./email.service";
+import fs from "fs/promises";
+import path from "path";
+import { create } from "express-handlebars";
 
 export class AuthService {
   constructor(private readonly emailService: EmailService) {}
@@ -57,16 +60,30 @@ export class AuthService {
     return { user: userEntity, token };
   }
 
+  private async compileTemplate(
+    templateName: string,
+    data: object
+  ): Promise<string> {
+    const templatePath = path.join(
+      __dirname,
+      "../../presentation/views",
+      `${templateName}.hbs`
+    );
+    const templateSource = await fs.readFile(templatePath, "utf-8");
+    const hbs = create({ extname: ".hbs" });
+    const compiledTemplate = hbs.handlebars.compile(templateSource, {});
+    return compiledTemplate(data);
+  }
+
   private async sendEmailConfirmation(email: string): Promise<void> {
     const token = JwtAdapter.generateToken({ email });
     if (!token) throw new Error("Error generating token");
 
     const url = `${envs.app_url}/api/auth/validate-email/${token}`;
-    const message = `
-        <h1>Validate your email</h1>
-        <p>Click on the following link to validate your email</p>
-        <a href="${url}">Validate your email: ${email}</a>
-      `;
+    const message = await this.compileTemplate("emailValidation", {
+      validationUrl: url,
+      email,
+    });
 
     const isSent = await this.emailService.sendEmail({
       email,

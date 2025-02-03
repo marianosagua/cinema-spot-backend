@@ -42,7 +42,9 @@ export class AuthController {
 
     try {
       await this.authService.validateEmail(token);
-      res.status(200).json({ message: "Email validated !!!" });
+      res.render("successEmailValidation", {
+        urlHomePage: "http://localhost:5174/",
+      });
     } catch (error) {
       handleError(error, res);
     }

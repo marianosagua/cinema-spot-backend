@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Movie Reservation System is a backend application designed to manage movie reservations, user authentication, and administrative tasks. It is built using TypeScript, Express.js, and Prisma ORM with a PostgreSQL database.
+The Movie Reservation System is a backend application that manages movie reservations, user authentication, and administrative tasks. Built with TypeScript, Express.js, and Prisma ORM using a PostgreSQL database, it offers a robust platform for movie booking operations.
 
 ## Features
 
@@ -28,7 +28,7 @@ The Movie Reservation System is a backend application designed to manage movie r
 
 ```
 src/
-├── config/                 # Configuration files
+├── config/                 # Configuration files (including environment setups)
 ├── data/                   # Database connection and seed data
 ├── domain/                 # Business logic and entities
 ├── interfaces/             # TypeScript interfaces
@@ -41,7 +41,7 @@ src/
 ### Prerequisites
 
 - Node.js
-- Docker
+- Docker (with Docker Compose)
 - PostgreSQL
 
 ### Installation
@@ -60,16 +60,17 @@ src/
    ```
 
 3. Set up environment variables:
-   Create a `.env` file in the root directory and add the following:
+   
+   Create a `.env` file in the root directory with the following content:
 
    ```env
-   PORT=port
-   APP_URL=http://localhost:PORT
+   PORT=your_port
+   APP_URL=http://localhost:your_port
    JWT_SECRET_KEY=your_jwt_secret_key
-   DATABASE_URL=your_db_url
+   DATABASE_URL=your_database_url
    ```
 
-4. Start PostgreSQL using Docker:
+4. Start PostgreSQL using Docker Compose:
 
    ```sh
    docker-compose up -d
@@ -87,7 +88,8 @@ src/
    npm run seed
    ```
 
-7. Start the application:
+7. Start the application in development mode:
+
    ```sh
    npm run dev
    ```
@@ -96,51 +98,51 @@ src/
 
 ### Authentication
 
-- `POST /api/auth/login`: User login
-- `POST /api/auth/register`: User registration
-- `GET /api/auth/validate-email/:token`: Email validation
+- `POST /api/auth/login`: User login.
+- `POST /api/auth/register`: User registration.
+- `GET /api/auth/validate-email/:token`: Email validation.
 
 ### Movies
 
-- `GET /api/movies`: Get all movies
-- `GET /api/movies/:id`: Get movie by ID
-- `POST /api/movies`: Add a new movie (Admin only)
-- `PUT /api/movies`: Update a movie (Admin only)
-- `DELETE /api/movies/:id`: Delete a movie (Admin only)
+- `GET /api/movies`: Get all movies.
+- `GET /api/movies/:id`: Get a movie by ID.
+- `POST /api/movies`: Add a new movie (Admin only).
+- `PUT /api/movies/:id`: Update a movie (Admin only).
+- `DELETE /api/movies/:id`: Delete a movie (Admin only).
 
 ### Rooms
 
-- `GET /api/rooms`: Get all rooms
-- `GET /api/rooms/:id`: Get room by ID
-- `POST /api/rooms`: Add a new room (Admin only)
-- `PUT /api/rooms/:id`: Update a room (Admin only)
-- `DELETE /api/rooms/:id`: Delete a room (Admin only)
+- `GET /api/rooms`: Get all rooms.
+- `GET /api/rooms/:id`: Get room by ID.
+- `POST /api/rooms`: Add a new room (Admin only).
+- `PUT /api/rooms/:id`: Update a room (Admin only).
+- `DELETE /api/rooms/:id`: Delete a room (Admin only).
 
 ### Showtimes
 
-- `GET /api/showtimes`: Get all showtimes
-- `GET /api/showtimes/:id`: Get showtime by ID
-- `GET /api/showtimes/movie/:movieId`: Get showtimes by movie ID
-- `POST /api/showtimes`: Add a new showtime (Admin only)
-- `PUT /api/showtimes/:id`: Update a showtime (Admin only)
-- `DELETE /api/showtimes/:id`: Delete a showtime (Admin only)
+- `GET /api/showtimes`: Get all showtimes.
+- `GET /api/showtimes/:id`: Get a showtime by ID.
+- `GET /api/showtimes/movie/:movieId`: Get showtimes by movie ID.
+- `POST /api/showtimes`: Add a new showtime (Admin only).
+- `PUT /api/showtimes/:id`: Update a showtime (Admin only).
+- `DELETE /api/showtimes/:id`: Delete a showtime (Admin only).
 
 ### Reservations
 
-- `GET /api/reservations`: Get all reservations (Admin only)
-- `GET /api/reservations/:id`: Get reservation by ID (Admin only)
-- `POST /api/reservations`: Add a new reservation
-- `DELETE /api/reservations/:id`: Delete a reservation
+- `GET /api/reservations`: Get all reservations (Admin only).
+- `GET /api/reservations/:id`: Get a reservation by ID (Admin only).
+- `POST /api/reservations`: Add a new reservation.
+- `DELETE /api/reservations/:id`: Delete a reservation.
 
 ### Roles
 
-- `POST /api/roles/assign-role`: Assign a role to a user (Admin only)
+- `POST /api/roles/assign-role`: Assign a role to a user (Admin only).
 
 ### Seats
 
-- `GET /api/seats`: Get all seats
-- `GET /api/seats/:id`: Get seat by ID
-- `GET /api/seats/room/:name`: Get seats by Room
-- `POST /api/seats`: Add a new seat
-- `PUT /api/seats/:id`: Update a seat
-- `DELETE /api/seats/:id`: Delete a seat
+- `GET /api/seats`: Get all seats.
+- `GET /api/seats/:id`: Get a seat by ID.
+- `GET /api/seats/room/:name`: Get seats by room.
+- `POST /api/seats`: Add a new seat.
+- `PUT /api/seats/:id`: Update a seat.
+- `DELETE /api/seats/:id`: Delete a seat.
