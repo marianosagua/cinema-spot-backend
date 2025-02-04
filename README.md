@@ -60,7 +60,7 @@ src/
    ```
 
 3. Set up environment variables:
-   
+
    Create a `.env` file in the root directory with the following content:
 
    ```env
@@ -146,3 +146,10 @@ src/
 - `POST /api/seats`: Add a new seat.
 - `PUT /api/seats/:id`: Update a seat.
 - `DELETE /api/seats/:id`: Delete a seat.
+
+### Users
+
+- `GET /api/users`: Retrieve all users (Admin only).
+- `GET /api/users/:id`: Retrieve a user by ID (Admin only).
+- `PUT /api/users/:id`: Update a user's information (Admin only).
+- `DELETE /api/users/:id`: Delete a user (Admin only).

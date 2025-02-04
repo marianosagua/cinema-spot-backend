@@ -6,26 +6,28 @@ import { ReservationsRoutes } from "./reservations/reservations.routes";
 import { ShowtimesRoutes } from "./showtimes/showtimes.routes";
 import { SeatsRoutes } from "./seats/seats.routes";
 import { RoomsRoutes } from "./rooms/rooms.routes";
+import { UsersRoutes } from "./users/users.routes";
 
 /**
- * Provides all application routes for the movie reservation system backend.
+ * Regroups all API routes for the movie reservation system backend.
  *
- * This static class method creates and configures an Express Router by mounting various sub-route
- * modules that handle different aspects of the system's API. Each sub-route is associated with a
- * specific URL prefix, ensuring a modular and organized API structure.
+ * This static method creates and configures an Express Router by mounting various sub-route modules,
+ * each handling specific functionalities of the system. The modular design assigns unique URL prefixes
+ * to each group of routes, ensuring a clean and organized API structure.
  *
  * @remarks
- * The following sub-routes are set up:
- * - "/api/auth": Handles authentication-related endpoints.
- * - "/api/roles": Manages user roles and permissions.
- * - "/api/movies": Provides endpoints related to movie data and operations.
- * - "/api/showtimes": Manages endpoints for movie showtime scheduling.
- * - "/api/reservations": Handles reservation functionalities.
+ * The integrated sub-routes include:
+ * - "/api/auth": Manages authentication operations.
+ * - "/api/roles": Controls user roles and permissions.
+ * - "/api/movies": Handles movie-related data and operations.
+ * - "/api/showtimes": Manages scheduling for movie showtimes.
+ * - "/api/reservations": Handles reservation processes.
  * - "/api/seats": Manages seating arrangements and related endpoints.
- * - "/api/rooms": Provides endpoints for room configuration and management.
+ * - "/api/rooms": Oversees room configuration and management.
+ * - "/api/users": Manages user-related functionalities.
  *
  * @example
- * An example of integrating the application routes into an Express application:
+ * The following example shows how to incorporate the app routes into an Express application:
  *
  * import express from "express";
  * import { AppRoutes } from "./presentation/app.routes";
@@ -33,7 +35,7 @@ import { RoomsRoutes } from "./rooms/rooms.routes";
  * const app = express();
  * app.use(AppRoutes.getRoutes());
  *
- * @returns A configured Express Router instance with all the defined sub-route endpoints.
+ * @returns {Router} A fully configured Express Router instance with all mounted API routes.
  */
 export class AppRoutes {
   static getRoutes(): Router {
@@ -52,6 +54,8 @@ export class AppRoutes {
     router.use("/api/seats", SeatsRoutes.getRoutes());
 
     router.use("/api/rooms", RoomsRoutes.getRoutes());
+
+    router.use("/api/users", UsersRoutes.getRoutes());
 
     return router;
   }
