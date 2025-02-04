@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { UsersController } from "./users.controller";
 import { UsersService } from "../services/users.service";
+import { AuthMiddleware } from "../middlewares/auth.middleware";
 
 /**
  * Class containing the route definitions for user-related endpoints.
@@ -35,15 +36,15 @@ export class UsersRoutes {
     const usersService = new UsersService();
     const usersController = new UsersController(usersService);
 
-    router.get("/", usersController.getUsers);
+    router.get("/", AuthMiddleware.isAdmin, usersController.getUsers);
 
     router.get("/:id", usersController.getUserById);
 
-    router.post("/", usersController.createUser);
+    router.post("/", AuthMiddleware.isAdmin, usersController.createUser);
 
-    router.put("/:id", usersController.updateUser);
+    router.put("/:id", AuthMiddleware.isAdmin, usersController.updateUser);
 
-    router.delete("/:id", usersController.deleteUser);
+    router.delete("/:id", AuthMiddleware.isAdmin, usersController.deleteUser);
 
     return router;
   }
