@@ -26,4 +26,35 @@ export class RolesService {
       throw CustomError.notFound(`User not found`);
     }
   };
+
+  getAllRoles = async () => {
+    return await prismaClient.roles.findMany();
+  };
+
+  getRoleById = async (id: number) => {
+    return await prismaClient.roles.findFirst({
+      where: {
+        id,
+      },
+    });
+  };
+
+  updateRole = async (id: number, name: string) => {
+    return await prismaClient.roles.update({
+      where: {
+        id,
+      },
+      data: {
+        name,
+      },
+    });
+  };
+
+  deleteRole = async (id: number) => {
+    return await prismaClient.roles.delete({
+      where: {
+        id,
+      },
+    });
+  };
 }

@@ -15,4 +15,47 @@ export class RolesController {
       handleError(error, res);
     }
   };
+
+  getAllRoles = async (req: Request, res: Response) => {
+    try {
+      const roles = await this.rolesService.getAllRoles();
+      res.status(200).json(roles);
+    } catch (error) {
+      handleError(error, res);
+    }
+  };
+
+  getRoleById = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    try {
+      const role = await this.rolesService.getRoleById(Number(id));
+      res.status(200).json(role);
+    } catch (error) {
+      handleError(error, res);
+    }
+  };
+
+  updateRole = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { name } = req.body;
+
+    try {
+      const role = await this.rolesService.updateRole(Number(id), name);
+      res.status(200).json(role);
+    } catch (error) {
+      handleError(error, res);
+    }
+  };
+
+  deleteRole = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    try {
+      await this.rolesService.deleteRole(Number(id));
+      res.status(200).json({ message: "Role deleted !!!" });
+    } catch (error) {
+      handleError(error, res);
+    }
+  };
 }

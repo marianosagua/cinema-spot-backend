@@ -8,6 +8,33 @@ import { dataSeed } from "./dataSeed";
   await prismaClient.$disconnect();
 })();
 
+/**
+ * Seeds the database with initial data for the Movie Reservation System.
+ *
+ * This asynchronous function performs the following operations:
+ *
+ * 1. Deletes all existing records concurrently from the database tables: movies, categories, showtimes, seats, rooms, users, and roles.
+ *
+ * 2. Creates new category records from the data provided in `dataSeed.categories`.
+ *
+ * 3. Creates new movie records from `dataSeed.movies`, associating each movie with its corresponding category by matching on the category name.
+ *
+ * 4. Creates new room records using the entries in `dataSeed.rooms`.
+ *
+ * 5. Creates new role records using the entries in `dataSeed.roles`. Each role is inserted with its specific id, name, and description.
+ *
+ * 6. Creates new user records in bulk from `dataSeed.users`. For each user, the function hashes the provided password using `bcryptAdapter` and assigns the appropriate role based on the role name.
+ *
+ * 7. Creates new showtime records from `dataSeed.showtimes`, linking the showtime to its corresponding movie and room, and converting the start and end times to Date objects.
+ *
+ * 8. Creates new seat records from `dataSeed.seats`, associating each seat with the correct room and setting its availability status.
+ *
+ * 9. Logs a "Seed completed" message upon successful completion of all operations.
+ *
+ * @async
+ * @function seed
+ * @throws {Error} If any of the database operations fail during the seeding process.
+ */
 async function seed() {
   await Promise.all([
     prismaClient.movies.deleteMany(),
@@ -18,14 +45,6 @@ async function seed() {
     prismaClient.users.deleteMany(),
     prismaClient.roles.deleteMany(),
   ]);
-
-  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."seats_id_seq" RESTART WITH 1`;
-  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."users_id_seq" RESTART WITH 1`;
-  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."roles_id_seq" RESTART WITH 1`;
-  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."showtimes_id_seq" RESTART WITH 1`;
-  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."movies_id_seq" RESTART WITH 1`;
-  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."rooms_id_seq" RESTART WITH 1`;
-  // await prismaClient.$executeRaw`ALTER SEQUENCE "public"."categories_id_seq" RESTART WITH 1`;
 
   const categories = await Promise.all(
     dataSeed.categories.map((category) =>

@@ -2,6 +2,39 @@ import { prismaClient } from "../../data/postgres/client-connection";
 import { Movie } from "../../interfaces/movie";
 import { CustomError } from "../errors";
 
+/**
+ * Represents a movie entity with its associated properties, including title, description, poster, and category.
+ *
+ * @remarks
+ * The MovieEntity class encapsulates the logic for validating input data and creating a movie record.
+ * The static create method validates that all required properties (title, description, poster, and category)
+ * are provided in the data object. It then retrieves the corresponding category from the database using the Prisma Client.
+ *
+ * If any required field is missing, a custom BadRequest error is thrown. Likewise, if the category is not found
+ * in the database, an Error is thrown to indicate the absence of a valid category. On successful validation and retrieval
+ * of the category, the method returns an object adhering to the expected Movie interface, where the category is represented
+ * by its database identifier.
+ *
+ * @example
+ * ```typescript
+ * const movieData = {
+ *   id: 1,
+ *   title: "Inception",
+ *   description: "A mind-bending thriller about dream invasion.",
+ *   poster: "https://example.com/inception-poster.jpg",
+ *   category: "Science Fiction"
+ * };
+ *
+ * try {
+ *   const movie = await MovieEntity.create(movieData);
+ *   console.log("Movie created successfully:", movie);
+ * } catch (error) {
+ *   console.error("Error creating movie:", error);
+ * }
+ * ```
+ *
+ * @public
+ */
 export class MovieEntity {
   constructor(
     public id: number,

@@ -137,6 +137,10 @@ src/
 ### Roles
 
 - `POST /api/roles/assign-role`: Assign a role to a user (Admin only).
+- `GET /api/roles`: Get all roles (Admin only).
+- `GET /api/roles/:id`: Get a rol by ID.
+- `PUT /api/roles/:id`: Update an existing role (Admin only).
+- `DELETE /api/roles/:id`: Delete a role (Admin only).
 
 ### Seats
 
