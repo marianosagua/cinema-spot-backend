@@ -43,7 +43,7 @@ export class AuthController {
     try {
       await this.authService.validateEmail(token);
       res.render("successEmailValidation", {
-        urlHomePage: "http://localhost:5173/",
+        urlHomePage: "https://movie-reservation-system-frontend.vercel.app/",
       });
     } catch (error) {
       handleError(error, res);
