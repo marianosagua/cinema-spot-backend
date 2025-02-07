@@ -66,8 +66,9 @@ export class AuthService {
   ): Promise<string> {
     const templatePath = path.join(
       __dirname,
-      "../../presentation/views",
-      `${templateName}.hbs`
+      "..",
+      "views",
+      "emailValidation.hbs"
     );
     const templateSource = await fs.readFile(templatePath, "utf-8");
     const hbs = create({ extname: ".hbs" });
