@@ -17,9 +17,9 @@ import { Server } from "./presentation/server";
  * main();
  * ```
  */
-function main() {
+const main = () => {
   const server = new Server({ port: envs.port, routes: AppRoutes.getRoutes() });
   server.start();
-}
+};
 
 main();
