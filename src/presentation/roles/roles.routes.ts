@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { RolesController } from "./roles.controller";
-import { RolesService } from "../services/roles.service";
+import { RolesService } from "./roles.service";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
 
 /**

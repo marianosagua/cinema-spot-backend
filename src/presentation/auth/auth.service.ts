@@ -5,10 +5,10 @@ import { prismaClient } from "../../data/postgres/client-connection";
 import { LoginUserDto, RegisterUserDto } from "../../domain/dtos/auth";
 import { UserEntity } from "../../domain/entities/user.entity";
 import { CustomError } from "../../domain/errors/CustomErrors";
-import { EmailService } from "./email.service";
 import fs from "fs/promises";
 import path from "path";
 import { create } from "express-handlebars";
+import { EmailService } from "./email.service";
 
 export class AuthService {
   constructor(private readonly emailService: EmailService) {}

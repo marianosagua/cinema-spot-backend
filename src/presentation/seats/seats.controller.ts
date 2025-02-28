@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { SeatsService } from "../services/seats.service";
+import { SeatsService } from "./seats.service";
 import { handleError } from "../../domain/errors";
 
 export class SeatsController {

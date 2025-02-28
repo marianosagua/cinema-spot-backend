@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { SeatsService } from "../services/seats.service";
+import { SeatsService } from "./seats.service";
 import { SeatsController } from "./seats.controller";
 
 /**

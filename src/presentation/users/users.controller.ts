@@ -1,5 +1,5 @@
 import { handleError } from "../../domain/errors";
-import { UsersService } from "../services/users.service";
+import { UsersService } from "./users.service";
 import { Request, Response } from "express";
 
 export class UsersController {

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { MoviesController } from "./movies.controller";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
-import { MoviesService } from "../services/movies.service";
+import { MoviesService } from "./movies.service";
 
 /**
  * MoviesRoutes class encapsulates the routing configuration for movie-related API endpoints.

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { ReservationsController } from "./reservations.controller";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
-import { ReservationsService } from "../services";
+import { ReservationsService } from "./reservations.service";
 
 /**
  * ReservationsRoutes class encapsulates the routing configuration for reservation-related endpoints.

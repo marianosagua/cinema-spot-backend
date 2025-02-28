@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
-import { RoomsService } from "../services";
 import { RoomsController } from "./rooms.controller";
+import { RoomsService } from "./rooms.service";
 
 /**
  * Configures and returns an Express router for managing room-related endpoints.

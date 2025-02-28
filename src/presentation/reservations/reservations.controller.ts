@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { ReservationsService } from "../services";
 import { handleError } from "../../domain/errors";
+import { ReservationsService } from "./reservations.service";
 
 export class ReservationsController {
   constructor(private reservationsService: ReservationsService) {}

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { ShowtimesController } from "./showtimes.controller";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
-import { ShowtimesService } from "../services/showtimes.service";
+import { ShowtimesService } from "./showtimes.service";
 
 /**
  * Provides routing configuration for all showtime-related API endpoints within the Movie Reservation System.

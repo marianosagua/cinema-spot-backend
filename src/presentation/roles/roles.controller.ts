@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { RolesService } from "../services/roles.service";
+import { RolesService } from "./roles.service";
 import { handleError } from "../../domain/errors";
 
 export class RolesController {

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { AuthController } from "./auth.controller";
-import { AuthService, EmailService } from "../services";
+import { EmailService } from "./email.service";
+import { AuthService } from "./auth.service";
 
 /**
  * The AuthRoutes class encapsulates the routing configuration for authentication-related endpoints.

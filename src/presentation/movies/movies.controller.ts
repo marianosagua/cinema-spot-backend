@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { MoviesService } from "../services/movies.service";
+import { MoviesService } from "./movies.service";
 import { MovieEntity } from "../../domain/entities";
 import { handleError } from "../../domain/errors";
 

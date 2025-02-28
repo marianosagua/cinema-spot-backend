@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ShowtimesService } from "../services/showtimes.service";
+import { ShowtimesService } from "./showtimes.service";
 import { handleError } from "../../domain/errors";
 import { CreateShowtimeDto } from "../../domain/dtos/showtimes/create-showtime.dto";
 
