@@ -1,8 +1,8 @@
-# Movie Reservation System
+# CinemaSpot Backend
 
 ## Overview
 
-The Movie Reservation System is a backend application that manages movie reservations, user authentication, and administrative tasks. Built with TypeScript, Express.js, and Prisma ORM using a PostgreSQL database, it offers a robust platform for movie booking operations.
+CinemaSpot is a backend application that manages movie reservations, user authentication, and administrative tasks. Built with TypeScript, Express.js, and Prisma ORM using a PostgreSQL database, it offers a robust platform for movie booking operations.
 
 ## Features
 
@@ -49,8 +49,8 @@ src/
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/your-repo/movie-reservation-system.git
-   cd movie-reservation-system/backend
+   git clone https://github.com/your-username/CineSpot.git
+   cd CineSpot/cinemaspot_backend
    ```
 
 2. Install dependencies:
@@ -64,10 +64,13 @@ src/
    Create a `.env` file in the root directory with the following content:
 
    ```env
-   PORT=your_port
-   APP_URL=http://localhost:your_port
+   PORT=3000
+   APP_URL=http://localhost:3000
    JWT_SECRET_KEY=your_jwt_secret_key
-   DATABASE_URL=your_database_url
+   POSTGRES_USER=cinemaspot-user
+   POSTGRES_PASSWORD=your_password
+   POSTGRES_DB=cinemaspot-db
+   DATABASE_URL="postgresql://cinemaspot-user:your_password@localhost:5433/cinemaspot-db?schema=public"
    ```
 
 4. Start PostgreSQL using Docker Compose:
@@ -107,7 +110,7 @@ src/
 - `GET /api/movies`: Get all movies.
 - `GET /api/movies/:id`: Get a movie by ID.
 - `POST /api/movies`: Add a new movie (Admin only).
-- `PUT /api/movies/:id`: Update a movie (Admin only).
+- `PUT /api/movies`: Update a movie (Admin only).
 - `DELETE /api/movies/:id`: Delete a movie (Admin only).
 
 ### Rooms
@@ -130,7 +133,8 @@ src/
 ### Reservations
 
 - `GET /api/reservations`: Get all reservations (Admin only).
-- `GET /api/reservations/:id`: Get a reservation by ID (Admin only).
+- `GET /api/reservations/:id`: Get a reservation by ID.
+- `GET /api/reservations/user/:userId`: Get reservations by user ID.
 - `POST /api/reservations`: Add a new reservation.
 - `DELETE /api/reservations/:id`: Delete a reservation.
 
@@ -138,7 +142,7 @@ src/
 
 - `POST /api/roles/assign-role`: Assign a role to a user (Admin only).
 - `GET /api/roles`: Get all roles (Admin only).
-- `GET /api/roles/:id`: Get a rol by ID.
+- `GET /api/roles/:id`: Get a role by ID.
 - `PUT /api/roles/:id`: Update an existing role (Admin only).
 - `DELETE /api/roles/:id`: Delete a role (Admin only).
 
@@ -154,6 +158,6 @@ src/
 ### Users
 
 - `GET /api/users`: Retrieve all users (Admin only).
-- `GET /api/users/:id`: Retrieve a user by ID (Admin only).
+- `GET /api/users/:id`: Retrieve a user by ID.
 - `PUT /api/users/:id`: Update a user's information (Admin only).
 - `DELETE /api/users/:id`: Delete a user (Admin only).
