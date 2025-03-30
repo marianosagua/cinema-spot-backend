@@ -73,12 +73,47 @@ export class MovieEntity {
       throw new Error("Category not found in DB");
     }
 
+    if(!data.duration){
+      throw CustomError.badRequest("Duration is required");
+    }
+
+    if(!data.banner){
+      throw CustomError.badRequest("Banner is required");
+    }
+
+    if(!data.synopsis){
+      throw CustomError.badRequest("Synopsis is required");
+    }
+
+    if(!data.trailer){
+      throw CustomError.badRequest("Trailer is required");
+    }
+
+    if(!data.director){
+      throw CustomError.badRequest("Director is required");
+    }
+
+    if(!data.rating){
+      throw CustomError.badRequest("Rating is required");
+    }
+
+    if(!data.review){
+      throw CustomError.badRequest("Review is required");
+    }
+
     return {
       id: data.id,
       title: data.title,
       description: data.description,
       poster: data.poster,
       category: category?.id || 0,
+      duration: data.duration,
+      banner: data.banner,
+      synopsis: data.synopsis,
+      trailer: data.trailer,
+      director: data.director,
+      rating: data.rating,
+      review: data.review,
     };
   }
 }

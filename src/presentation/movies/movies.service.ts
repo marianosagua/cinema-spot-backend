@@ -15,6 +15,13 @@ export class MoviesService {
             name: true,
           },
         },
+        duration: true,
+        banner: true,
+        synopsis: true,
+        trailer: true,
+        director: true,
+        rating: true,
+        review: true,
       },
     });
 
@@ -28,9 +35,16 @@ export class MoviesService {
       description: movie.description,
       poster: movie.poster,
       category: movie.categories?.name,
+      duration: movie.duration,
+      banner: movie.banner,
+      synopsis: movie.synopsis,
+      trailer: movie.trailer,
+      director: movie.director,
+      rating: movie.rating,
+      review: movie.review,
     }));
 
-    return transformedMovies;
+    return transformedMovies.sort((a, b) => a.id - b.id);
   }
 
   async getMovie(id: string) {
@@ -48,6 +62,13 @@ export class MoviesService {
             name: true,
           },
         },
+        duration: true,
+        banner: true,
+        synopsis: true,
+        trailer: true,
+        director: true,
+        rating: true,
+        review: true,
       },
     });
 
@@ -61,6 +82,13 @@ export class MoviesService {
       description: movie.description,
       poster: movie.poster,
       category: movie.categories?.name,
+      duration: movie.duration,
+      banner: movie.banner,
+      synopsis: movie.synopsis,
+      trailer: movie.trailer,
+      director: movie.director,
+      rating: movie.rating,
+      review: movie.review,
     };
   }
 
@@ -71,6 +99,13 @@ export class MoviesService {
         description: movie.description,
         poster: movie.poster,
         category: movie.category,
+        duration: movie.duration,
+        banner: movie.banner,
+        synopsis: movie.synopsis,
+        trailer: movie.trailer,
+        director: movie.director,
+        rating: movie.rating,
+        review: movie.review,
       },
     });
 
@@ -89,6 +124,13 @@ export class MoviesService {
         description: movie.description,
         poster: movie.poster,
         category: movie.category,
+        duration: movie.duration,
+        banner: movie.banner,
+        synopsis: movie.synopsis,
+        trailer: movie.trailer,
+        director: movie.director,
+        rating: movie.rating,
+        review: movie.review,
       },
     });
 

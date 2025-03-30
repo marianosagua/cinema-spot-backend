@@ -4,4 +4,11 @@ export interface Movie {
   description: string;
   poster: string;
   category: number;
+  duration: string;
+  banner: string;
+  synopsis: string;
+  trailer: string;
+  director: string;
+  rating: string;
+  review: number;
 }
