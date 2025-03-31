@@ -8,9 +8,10 @@ datasource db {
 }
 
 model categories {
-  id     Int      @id @default(autoincrement())
-  name   String   @unique @db.VarChar(50)
-  movies movies[]
+  id              Int               @id @default(autoincrement())
+  name            String            @unique @db.VarChar(50)
+  future_releases future_releases[]
+  movies          movies[]
 }
 
 model movies {
@@ -106,4 +107,20 @@ model movie_cast {
   movies   movies @relation(fields: [movie_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([movie_id, actor_id])
+}
+
+model future_releases {
+  id           Int         @id @default(autoincrement())
+  title        String
+  description  String
+  poster       String
+  category     Int?
+  duration     DateTime    @db.Time(6)
+  banner       String
+  synopsis     String
+  trailer      String
+  director     String
+  rating       String
+  release_date DateTime    @db.Date
+  categories   categories? @relation(fields: [category], references: [id], onUpdate: NoAction, map: "fk_category")
 }

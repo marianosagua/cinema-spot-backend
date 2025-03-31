@@ -7,6 +7,7 @@ import { ShowtimesRoutes } from "./showtimes/showtimes.routes";
 import { SeatsRoutes } from "./seats/seats.routes";
 import { RoomsRoutes } from "./rooms/rooms.routes";
 import { UsersRoutes } from "./users/users.routes";
+import { FutureReleasesRoutes } from "./future-releases/future-releases.routes";
 
 /**
  * Regroups all API routes for the movie reservation system backend.
@@ -46,6 +47,8 @@ export class AppRoutes {
     router.use("/api/roles", RolesRoutes.getRoutes());
 
     router.use("/api/movies", MoviesRoutes.getRoutes());
+
+    router.use("/api/future-releases", FutureReleasesRoutes.getRoutes());
 
     router.use("/api/showtimes", ShowtimesRoutes.getRoutes());
 
