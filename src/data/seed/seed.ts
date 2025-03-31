@@ -38,6 +38,7 @@ import { dataSeed } from "./dataSeed";
 async function seed() {
   await Promise.all([
     prismaClient.movies.deleteMany(),
+    prismaClient.future_releases.deleteMany(),
     prismaClient.categories.deleteMany(),
     prismaClient.showtimes.deleteMany(),
     prismaClient.seats.deleteMany(),
@@ -63,6 +64,36 @@ async function seed() {
           description: movie.description,
           poster: movie.poster,
           category: category?.id,
+          duration: movie.duration,
+          banner: movie.banner,
+          synopsis: movie.synopsis,
+          trailer: movie.trailer,
+          director: movie.director,
+          rating: movie.rating,
+          review: movie.review,
+        },
+      });
+    })
+  );
+
+  await Promise.all(
+    dataSeed.futureReleases.map((futureRelease) => {
+      const category = categories.find(
+        (category: any) => category.name === futureRelease.category
+      );
+      return prismaClient.future_releases.create({
+        data: {
+          title: futureRelease.title,
+          description: futureRelease.description,
+          poster: futureRelease.poster,
+          category: category?.id,
+          duration: futureRelease.duration,
+          banner: futureRelease.banner,
+          synopsis: futureRelease.synopsis,
+          trailer: futureRelease.trailer,
+          director: futureRelease.director,
+          rating: futureRelease.rating,
+          release_date: futureRelease.release_date,
         },
       });
     })

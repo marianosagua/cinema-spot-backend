@@ -17,68 +17,197 @@ export const dataSeed = {
   ],
   movies: [
     {
-      title: "Inception",
-      description: "A mind-bending thriller about dreams within dreams.",
-      poster:
-        "https://i.postimg.cc/ZnBd7BR9/MV5-BMj-Ax-Mz-Y3-Njcx-NF5-BMl5-Ban-Bn-Xk-Ft-ZTcw-NTI5-OTM0-Mw-V1.jpg",
-      category: "Science Fiction",
+      id: 1,
+      title: "Interstellar",
+      description: "Explorers seek a new home for humanity beyond the stars.",
+      poster: "https://i.postimg.cc/WpYzW6Qt/interestellar-poster.jpg",
+      category: 9,
+      duration: "02:49:00",
+      banner: "https://i.postimg.cc/KjPt7Jsz/Interstellar.jpg",
+      synopsis: "A journey across time and space to save humanity.",
+      trailer: "https://www.youtube.com/watch?v=zSWdZVtXT7E",
+      director: "Christopher Nolan",
+      rating: "PG-13",
+      review: 8.6,
     },
     {
+      id: 6,
       title: "The Godfather",
       description:
-        "The aging patriarch of an organized crime dynasty transfers control to his son.",
+        "The story of the powerful and complex Corleone family, led by patriarch Don Vito Corleone, as they navigate the world of crime and betrayal.",
       poster: "https://i.postimg.cc/GhN3SYB0/the-godfather-poster.png",
-      category: "Crime",
+      category: 18,
+      duration: "02:55:00",
+      banner:
+        "https://i.postimg.cc/HnX9ZpjT/HT-godfatrher-jef-170308-16x9-992.jpg",
+      synopsis: "A legendary saga about power, family, and crime.",
+      trailer: "https://www.youtube.com/watch?v=sY1S34973zA",
+      director: "Francis Ford Coppola",
+      rating: "R",
+      review: 9.2,
     },
     {
-      title: "The Dark Knight",
-      description: "Batman faces the Joker in Gotham City.",
-      poster: "https://i.postimg.cc/YqyrRrLF/the-dark-knight.jpg",
-      category: "Action",
-    },
-    {
-      title: "Forrest Gump",
-      description:
-        "The story of a man with a kind heart and extraordinary experiences.",
-      poster: "https://i.postimg.cc/7LnjB9tR/forrest-gump-poster.jpg",
-      category: "Drama",
-    },
-    {
-      title: "Pulp Fiction",
-      description: "The lives of two mob hitmen intertwine in unexpected ways.",
-      poster: "https://i.postimg.cc/15pxnycP/pulp-fiction-poster.jpg",
-      category: "Crime",
-    },
-    {
+      id: 7,
       title: "The Matrix",
-      description: "A hacker discovers the truth about his reality.",
+      description:
+        "A hacker learns the shocking truth about reality, leading him to become part of a revolution to free humanity from a simulated existence.",
       poster: "https://i.postimg.cc/ZRy7GLwZ/the-matrix-poster.jpg",
-      category: "Science Fiction",
+      category: 9,
+      duration: "02:16:00",
+      banner: "https://i.postimg.cc/dtR9GtzB/descarga.jpg",
+      synopsis: "A mind-bending story about reality and simulation.",
+      trailer: "https://www.youtube.com/watch?v=vKQi3bBA1y8",
+      director: "Lana Wachowski",
+      rating: "R",
+      review: 8.7,
     },
     {
-      title: "Titanic",
-      description: "A love story set on the ill-fated Titanic.",
-      poster: "https://i.postimg.cc/fbyG4q1B/titanic-poster.jpg",
-      category: "Romance",
+      id: 2,
+      title: "The Dark Knight",
+      description:
+        "Batman faces his most dangerous opponent, the Joker. The Joker''s reign of terror causes Gotham to descend into chaos.",
+      poster: "https://i.postimg.cc/YqyrRrLF/the-dark-knight.jpg",
+      category: 18,
+      duration: "02:32:00",
+      banner: "https://i.postimg.cc/fL6vf3zH/christian-bale-batsuit.jpg",
+      synopsis:
+        "A gripping story about good versus evil in the world of Gotham.",
+      trailer: "https://www.youtube.com/watch?v=EXeTwQWrcwY",
+      director: "Christopher Nolan",
+      rating: "PG-13",
+      review: 9.0,
     },
     {
+      id: 3,
+      title: "Inception",
+      description:
+        "A thief who steals secrets by infiltrating the subconscious of his targets is tasked with planting an idea in someone''s mind.",
+      poster:
+        "https://i.postimg.cc/ZnBd7BR9/MV5-BMj-Ax-Mz-Y3-Njcx-NF5-BMl5-Ban-Bn-Xk-Ft-ZTcw-NTI5-OTM0-Mw-V1.jpg",
+      category: 9,
+      duration: "02:28:00",
+      banner:
+        "https://i.postimg.cc/R0Y1v3HM/origen-inception-christopher-nolan-mutaciones-1.jpg",
+      synopsis: "A complex, mind-bending thriller about dreams within dreams.",
+      trailer: "https://www.youtube.com/watch?v=YoHD9XEInc0",
+      director: "Christopher Nolan",
+      rating: "PG-13",
+      review: 8.8,
+    },
+    {
+      id: 9,
+      title: "The Lord of the Rings",
+      description:
+        "A young hobbit embarks on an epic quest to destroy the One Ring, with the fate of Middle-Earth hanging in the balance.",
+      poster:
+        "https://i.postimg.cc/28hy91ws/dd24aedc7ba4fb38016329c1fb5cade7.jpg",
+      category: 5,
+      duration: "03:30:00",
+      banner: "https://i.postimg.cc/k5GFrND1/hobbit-1-1659123079896.jpg",
+      synopsis:
+        "A legendary tale of good versus evil set in the magical world of Middle-Earth.",
+      trailer: "https://www.youtube.com/watch?v=PwiXeJfoR28",
+      director: "Peter Jackson",
+      rating: "PG-13",
+      review: 8.9,
+    },
+    {
+      id: 4,
+      title: "Pulp Fiction",
+      description:
+        "A series of interconnected stories involving crime, redemption, and fate in Los Angeles.",
+      poster: "https://i.postimg.cc/15pxnycP/pulp-fiction-poster.jpg",
+      category: 18,
+      duration: "02:34:00",
+      banner: "https://i.postimg.cc/qB3wMGwW/pulp-1100x733.jpg",
+      synopsis:
+        "An intense, stylish portrayal of crime and its consequences in L.A.",
+      trailer: "https://www.youtube.com/watch?v=s7EdQ4FqbhY",
+      director: "Quentin Tarantino",
+      rating: "R",
+      review: 8.9,
+    },
+    {
+      id: 5,
       title: "The Shawshank Redemption",
-      description: "Two imprisoned men bond over years.",
+      description:
+        "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
       poster:
         "https://i.postimg.cc/Y0R1ZGBM/the-shawshank-redeption-poster.jpg",
-      category: "Drama",
+      category: 4,
+      duration: "02:22:00",
+      banner: "https://i.postimg.cc/vHwz16ST/image.jpg",
+      synopsis: "A tale of friendship and resilience in the face of adversity.",
+      trailer: "https://www.youtube.com/watch?v=6hB3S9bIaco",
+      director: "Frank Darabont",
+      rating: "R",
+      review: 9.3,
     },
     {
-      title: "Avengers: Endgame",
-      description: "Superheroes unite to reverse Thanos's actions.",
-      poster: "https://i.postimg.cc/4yxKKWjR/avengers-endgame-poster.jpg",
-      category: "Action",
+      id: 11,
+      title: "Goodfellas",
+      description:
+        "The true story of a young man who rises through the ranks of the Mafia, only to fall victim to betrayal and violence.",
+      poster: "https://i.postimg.cc/yNYNNvHK/Good-Fellas.jpg",
+      category: 18,
+      duration: "02:26:00",
+      banner: "https://i.postimg.cc/D0kqbt6H/buenos-muchachos-3.jpg",
+      synopsis: "A gripping, real-life tale of crime, loyalty, and betrayal.",
+      trailer: "https://www.youtube.com/watch?v=qo5jJp4p8p4",
+      director: "Martin Scorsese",
+      rating: "R",
+      review: 8.7,
     },
     {
-      title: "Interstellar",
-      description: "A journey to the farthest reaches of space.",
-      poster: "https://i.postimg.cc/WpYzW6Qt/interestellar-poster.jpg",
-      category: "Adventure",
+      id: 8,
+      title: "Forrest Gump",
+      description:
+        "The extraordinary life of a simple man from Alabama who unexpectedly influences major historical events.",
+      poster: "https://i.postimg.cc/7LnjB9tR/forrest-gump-poster.jpg",
+      category: 4,
+      duration: "02:22:00",
+      banner: "https://i.postimg.cc/pL2JCMvt/maxresdefault.jpg",
+      synopsis:
+        "A touching and humorous tale of a man who unwittingly changes history.",
+      trailer: "https://www.youtube.com/watch?v=bLvqoHBptjg",
+      director: "Robert Zemeckis",
+      rating: "PG-13",
+      review: 8.8,
+    },
+    {
+      id: 12,
+      title: "The Silence of the Lambs",
+      description:
+        "A young FBI agent seeks the help of imprisoned cannibalistic serial killer Hannibal Lecter to catch another serial killer on the loose.",
+      poster: "https://i.postimg.cc/Gmj2r66z/Josh-Beamish-Silence-Of-Lambs.jpg",
+      category: 18,
+      duration: "01:58:00",
+      banner:
+        "https://i.postimg.cc/MTj7HW71/tumblr-inline-o0ox4oi-APe1sl6jqt-500.jpg",
+      synopsis:
+        "A chilling psychological thriller about manipulation and mind games.",
+      trailer: "https://www.youtube.com/watch?v=W6Mm8Vco1pY",
+      director: "Jonathan Demme",
+      rating: "R",
+      review: 8.6,
+    },
+    {
+      id: 10,
+      title: "Fight Club",
+      description:
+        "An insomniac office worker forms an underground fight club as a form of male bonding and a rejection of consumerism.",
+      poster:
+        "https://i.postimg.cc/jqWLNgJd/MV5-BOTgy-OGQ1-NDIt-NGU3-Ny00-Mj-U3-LTg2-YWEt-Nm-Ey-Yj-Bi-Mj-I1-Y2-M5-Xk-Ey-Xk-Fqc-Gc-V1-FMjpg-UX1000.jpg",
+      category: 18,
+      duration: "02:19:00",
+      banner:
+        "https://i.postimg.cc/XYQcD1NB/fight-club-critica-echo-boomer.jpg",
+      synopsis:
+        "A gritty and dark satire about the breakdown of modern society.",
+      trailer: "https://www.youtube.com/watch?v=SUXWAEX2jlg",
+      director: "David Fincher",
+      rating: "R",
+      review: 8.8,
     },
   ],
   rooms: [{ name: "A1" }, { name: "B1" }, { name: "C1" }],
@@ -351,5 +480,71 @@ export const dataSeed = {
     { seat_number: 8, room: "C1", is_available: true },
     { seat_number: 9, room: "C1", is_available: true },
     { seat_number: 10, room: "C1", is_available: true },
+  ],
+  futureReleases: [
+    {
+      title: "Capitán América: Nuevo Orden Mundial",
+      description:
+        "Sam Wilson asume el manto del Capitán América y enfrenta nuevos desafíos en un mundo cambiante.",
+      poster: "https://www.cinesa.es/Content/Upload/Movies/1150/1/1150.jpg",
+      category: 1,
+      duration: "02:15:00",
+      banner:
+        "https://www.cinesa.es/Content/Upload/Movies/1150/1/1150_banner.jpg",
+      synopsis:
+        "Sam Wilson, el nuevo Capitán América, debe descubrir una conspiración que amenaza la paz mundial.",
+      trailer: "https://www.youtube.com/watch?v=trailer1",
+      director: "Julius Onah",
+      rating: "PG-13",
+      release_date: "2025-05-03",
+    },
+    {
+      title: "Mickey 17",
+      description:
+        "Un empleado desechable en una misión humana colonizadora se rebela contra su destino.",
+      poster: "https://www.cinesa.es/Content/Upload/Movies/1151/1/1151.jpg",
+      category: 2,
+      duration: "01:50:00",
+      banner:
+        "https://www.cinesa.es/Content/Upload/Movies/1151/1/1151_banner.jpg",
+      synopsis:
+        "Mickey 17 descubre la verdad detrás de su misión y lucha por su supervivencia.",
+      trailer: "https://www.youtube.com/watch?v=trailer2",
+      director: "Bong Joon-ho",
+      rating: "PG-13",
+      release_date: "2025-06-15",
+    },
+    {
+      title: "Jurassic World: El Renacer",
+      description:
+        "La saga continúa con nuevas aventuras y desafíos en un mundo donde los dinosaurios conviven con los humanos.",
+      poster: "https://www.cinesa.es/Content/Upload/Movies/1152/1/1152.jpg",
+      category: 1,
+      duration: "02:10:00",
+      banner:
+        "https://www.cinesa.es/Content/Upload/Movies/1152/1/1152_banner.jpg",
+      synopsis:
+        "La coexistencia entre humanos y dinosaurios alcanza un punto crítico, desatando una nueva era de peligro.",
+      trailer: "https://www.youtube.com/watch?v=trailer3",
+      director: "Colin Trevorrow",
+      rating: "PG-13",
+      release_date: "2025-07-20",
+    },
+    {
+      title: "Avatar: Fuego y Ceniza",
+      description:
+        "La continuación de la épica saga en Pandora, explorando nuevos territorios y culturas.",
+      poster: "https://www.cinesa.es/Content/Upload/Movies/1153/1/1153.jpg",
+      category: 3,
+      duration: "02:45:00",
+      banner:
+        "https://www.cinesa.es/Content/Upload/Movies/1153/1/1153_banner.jpg",
+      synopsis:
+        "Jake Sully y Neytiri enfrentan nuevas amenazas que ponen en peligro la armonía de Pandora.",
+      trailer: "https://www.youtube.com/watch?v=trailer4",
+      director: "James Cameron",
+      rating: "PG-13",
+      release_date: "2025-12-18",
+    },
   ],
 };
