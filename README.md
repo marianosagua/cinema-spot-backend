@@ -1,10 +1,10 @@
-# CinemaSpot Backend
+# 🎬 CinemaSpot Backend
 
-## Overview
+## 📋 Overview
 
 CinemaSpot is a backend application that manages movie reservations, user authentication, and administrative tasks. Built with TypeScript, Express.js, and Prisma ORM using a PostgreSQL database, it offers a robust platform for movie booking operations.
 
-## Features
+## ✨ Features
 
 - User Authentication (Login, Registration, Email Validation)
 - Role Management (Admin, User)
@@ -13,8 +13,9 @@ CinemaSpot is a backend application that manages movie reservations, user authen
 - Showtime Management
 - Reservation Management
 - Email Notifications
+- Future Releases Management
 
-## Technologies Used
+## 🛠 Technologies Used
 
 - **TypeScript**: For type-safe JavaScript.
 - **Express.js**: Web framework for Node.js.
@@ -22,9 +23,10 @@ CinemaSpot is a backend application that manages movie reservations, user authen
 - **PostgreSQL**: Relational database.
 - **JWT**: JSON Web Tokens for authentication.
 - **Bcrypt**: Password hashing.
+- **Handlebars**: HTML templates for emails.
 - **Docker**: Containerization.
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 src/
@@ -33,10 +35,12 @@ src/
 ├── domain/                 # Business logic and entities
 ├── interfaces/             # TypeScript interfaces
 ├── presentation/           # Controllers, routes, and middlewares
+│   ├── views/              # Handlebars templates
+│   └── ...
 └── app.ts                  # Entry point of the application
 ```
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -97,15 +101,15 @@ src/
    npm run dev
    ```
 
-## API Endpoints
+## 🔌 API Endpoints
 
-### Authentication
+### 🔐 Authentication
 
 - `POST /api/auth/login`: User login.
 - `POST /api/auth/register`: User registration.
 - `GET /api/auth/validate-email/:token`: Email validation.
 
-### Movies
+### 🎥 Movies
 
 - `GET /api/movies`: Get all movies.
 - `GET /api/movies/:id`: Get a movie by ID.
@@ -113,7 +117,15 @@ src/
 - `PUT /api/movies`: Update a movie (Admin only).
 - `DELETE /api/movies/:id`: Delete a movie (Admin only).
 
-### Rooms
+### 🍿 Future Releases
+
+- `GET /api/future-releases`: Get all upcoming movies.
+- `GET /api/future-releases/:id`: Get upcoming movie by ID.
+- `POST /api/future-releases`: Add a new upcoming movie (Admin only).
+- `PUT /api/future-releases/:id`: Update an upcoming movie (Admin only).
+- `DELETE /api/future-releases/:id`: Delete an upcoming movie (Admin only).
+
+### 🏛️ Rooms
 
 - `GET /api/rooms`: Get all rooms.
 - `GET /api/rooms/:id`: Get room by ID.
@@ -121,7 +133,7 @@ src/
 - `PUT /api/rooms/:id`: Update a room (Admin only).
 - `DELETE /api/rooms/:id`: Delete a room (Admin only).
 
-### Showtimes
+### 🕒 Showtimes
 
 - `GET /api/showtimes`: Get all showtimes.
 - `GET /api/showtimes/:id`: Get a showtime by ID.
@@ -130,7 +142,7 @@ src/
 - `PUT /api/showtimes/:id`: Update a showtime (Admin only).
 - `DELETE /api/showtimes/:id`: Delete a showtime (Admin only).
 
-### Reservations
+### 🎟️ Reservations
 
 - `GET /api/reservations`: Get all reservations (Admin only).
 - `GET /api/reservations/:id`: Get a reservation by ID.
@@ -138,7 +150,7 @@ src/
 - `POST /api/reservations`: Add a new reservation.
 - `DELETE /api/reservations/:id`: Delete a reservation.
 
-### Roles
+### 👑 Roles
 
 - `POST /api/roles/assign-role`: Assign a role to a user (Admin only).
 - `GET /api/roles`: Get all roles (Admin only).
@@ -146,7 +158,7 @@ src/
 - `PUT /api/roles/:id`: Update an existing role (Admin only).
 - `DELETE /api/roles/:id`: Delete a role (Admin only).
 
-### Seats
+### 💺 Seats
 
 - `GET /api/seats`: Get all seats.
 - `GET /api/seats/:id`: Get a seat by ID.
@@ -155,7 +167,7 @@ src/
 - `PUT /api/seats/:id`: Update a seat.
 - `DELETE /api/seats/:id`: Delete a seat.
 
-### Users
+### 👥 Users
 
 - `GET /api/users`: Retrieve all users (Admin only).
 - `GET /api/users/:id`: Retrieve a user by ID.
