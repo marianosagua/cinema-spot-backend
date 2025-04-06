@@ -101,12 +101,12 @@ model actors {
 }
 
 model movie_cast {
-  movie_id Int
-  actor_id Int
-  actors   actors @relation(fields: [actor_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  movies   movies @relation(fields: [movie_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  movie  Int
+  actor  Int
+  actors actors @relation(fields: [actor], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  movies movies @relation(fields: [movie], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-  @@id([movie_id, actor_id])
+  @@id([movie, actor])
 }
 
 model future_releases {

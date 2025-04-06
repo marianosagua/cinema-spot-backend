@@ -17,7 +17,6 @@ export const dataSeed = {
   ],
   movies: [
     {
-      id: 1,
       title: "Interstellar",
       description: "Explorers seek a new home for humanity beyond the stars.",
       poster: "https://i.postimg.cc/WpYzW6Qt/interestellar-poster.jpg",
@@ -31,7 +30,6 @@ export const dataSeed = {
       review: 8.6,
     },
     {
-      id: 2,
       title: "The Dark Knight",
       description:
         "Batman faces his most dangerous opponent, the Joker. The Joker''s reign of terror causes Gotham to descend into chaos.",
@@ -47,7 +45,6 @@ export const dataSeed = {
       review: 9.0,
     },
     {
-      id: 3,
       title: "Inception",
       description:
         "A thief who steals secrets by infiltrating the subconscious of his targets is tasked with planting an idea in someone''s mind.",
@@ -64,7 +61,6 @@ export const dataSeed = {
       review: 8.8,
     },
     {
-      id: 4,
       title: "Pulp Fiction",
       description:
         "A series of interconnected stories involving crime, redemption, and fate in Los Angeles.",
@@ -80,7 +76,6 @@ export const dataSeed = {
       review: 8.9,
     },
     {
-      id: 5,
       title: "The Shawshank Redemption",
       description:
         "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
@@ -96,7 +91,6 @@ export const dataSeed = {
       review: 9.3,
     },
     {
-      id: 6,
       title: "The Godfather",
       description:
         "The story of the powerful and complex Corleone family, led by patriarch Don Vito Corleone, as they navigate the world of crime and betrayal.",
@@ -112,7 +106,6 @@ export const dataSeed = {
       review: 9.2,
     },
     {
-      id: 7,
       title: "The Matrix",
       description:
         "A hacker learns the shocking truth about reality, leading him to become part of a revolution to free humanity from a simulated existence.",
@@ -127,7 +120,6 @@ export const dataSeed = {
       review: 8.7,
     },
     {
-      id: 8,
       title: "Forrest Gump",
       description:
         "The extraordinary life of a simple man from Alabama who unexpectedly influences major historical events.",
@@ -143,7 +135,6 @@ export const dataSeed = {
       review: 8.8,
     },
     {
-      id: 9,
       title: "The Lord of the Rings",
       description:
         "A young hobbit embarks on an epic quest to destroy the One Ring, with the fate of Middle-Earth hanging in the balance.",
@@ -160,7 +151,6 @@ export const dataSeed = {
       review: 8.9,
     },
     {
-      id: 10,
       title: "Fight Club",
       description:
         "An insomniac office worker forms an underground fight club as a form of male bonding and a rejection of consumerism.",
@@ -178,7 +168,6 @@ export const dataSeed = {
       review: 8.8,
     },
     {
-      id: 11,
       title: "Goodfellas",
       description:
         "The true story of a young man who rises through the ranks of the Mafia, only to fall victim to betrayal and violence.",
@@ -193,7 +182,6 @@ export const dataSeed = {
       review: 8.7,
     },
     {
-      id: 12,
       title: "The Silence of the Lambs",
       description:
         "A young FBI agent seeks the help of imprisoned cannibalistic serial killer Hannibal Lecter to catch another serial killer on the loose.",
@@ -248,202 +236,121 @@ export const dataSeed = {
     },
   ],
   showtimes: [
-    {
-      movie: "The Matrix",
-      start_time: "2022-01-01T09:00:00",
-      end_time: "2022-01-01T12:00:00",
-      room: "A1",
-    },
-    {
-      movie: "The Matrix",
-      start_time: "2022-01-01T12:15:00",
-      end_time: "2022-01-01T15:15:00",
-      room: "B1",
-    },
-    {
-      movie: "The Matrix",
-      start_time: "2022-01-02T09:00:00",
-      end_time: "2022-01-02T12:00:00",
-      room: "C1",
-    },
+    // Morning showtimes
     {
       movie: "Interstellar",
-      start_time: "2022-01-01T15:30:00",
-      end_time: "2022-01-01T18:30:00",
-      room: "C1",
-    },
-    {
-      movie: "Interstellar",
-      start_time: "2022-01-01T18:45:00",
-      end_time: "2022-01-01T21:45:00",
-      room: "A1",
-    },
-    {
-      movie: "Interstellar",
-      start_time: "2022-01-02T15:30:00",
-      end_time: "2022-01-02T18:30:00",
-      room: "B1",
-    },
-    {
-      movie: "The Godfather",
-      start_time: "2022-01-01T18:45:00",
-      end_time: "2022-01-01T21:45:00",
-      room: "B1",
-    },
-    {
-      movie: "The Godfather",
-      start_time: "2022-01-02T18:45:00",
-      end_time: "2022-01-02T21:45:00",
-      room: "A1",
-    },
-    {
-      movie: "The Godfather",
-      start_time: "2022-01-03T18:45:00",
-      end_time: "2022-01-03T21:45:00",
-      room: "C1",
-    },
-    {
-      movie: "Inception",
-      start_time: "2022-01-01T09:00:00",
-      end_time: "2022-01-01T12:00:00",
-      room: "A1",
-    },
-    {
-      movie: "Inception",
-      start_time: "2022-01-01T12:15:00",
-      end_time: "2022-01-01T15:15:00",
-      room: "B1",
-    },
-    {
-      movie: "Inception",
-      start_time: "2022-01-02T09:00:00",
-      end_time: "2022-01-02T12:00:00",
-      room: "C1",
-    },
-    {
-      movie: "The Dark Knight",
-      start_time: "2022-01-01T15:30:00",
-      end_time: "2022-01-01T18:30:00",
-      room: "C1",
-    },
-    {
-      movie: "The Dark Knight",
-      start_time: "2022-01-01T18:45:00",
-      end_time: "2022-01-01T21:45:00",
+      start_time: "2024-05-01T10:00:00",
+      end_time: "2024-05-01T12:49:00",
       room: "A1",
     },
     {
       movie: "The Dark Knight",
-      start_time: "2022-01-02T15:30:00",
-      end_time: "2022-01-02T18:30:00",
+      start_time: "2024-05-01T10:00:00",
+      end_time: "2024-05-01T12:32:00",
       room: "B1",
     },
     {
-      movie: "Forrest Gump",
-      start_time: "2022-01-01T18:45:00",
-      end_time: "2022-01-01T21:45:00",
-      room: "B1",
-    },
-    {
-      movie: "Forrest Gump",
-      start_time: "2022-01-02T18:45:00",
-      end_time: "2022-01-02T21:45:00",
-      room: "A1",
-    },
-    {
-      movie: "Forrest Gump",
-      start_time: "2022-01-03T18:45:00",
-      end_time: "2022-01-03T21:45:00",
+      movie: "Inception",
+      start_time: "2024-05-01T10:00:00",
+      end_time: "2024-05-01T12:28:00",
       room: "C1",
     },
+
+    // Afternoon showtimes
     {
       movie: "Pulp Fiction",
-      start_time: "2022-01-01T09:00:00",
-      end_time: "2022-01-01T12:00:00",
-      room: "A1",
-    },
-    {
-      movie: "Pulp Fiction",
-      start_time: "2022-01-01T12:15:00",
-      end_time: "2022-01-01T15:15:00",
-      room: "B1",
-    },
-    {
-      movie: "Pulp Fiction",
-      start_time: "2022-01-02T09:00:00",
-      end_time: "2022-01-02T12:00:00",
-      room: "C1",
-    },
-    {
-      movie: "Titanic",
-      start_time: "2022-01-01T15:30:00",
-      end_time: "2022-01-01T18:30:00",
-      room: "C1",
-    },
-    {
-      movie: "Titanic",
-      start_time: "2022-01-01T18:45:00",
-      end_time: "2022-01-01T21:45:00",
-      room: "A1",
-    },
-    {
-      movie: "Titanic",
-      start_time: "2022-01-02T15:30:00",
-      end_time: "2022-01-02T18:30:00",
-      room: "B1",
-    },
-    {
-      movie: "The Shawshank Redemption",
-      start_time: "2022-01-01T18:45:00",
-      end_time: "2022-01-01T21:45:00",
-      room: "B1",
-    },
-    {
-      movie: "The Shawshank Redemption",
-      start_time: "2022-01-02T18:45:00",
-      end_time: "2022-01-02T21:45:00",
+      start_time: "2024-05-01T14:00:00",
+      end_time: "2024-05-01T16:34:00",
       room: "A1",
     },
     {
       movie: "The Shawshank Redemption",
-      start_time: "2022-01-03T18:45:00",
-      end_time: "2022-01-03T21:45:00",
-      room: "C1",
-    },
-    {
-      movie: "Avengers: Endgame",
-      start_time: "2022-01-01T09:00:00",
-      end_time: "2022-01-01T12:00:00",
-      room: "A1",
-    },
-    {
-      movie: "Avengers: Endgame",
-      start_time: "2022-01-01T12:15:00",
-      end_time: "2022-01-01T15:15:00",
+      start_time: "2024-05-01T14:00:00",
+      end_time: "2024-05-01T16:22:00",
       room: "B1",
     },
     {
-      movie: "Avengers: Endgame",
-      start_time: "2022-01-02T09:00:00",
-      end_time: "2022-01-02T12:00:00",
+      movie: "The Godfather",
+      start_time: "2024-05-01T14:00:00",
+      end_time: "2024-05-01T16:55:00",
       room: "C1",
     },
+
+    // Evening showtimes
     {
-      movie: "Interstellar",
-      start_time: "2022-01-01T15:30:00",
-      end_time: "2022-01-01T18:30:00",
-      room: "C1",
-    },
-    {
-      movie: "Interstellar",
-      start_time: "2022-01-01T18:45:00",
-      end_time: "2022-01-01T21:45:00",
+      movie: "The Matrix",
+      start_time: "2024-05-01T19:00:00",
+      end_time: "2024-05-01T21:16:00",
       room: "A1",
     },
     {
+      movie: "Forrest Gump",
+      start_time: "2024-05-01T19:00:00",
+      end_time: "2024-05-01T21:22:00",
+      room: "B1",
+    },
+    {
+      movie: "The Lord of the Rings",
+      start_time: "2024-05-01T19:00:00",
+      end_time: "2024-05-01T22:30:00",
+      room: "C1",
+    },
+
+    // Next day showtimes
+    {
+      movie: "Fight Club",
+      start_time: "2024-05-02T10:00:00",
+      end_time: "2024-05-02T12:19:00",
+      room: "A1",
+    },
+    {
+      movie: "Goodfellas",
+      start_time: "2024-05-02T10:00:00",
+      end_time: "2024-05-02T12:26:00",
+      room: "B1",
+    },
+    {
+      movie: "The Silence of the Lambs",
+      start_time: "2024-05-02T10:00:00",
+      end_time: "2024-05-02T11:58:00",
+      room: "C1",
+    },
+
+    // Weekend showtimes
+    {
       movie: "Interstellar",
-      start_time: "2022-01-02T15:30:00",
-      end_time: "2022-01-02T18:30:00",
+      start_time: "2024-05-04T14:00:00",
+      end_time: "2024-05-04T16:49:00",
+      room: "A1",
+    },
+    {
+      movie: "The Dark Knight",
+      start_time: "2024-05-04T14:00:00",
+      end_time: "2024-05-04T16:32:00",
+      room: "B1",
+    },
+    {
+      movie: "Inception",
+      start_time: "2024-05-04T19:00:00",
+      end_time: "2024-05-04T21:28:00",
+      room: "A1",
+    },
+    {
+      movie: "Pulp Fiction",
+      start_time: "2024-05-04T19:00:00",
+      end_time: "2024-05-04T21:34:00",
+      room: "B1",
+    },
+    {
+      movie: "The Shawshank Redemption",
+      start_time: "2024-05-05T10:00:00",
+      end_time: "2024-05-05T12:22:00",
+      room: "A1",
+    },
+    {
+      movie: "The Godfather",
+      start_time: "2024-05-05T10:00:00",
+      end_time: "2024-05-05T12:55:00",
       room: "B1",
     },
   ],
@@ -546,5 +453,331 @@ export const dataSeed = {
       rating: "PG-13",
       release_date: "2025-12-18",
     },
+  ],
+  actors: [
+    {
+      first_name: "Matthew",
+      last_name: "McConaughey",
+      age: 54,
+      nationality: "American",
+    },
+    {
+      first_name: "Anne",
+      last_name: "Hathaway",
+      age: 41,
+      nationality: "American",
+    },
+    {
+      first_name: "Jessica",
+      last_name: "Chastain",
+      age: 47,
+      nationality: "American",
+    },
+    {
+      first_name: "Michael",
+      last_name: "Caine",
+      age: 91,
+      nationality: "British",
+    },
+    {
+      first_name: "Christian",
+      last_name: "Bale",
+      age: 50,
+      nationality: "British",
+    },
+    {
+      first_name: "Heath",
+      last_name: "Ledger",
+      age: 28,
+      nationality: "Australian",
+    },
+    {
+      first_name: "Aaron",
+      last_name: "Eckhart",
+      age: 56,
+      nationality: "American",
+    },
+    {
+      first_name: "Gary",
+      last_name: "Oldman",
+      age: 66,
+      nationality: "British",
+    },
+    {
+      first_name: "Leonardo",
+      last_name: "DiCaprio",
+      age: 49,
+      nationality: "American",
+    },
+    {
+      first_name: "Joseph",
+      last_name: "Gordon-Levitt",
+      age: 43,
+      nationality: "American",
+    },
+    {
+      first_name: "Ellen",
+      last_name: "Page",
+      age: 37,
+      nationality: "Canadian",
+    },
+    { first_name: "Tom", last_name: "Hardy", age: 46, nationality: "British" },
+    {
+      first_name: "John",
+      last_name: "Travolta",
+      age: 70,
+      nationality: "American",
+    },
+    {
+      first_name: "Samuel L.",
+      last_name: "Jackson",
+      age: 75,
+      nationality: "American",
+    },
+    {
+      first_name: "Uma",
+      last_name: "Thurman",
+      age: 54,
+      nationality: "American",
+    },
+    {
+      first_name: "Bruce",
+      last_name: "Willis",
+      age: 69,
+      nationality: "American",
+    },
+    {
+      first_name: "Tim",
+      last_name: "Robbins",
+      age: 65,
+      nationality: "American",
+    },
+    {
+      first_name: "Morgan",
+      last_name: "Freeman",
+      age: 87,
+      nationality: "American",
+    },
+    {
+      first_name: "Bob",
+      last_name: "Gunton",
+      age: 78,
+      nationality: "American",
+    },
+    {
+      first_name: "William",
+      last_name: "Sadler",
+      age: 74,
+      nationality: "American",
+    },
+    {
+      first_name: "Marlon",
+      last_name: "Brando",
+      age: 80,
+      nationality: "American",
+    },
+    { first_name: "Al", last_name: "Pacino", age: 84, nationality: "American" },
+    {
+      first_name: "James",
+      last_name: "Caan",
+      age: 82,
+      nationality: "American",
+    },
+    {
+      first_name: "Robert",
+      last_name: "Duvall",
+      age: 93,
+      nationality: "American",
+    },
+    {
+      first_name: "Keanu",
+      last_name: "Reeves",
+      age: 59,
+      nationality: "Canadian",
+    },
+    {
+      first_name: "Laurence",
+      last_name: "Fishburne",
+      age: 62,
+      nationality: "American",
+    },
+    {
+      first_name: "Carrie-Anne",
+      last_name: "Moss",
+      age: 56,
+      nationality: "Canadian",
+    },
+    {
+      first_name: "Hugo",
+      last_name: "Weaving",
+      age: 64,
+      nationality: "British",
+    },
+    { first_name: "Tom", last_name: "Hanks", age: 67, nationality: "American" },
+    {
+      first_name: "Robin",
+      last_name: "Wright",
+      age: 58,
+      nationality: "American",
+    },
+    {
+      first_name: "Gary",
+      last_name: "Sinise",
+      age: 69,
+      nationality: "American",
+    },
+    {
+      first_name: "Sally",
+      last_name: "Field",
+      age: 77,
+      nationality: "American",
+    },
+    {
+      first_name: "Elijah",
+      last_name: "Wood",
+      age: 43,
+      nationality: "American",
+    },
+    {
+      first_name: "Ian",
+      last_name: "McKellen",
+      age: 85,
+      nationality: "British",
+    },
+    {
+      first_name: "Viggo",
+      last_name: "Mortensen",
+      age: 65,
+      nationality: "American",
+    },
+    {
+      first_name: "Orlando",
+      last_name: "Bloom",
+      age: 47,
+      nationality: "British",
+    },
+    { first_name: "Brad", last_name: "Pitt", age: 60, nationality: "American" },
+    {
+      first_name: "Edward",
+      last_name: "Norton",
+      age: 54,
+      nationality: "American",
+    },
+    {
+      first_name: "Helena",
+      last_name: "Bonham Carter",
+      age: 58,
+      nationality: "British",
+    },
+    {
+      first_name: "Jared",
+      last_name: "Leto",
+      age: 52,
+      nationality: "American",
+    },
+    {
+      first_name: "Robert",
+      last_name: "De Niro",
+      age: 80,
+      nationality: "American",
+    },
+    {
+      first_name: "Ray",
+      last_name: "Liotta",
+      age: 67,
+      nationality: "American",
+    },
+    { first_name: "Joe", last_name: "Pesci", age: 81, nationality: "American" },
+    {
+      first_name: "Lorraine",
+      last_name: "Bracco",
+      age: 69,
+      nationality: "American",
+    },
+    {
+      first_name: "Jodie",
+      last_name: "Foster",
+      age: 61,
+      nationality: "American",
+    },
+    {
+      first_name: "Anthony",
+      last_name: "Hopkins",
+      age: 86,
+      nationality: "British",
+    },
+    {
+      first_name: "Scott",
+      last_name: "Glenn",
+      age: 83,
+      nationality: "American",
+    },
+    {
+      first_name: "Ted",
+      last_name: "Levine",
+      age: 67,
+      nationality: "American",
+    },
+  ],
+  movieCast: [
+    { movie: "Interstellar", actor: "Matthew McConaughey" },
+    { movie: "Interstellar", actor: "Anne Hathaway" },
+    { movie: "Interstellar", actor: "Jessica Chastain" },
+    { movie: "Interstellar", actor: "Michael Caine" },
+
+    { movie: "The Dark Knight", actor: "Christian Bale" },
+    { movie: "The Dark Knight", actor: "Heath Ledger" },
+    { movie: "The Dark Knight", actor: "Aaron Eckhart" },
+    { movie: "The Dark Knight", actor: "Gary Oldman" },
+
+    { movie: "Inception", actor: "Leonardo DiCaprio" },
+    { movie: "Inception", actor: "Joseph Gordon-Levitt" },
+    { movie: "Inception", actor: "Ellen Page" },
+    { movie: "Inception", actor: "Tom Hardy" },
+
+    { movie: "Pulp Fiction", actor: "John Travolta" },
+    { movie: "Pulp Fiction", actor: "Samuel L. Jackson" },
+    { movie: "Pulp Fiction", actor: "Uma Thurman" },
+    { movie: "Pulp Fiction", actor: "Bruce Willis" },
+
+    { movie: "The Shawshank Redemption", actor: "Tim Robbins" },
+    { movie: "The Shawshank Redemption", actor: "Morgan Freeman" },
+    { movie: "The Shawshank Redemption", actor: "Bob Gunton" },
+    { movie: "The Shawshank Redemption", actor: "William Sadler" },
+
+    { movie: "The Godfather", actor: "Marlon Brando" },
+    { movie: "The Godfather", actor: "Al Pacino" },
+    { movie: "The Godfather", actor: "James Caan" },
+    { movie: "The Godfather", actor: "Robert Duvall" },
+
+    { movie: "The Matrix", actor: "Keanu Reeves" },
+    { movie: "The Matrix", actor: "Laurence Fishburne" },
+    { movie: "The Matrix", actor: "Carrie-Anne Moss" },
+    { movie: "The Matrix", actor: "Hugo Weaving" },
+
+    { movie: "Forrest Gump", actor: "Tom Hanks" },
+    { movie: "Forrest Gump", actor: "Robin Wright" },
+    { movie: "Forrest Gump", actor: "Gary Sinise" },
+    { movie: "Forrest Gump", actor: "Sally Field" },
+
+    { movie: "The Lord of the Rings", actor: "Elijah Wood" },
+    { movie: "The Lord of the Rings", actor: "Ian McKellen" },
+    { movie: "The Lord of the Rings", actor: "Viggo Mortensen" },
+    { movie: "The Lord of the Rings", actor: "Orlando Bloom" },
+
+    { movie: "Fight Club", actor: "Brad Pitt" },
+    { movie: "Fight Club", actor: "Edward Norton" },
+    { movie: "Fight Club", actor: "Helena Bonham Carter" },
+    { movie: "Fight Club", actor: "Jared Leto" },
+
+    { movie: "Goodfellas", actor: "Robert De Niro" },
+    { movie: "Goodfellas", actor: "Ray Liotta" },
+    { movie: "Goodfellas", actor: "Joe Pesci" },
+    { movie: "Goodfellas", actor: "Lorraine Bracco" },
+
+    { movie: "The Silence of the Lambs", actor: "Jodie Foster" },
+    { movie: "The Silence of the Lambs", actor: "Anthony Hopkins" },
+    { movie: "The Silence of the Lambs", actor: "Scott Glenn" },
+    { movie: "The Silence of the Lambs", actor: "Ted Levine" },
   ],
 };

@@ -1,25 +1,31 @@
+/**
+ * Entry point for the CinemaSpot backend application.
+ *
+ * This file bootstraps the Express server application by initializing the server
+ * with the appropriate configuration and routes.
+ *
+ * @file This file is the main entry point that starts the CinemaSpot backend server.
+ * @author Mariano Sagua
+ */
+
 import { envs } from "./config/envs";
 import { AppRoutes } from "./presentation/app.routes";
 import { Server } from "./presentation/server";
 
 /**
- * Entry point of the application that initializes and starts the server.
+ * Initializes and starts the server application.
  *
- * This function creates an instance of the server using the port specified in the environment variables and the routes defined by the application's routing module.
- * Once the server instance is constructed, it immediately starts listening for incoming connections.
+ * Creates a new Server instance configured with:
+ * - Port: Retrieved from environment variables via the envs object
+ * - Routes: Configured API routes from the AppRoutes static method
  *
- * @remarks
- * Ensure that the environment variables and route configurations are correctly set up before calling this function.
- *
- * @example
- * ```typescript
- * // Initialize and start the server
- * main();
- * ```
+ * @function main
+ * @returns {void}
  */
 const main = () => {
   const server = new Server({ port: envs.port, routes: AppRoutes.getRoutes() });
   server.start();
 };
 
+// Bootstrap the application by executing the main function
 main();
