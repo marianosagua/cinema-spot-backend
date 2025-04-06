@@ -36,16 +36,22 @@ import { dataSeed } from "./dataSeed";
  * @throws {Error} If any of the database operations fail during the seeding process.
  */
 async function seed() {
-  await Promise.all([
-    prismaClient.movies.deleteMany(),
-    prismaClient.future_releases.deleteMany(),
-    prismaClient.categories.deleteMany(),
-    prismaClient.showtimes.deleteMany(),
-    prismaClient.seats.deleteMany(),
-    prismaClient.rooms.deleteMany(),
-    prismaClient.users.deleteMany(),
-    prismaClient.roles.deleteMany(),
-  ]);
+  // Do not modify the deletion order, as it depends on the relationships between tables.
+  await prismaClient.reservations.deleteMany();
+  await prismaClient.showtimes.deleteMany();
+  await prismaClient.seats.deleteMany();
+  await prismaClient.users.deleteMany();
+  await prismaClient.movies.deleteMany();
+  await prismaClient.rooms.deleteMany();
+  await prismaClient.roles.deleteMany();
+  await prismaClient.future_releases.deleteMany();
+  await prismaClient.categories.deleteMany();
+
+  await prismaClient.$executeRaw`ALTER SEQUENCE "movies_id_seq" RESTART WITH 1;`;
+  await prismaClient.$executeRaw`ALTER SEQUENCE "actors_id_seq" RESTART WITH 1;`;
+  await prismaClient.$executeRaw`ALTER SEQUENCE "future_releases_id_seq" RESTART WITH 1;`;
+  await prismaClient.$executeRaw`ALTER SEQUENCE "categories_id_seq" RESTART WITH 1;`;
+  await prismaClient.$executeRaw`ALTER SEQUENCE "roles_id_seq" RESTART WITH 1;`;
 
   const categories = await Promise.all(
     dataSeed.categories.map((category) =>

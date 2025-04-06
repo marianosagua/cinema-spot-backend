@@ -20,7 +20,7 @@ model movies {
   description String
   poster      String
   category    Int?
-  duration    DateTime     @db.Time(6)
+  duration    String
   banner      String
   synopsis    String
   trailer     String
@@ -115,12 +115,12 @@ model future_releases {
   description  String
   poster       String
   category     Int?
-  duration     DateTime    @db.Time(6)
+  duration     String
   banner       String
   synopsis     String
   trailer      String
   director     String
   rating       String
-  release_date DateTime    @db.Date
+  release_date String
   categories   categories? @relation(fields: [category], references: [id], onUpdate: NoAction, map: "fk_category")
 }
