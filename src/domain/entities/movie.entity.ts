@@ -101,6 +101,10 @@ export class MovieEntity {
       throw CustomError.badRequest("Review is required");
     }
 
+    if(!data.showtimes){
+      throw CustomError.badRequest("Showtimes is required");
+    }
+
     return {
       id: data.id,
       title: data.title,
@@ -114,6 +118,7 @@ export class MovieEntity {
       director: data.director,
       rating: data.rating,
       review: data.review,
+      showtimes: data.showtimes,
     };
   }
 }

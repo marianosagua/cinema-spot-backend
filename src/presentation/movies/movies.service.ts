@@ -22,6 +22,20 @@ export class MoviesService {
         director: true,
         rating: true,
         review: true,
+        showtimes: {
+          select: {
+            id: true,
+            start_time: true,
+            end_time: true,
+            rooms: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+            is_full: true,
+          },
+        },
       },
     });
 
@@ -42,6 +56,16 @@ export class MoviesService {
       director: movie.director,
       rating: movie.rating,
       review: movie.review,
+      showtimes: movie.showtimes.map((showtime) => ({
+        id: showtime.id,
+        start_time: showtime.start_time,
+        end_time: showtime.end_time,
+        room: {
+          id: showtime.rooms.id,
+          name: showtime.rooms.name,
+        },
+        is_full: showtime.is_full,
+      })),
     }));
 
     return transformedMovies.sort((a, b) => a.id - b.id);
@@ -69,6 +93,20 @@ export class MoviesService {
         director: true,
         rating: true,
         review: true,
+        showtimes: {
+          select: {
+            id: true,
+            start_time: true,
+            end_time: true,
+            rooms: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+            is_full: true,
+          },
+        },
       },
     });
 
@@ -89,6 +127,16 @@ export class MoviesService {
       director: movie.director,
       rating: movie.rating,
       review: movie.review,
+      showtimes: movie.showtimes.map((showtime) => ({
+        id: showtime.id,
+        start_time: showtime.start_time,
+        end_time: showtime.end_time,
+        room: {
+          id: showtime.rooms.id,
+          name: showtime.rooms.name,
+        },
+        is_full: showtime.is_full,
+      })),
     };
   }
 
@@ -106,6 +154,18 @@ export class MoviesService {
         director: movie.director,
         rating: movie.rating,
         review: movie.review,
+        showtimes: {
+          create: movie.showtimes.map((showtime) => ({
+            start_time: showtime.start_time,
+            end_time: showtime.end_time,
+            is_full: showtime.is_full,
+            rooms: {
+              connect: {
+                id: showtime.room,
+              },
+            },
+          })),
+        },
       },
     });
 
@@ -131,6 +191,23 @@ export class MoviesService {
         director: movie.director,
         rating: movie.rating,
         review: movie.review,
+        showtimes: {
+          update: movie.showtimes.map((showtime) => ({
+            where: {
+              id: showtime.id,
+            },
+            data: {
+              start_time: showtime.start_time,
+              end_time: showtime.end_time,
+              is_full: showtime.is_full,
+              rooms: {
+                connect: {
+                  id: showtime.room,
+                },
+              },
+            },
+          })),
+        },
       },
     });
 

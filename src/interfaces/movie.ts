@@ -1,3 +1,5 @@
+import { Showtime } from "./showtime";
+
 export interface Movie {
   id: number;
   title: string;
@@ -11,4 +13,5 @@ export interface Movie {
   director: string;
   rating: string;
   review: number;
+  showtimes: Showtime[];
 }
