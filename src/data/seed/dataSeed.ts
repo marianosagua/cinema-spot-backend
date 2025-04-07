@@ -171,7 +171,7 @@ export const dataSeed = {
       title: "Goodfellas",
       description:
         "The true story of a young man who rises through the ranks of the Mafia, only to fall victim to betrayal and violence.",
-      poster: "https://i.postimg.cc/yNYNNvHK/Good-Fellas.jpg",
+      poster: "https://i.postimg.cc/sgxtfFJ5/s-l400.jpg",
       category: 18,
       duration: "02:26:00",
       banner: "https://i.postimg.cc/D0kqbt6H/buenos-muchachos-3.jpg",
@@ -390,16 +390,15 @@ export const dataSeed = {
   ],
   futureReleases: [
     {
-      title: "Capitán América: Nuevo Orden Mundial",
+      title: "Captain America: New World Order",
       description:
-        "Sam Wilson asume el manto del Capitán América y enfrenta nuevos desafíos en un mundo cambiante.",
-      poster: "https://www.cinesa.es/Content/Upload/Movies/1150/1/1150.jpg",
+        "Sam Wilson takes on the mantle of Captain America and faces new challenges in a changing world.",
+      poster: "https://i.postimg.cc/N0w5qx6q/Gb-Kdq-KWIAAc-T5q.jpg",
       category: 1,
       duration: "02:15:00",
-      banner:
-        "https://www.cinesa.es/Content/Upload/Movies/1150/1/1150_banner.jpg",
+      banner: "https://i.postimg.cc/FsWBBWQz/70425-h3.jpg",
       synopsis:
-        "Sam Wilson, el nuevo Capitán América, debe descubrir una conspiración que amenaza la paz mundial.",
+        "Sam Wilson, the new Captain America, must uncover a conspiracy that threatens global peace.",
       trailer: "https://www.youtube.com/watch?v=trailer1",
       director: "Julius Onah",
       rating: "PG-13",
@@ -408,46 +407,47 @@ export const dataSeed = {
     {
       title: "Mickey 17",
       description:
-        "Un empleado desechable en una misión humana colonizadora se rebela contra su destino.",
-      poster: "https://www.cinesa.es/Content/Upload/Movies/1151/1/1151.jpg",
+        "An expendable employee on a human colonization mission rebels against his fate.",
+      poster:
+        "https://i.postimg.cc/13KfSqJ8/Captura-de-pantalla-2025-04-06-212653.png",
       category: 2,
       duration: "01:50:00",
-      banner:
-        "https://www.cinesa.es/Content/Upload/Movies/1151/1/1151_banner.jpg",
+      banner: "https://i.postimg.cc/zGycZCJj/Critica-Mickey-17-1-min.jpg",
       synopsis:
-        "Mickey 17 descubre la verdad detrás de su misión y lucha por su supervivencia.",
+        "Mickey 17 uncovers the truth behind his mission and fights for his survival.",
       trailer: "https://www.youtube.com/watch?v=trailer2",
       director: "Bong Joon-ho",
       rating: "PG-13",
       release_date: "2025-06-15",
     },
     {
-      title: "Jurassic World: El Renacer",
+      title: "Jurassic World: Rebirth",
       description:
-        "La saga continúa con nuevas aventuras y desafíos en un mundo donde los dinosaurios conviven con los humanos.",
-      poster: "https://www.cinesa.es/Content/Upload/Movies/1152/1/1152.jpg",
+        "The saga continues with new adventures and challenges in a world where dinosaurs coexist with humans.",
+      poster:
+        "https://i.postimg.cc/mrNhbFjc/5ad4e35246f489894d0a59e7a0606b96.jpg",
       category: 1,
       duration: "02:10:00",
-      banner:
-        "https://www.cinesa.es/Content/Upload/Movies/1152/1/1152_banner.jpg",
+      banner: "https://i.postimg.cc/3xzbKkNH/202524174522-1.jpg",
       synopsis:
-        "La coexistencia entre humanos y dinosaurios alcanza un punto crítico, desatando una nueva era de peligro.",
+        "The coexistence between humans and dinosaurs reaches a critical point, unleashing a new era of danger.",
       trailer: "https://www.youtube.com/watch?v=trailer3",
       director: "Colin Trevorrow",
       rating: "PG-13",
       release_date: "2025-07-20",
     },
     {
-      title: "Avatar: Fuego y Ceniza",
+      title: "Avatar: Fire and Ash",
       description:
-        "La continuación de la épica saga en Pandora, explorando nuevos territorios y culturas.",
-      poster: "https://www.cinesa.es/Content/Upload/Movies/1153/1/1153.jpg",
+        "The continuation of the epic saga in Pandora, exploring new territories and cultures.",
+      poster:
+        "https://i.postimg.cc/LX95h6Qx/MV5-BYj-E0-OWZm-YWMt-Zj-Bh-Mi00-Yz-M5-LTkz-OTct-OTZh-MTIw-NDcx-Y2-U0-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
       category: 3,
       duration: "02:45:00",
       banner:
-        "https://www.cinesa.es/Content/Upload/Movies/1153/1/1153_banner.jpg",
+        "https://i.postimg.cc/q7nDgp66/1-setrockspires-180719-concept-smm-gondola-2191-v011f-3df188e5.jpg",
       synopsis:
-        "Jake Sully y Neytiri enfrentan nuevas amenazas que ponen en peligro la armonía de Pandora.",
+        "Jake Sully and Neytiri face new threats that put Pandora's harmony in jeopardy.",
       trailer: "https://www.youtube.com/watch?v=trailer4",
       director: "James Cameron",
       rating: "PG-13",
