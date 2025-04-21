@@ -3,6 +3,7 @@ import { bcryptAdapter } from "../../config/bcrypt.adapter";
 import { JwtAdapter } from "../../config/jwt.adapter";
 import { prismaClient } from "../../data/postgres/client-connection";
 import { LoginUserDto, RegisterUserDto } from "../../domain/dtos/auth";
+import { ForgotPasswordDto, ResetPasswordDto } from "../../domain/dtos/auth/forgot-reset-password.dto";
 import { UserEntity } from "../../domain/entities/user.entity";
 import { CustomError } from "../../domain/errors/CustomErrors";
 import fs from "fs/promises";
@@ -107,6 +108,35 @@ export class AuthService {
     await prismaClient.users.update({
       data: { email_validated: true },
       where: { email },
+    });
+  }
+
+  public async forgotPassword(dto: ForgotPasswordDto): Promise<void> {
+    const user = await prismaClient.users.findFirst({ where: { email: dto.email } });
+    if (!user) throw CustomError.unauthorized("User not found");
+    const token = JwtAdapter.generateToken({ email: user.email }, "1h");
+    if (!token) throw new Error("Error generating token");
+    const url = `${envs.app_url}/api/auth/reset-password/${token}`;
+    const message = await this.compileTemplate("resetPassword", { resetUrl: url, email: user.email });
+    const isSent = await this.emailService.sendEmail({
+      email: user.email,
+      subject: "Restablece tu contraseña",
+      message,
+    });
+    if (!isSent) throw new Error("Error sending email");
+  }
+
+  public async resetPassword(dto: ResetPasswordDto): Promise<void> {
+    const payload = JwtAdapter.verifyToken(dto.token);
+    if (!payload) throw new Error("Invalid or expired token");
+    const { email } = payload as { email: string };
+    if (!email) throw new Error("Email not in token");
+    const user = await prismaClient.users.findFirst({ where: { email } });
+    if (!user) throw CustomError.unauthorized("User not found");
+    const hashedPassword = bcryptAdapter.hash(dto.password);
+    await prismaClient.users.update({
+      where: { email },
+      data: { password: hashedPassword },
     });
   }
 }

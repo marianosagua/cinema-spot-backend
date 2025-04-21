@@ -13,6 +13,10 @@ import { AuthService } from "./auth.service";
  * - POST "/login": Authenticates a user with provided login credentials.
  * - POST "/register": Registers a new user and triggers an email confirmation process.
  * - GET "/validate-email/:token": Validates the user's email using a token provided in the URL.
+ * - POST "/forgot-password": Initiates the password recovery process for a user.
+ * - POST "/reset-password/:token": Resets the user's password using a token provided in the URL.
+ * - GET "/reset-password/:token": Serves the password reset form using a token provided in the URL.
+ * - GET "/reset-password-success": Serves the success view after resetting the password.
  *
  * The method initializes required service dependencies:
  * - An EmailService instance to handle email sending tasks.
@@ -40,6 +44,10 @@ export class AuthRoutes {
     router.post("/login", authController.login);
     router.post("/register", authController.register);
     router.get("/validate-email/:token", authController.validateEmail);
+    router.post("/forgot-password", authController.forgotPassword);
+    router.post("/reset-password/:token", authController.resetPassword);
+    router.get("/reset-password/:token", authController.getResetPasswordForm);
+    router.get("/reset-password-success", authController.resetPasswordSuccess);
 
     return router;
   }
