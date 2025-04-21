@@ -49,42 +49,4 @@ export class AuthController {
       handleError(error, res);
     }
   };
-
-  restorePassword = async (req: Request, res: Response) => {
-    try {
-      const { email } = req.body;
-
-      if (!email) {
-        res.status(400).json({ error: "Email is required" });
-        return;
-      }
-
-      await this.authService.restorePassword(email);
-      res.status(200).json({ message: "Password reset email sent" });
-    } catch (error) {
-      handleError(error, res);
-    }
-  };
-
-  resetPassword = async (req: Request, res: Response) => {
-    try {
-      const { token } = req.params;
-      const { newPassword } = req.body;
-
-      if (!token) {
-        res.status(400).json({ error: "Token is required" });
-        return;
-      }
-
-      if (!newPassword) {
-        res.status(400).json({ error: "New password is required" });
-        return;
-      }
-
-      await this.authService.resetPassword(token, newPassword);
-      res.status(200).json({ message: "Password updated successfully" });
-    } catch (error) {
-      handleError(error, res);
-    }
-  };
 }

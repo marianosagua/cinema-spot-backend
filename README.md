@@ -173,3 +173,11 @@ src/
 - `GET /api/users/:id`: Retrieve a user by ID.
 - `PUT /api/users/:id`: Update a user's information (Admin only).
 - `DELETE /api/users/:id`: Delete a user (Admin only).
+
+### 📚 Categories
+
+- `GET /api/categories`: Get all categories.
+- `GET /api/categories/:id`: Get a category by ID.
+- `POST /api/categories`: Add a new category (Admin only).
+- `PUT /api/categories/:id`: Update a category (Admin only).
+- `DELETE /api/categories/:id`: Delete a category (Admin only).
