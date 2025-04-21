@@ -10,8 +10,8 @@ export class MovieCastRoutes {
     const controller = new MovieCastController(service);
 
     router.get("/", controller.getAll);
-    router.get("/:movie/:actor", controller.getById);
     router.get("/movie/:movieId", controller.getByMovieId);
+    router.get("/:movie/:actor", controller.getById);
     router.post("/", AuthMiddleware.isAdmin, controller.create);
     router.delete("/:movie/:actor", AuthMiddleware.isAdmin, controller.delete);
 
