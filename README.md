@@ -181,3 +181,11 @@ src/
 - `POST /api/categories`: Add a new category (Admin only).
 - `PUT /api/categories/:id`: Update a category (Admin only).
 - `DELETE /api/categories/:id`: Delete a category (Admin only).
+
+### 👥 Movie Cast
+
+- `GET /api/movie-cast`: Get all movie cast relations.
+- `GET /api/movie-cast/movie/:movieId`: Get all cast for a specific movie.
+- `GET /api/movie-cast/:movie/:actor`: Get a specific movie-actor relation.
+- `POST /api/movie-cast`: Add a new movie-actor relation (Admin only).
+- `DELETE /api/movie-cast/:movie/:actor`: Delete a movie-actor relation (Admin only).

@@ -9,6 +9,7 @@ import { RoomsRoutes } from "./rooms/rooms.routes";
 import { UsersRoutes } from "./users/users.routes";
 import { FutureReleasesRoutes } from "./future-releases/future-releases.routes";
 import { CategoriesRoutes } from "./categories/categories.routes";
+import { MovieCastRoutes } from "./movie-cast/movie-cast.routes";
 
 /**
  * Regroups all API routes for the movie reservation system backend.
@@ -62,6 +63,8 @@ export class AppRoutes {
     router.use("/api/users", UsersRoutes.getRoutes());
 
     router.use("/api/categories", CategoriesRoutes.getRoutes());
+
+    router.use("/api/movie-cast", MovieCastRoutes.getRoutes());
 
     return router;
   }

@@ -7,3 +7,5 @@ export type * from "./reservation";
 export type * from "./seat";
 
 export type * from "./room";
+
+export type * from "./movie-cast";
