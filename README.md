@@ -1,71 +1,71 @@
 # 🎬 CinemaSpot Backend
 
-## 📋 Overview
+## 📋 Visión General
 
-CinemaSpot is a backend application that manages movie reservations, user authentication, and administrative tasks. Built with TypeScript, Express.js, and Prisma ORM using a PostgreSQL database, it offers a robust platform for movie booking operations.
+CinemaSpot es una aplicación backend que gestiona reservas de películas, autenticación de usuarios y tareas administrativas. Construida con TypeScript, Express.js y Prisma ORM utilizando una base de datos PostgreSQL, ofrece una plataforma robusta para operaciones de reserva de películas.
 
-## ✨ Features
+## ✨ Características
 
-- User Authentication (Login, Registration, Email Validation)
-- Role Management (Admin, User)
-- Movie Management (CRUD operations)
-- Room and Seat Management
-- Showtime Management
-- Reservation Management
-- Email Notifications
-- Future Releases Management
+- Autenticación de Usuarios (Inicio de Sesión, Registro, Validación de Correo)
+- Gestión de Roles (Administrador, Usuario)
+- Gestión de Películas (operaciones CRUD)
+- Gestión de Salas y Asientos
+- Gestión de Horarios de Proyección
+- Gestión de Reservas
+- Notificaciones por Correo
+- Gestión de Próximos Estrenos
 
-## 🛠 Technologies Used
+## 🛠 Tecnologías Utilizadas
 
-- **TypeScript**: For type-safe JavaScript.
-- **Express.js**: Web framework for Node.js.
-- **Prisma ORM**: Database ORM for PostgreSQL.
-- **PostgreSQL**: Relational database.
-- **JWT**: JSON Web Tokens for authentication.
-- **Bcrypt**: Password hashing.
-- **Handlebars**: HTML templates for emails.
-- **Docker**: Containerization.
+- **TypeScript**: Para JavaScript con tipado seguro.
+- **Express.js**: Framework web para Node.js.
+- **Prisma ORM**: ORM para base de datos PostgreSQL.
+- **PostgreSQL**: Base de datos relacional.
+- **JWT**: JSON Web Tokens para autenticación.
+- **Bcrypt**: Hash de contraseñas.
+- **Handlebars**: Plantillas HTML para correos.
+- **Docker**: Contenedorización.
 
-## 📁 Project Structure
+## 📁 Estructura del Proyecto
 
 ```
 src/
-├── config/                 # Configuration files (including environment setups)
-├── data/                   # Database connection and seed data
-├── domain/                 # Business logic and entities
-├── interfaces/             # TypeScript interfaces
-├── presentation/           # Controllers, routes, and middlewares
-│   ├── views/              # Handlebars templates
+├── config/                 # Archivos de configuración (incluida configuración de entorno)
+├── data/                   # Conexión a la base de datos y datos de prueba
+├── domain/                 # Lógica de negocio y entidades
+├── interfaces/             # Interfaces de TypeScript
+├── presentation/           # Controladores, rutas y middlewares
+│   ├── views/              # Plantillas de Handlebars
 │   └── ...
-└── app.ts                  # Entry point of the application
+└── app.ts                  # Punto de entrada de la aplicación
 ```
 
-## 🚀 Getting Started
+## 🚀 Primeros Pasos
 
-### Prerequisites
+### Prerrequisitos
 
 - Node.js
-- Docker (with Docker Compose)
+- Docker (con Docker Compose)
 - PostgreSQL
 
-### Installation
+### Instalación
 
-1. Clone the repository:
+1. Clonar el repositorio:
 
    ```sh
    git clone https://github.com/your-username/CineSpot.git
    cd CineSpot/cinemaspot_backend
    ```
 
-2. Install dependencies:
+2. Instalar dependencias:
 
    ```sh
    npm install
    ```
 
-3. Set up environment variables:
+3. Configurar variables de entorno:
 
-   Create a `.env` file in the root directory with the following content:
+   Crear un archivo `.env` en el directorio raíz con el siguiente contenido:
 
    ```env
    PORT=3000
@@ -77,115 +77,115 @@ src/
    DATABASE_URL="postgresql://cinemaspot-user:your_password@localhost:5433/cinemaspot-db?schema=public"
    ```
 
-4. Start PostgreSQL using Docker Compose:
+4. Iniciar PostgreSQL usando Docker Compose:
 
    ```sh
    docker-compose up -d
    ```
 
-5. Run database migrations:
+5. Ejecutar migraciones de la base de datos:
 
    ```sh
    npx prisma migrate dev
    ```
 
-6. Seed the database:
+6. Poblar la base de datos:
 
    ```sh
    npm run seed
    ```
 
-7. Start the application in development mode:
+7. Iniciar la aplicación en modo desarrollo:
 
    ```sh
    npm run dev
    ```
 
-## 🔌 API Endpoints
+## 🔌 Endpoints de la API
 
-### 🔐 Authentication
+### 🔐 Autenticación
 
-- `POST /api/auth/login`: User login.
-- `POST /api/auth/register`: User registration.
-- `GET /api/auth/validate-email/:token`: Email validation.
+- `POST /api/auth/login`: Inicio de sesión de usuario.
+- `POST /api/auth/register`: Registro de usuario.
+- `GET /api/auth/validate-email/:token`: Validación de correo electrónico.
 
-### 🎥 Movies
+### 🎥 Películas
 
-- `GET /api/movies`: Get all movies.
-- `GET /api/movies/:id`: Get a movie by ID.
-- `POST /api/movies`: Add a new movie (Admin only).
-- `PUT /api/movies`: Update a movie (Admin only).
-- `DELETE /api/movies/:id`: Delete a movie (Admin only).
+- `GET /api/movies`: Obtener todas las películas.
+- `GET /api/movies/:id`: Obtener una película por ID.
+- `POST /api/movies`: Agregar una nueva película (Solo administrador).
+- `PUT /api/movies`: Actualizar una película (Solo administrador).
+- `DELETE /api/movies/:id`: Eliminar una película (Solo administrador).
 
-### 🍿 Future Releases
+### 🍿 Próximos Estrenos
 
-- `GET /api/future-releases`: Get all upcoming movies.
-- `GET /api/future-releases/:id`: Get upcoming movie by ID.
-- `POST /api/future-releases`: Add a new upcoming movie (Admin only).
-- `PUT /api/future-releases/:id`: Update an upcoming movie (Admin only).
-- `DELETE /api/future-releases/:id`: Delete an upcoming movie (Admin only).
+- `GET /api/future-releases`: Obtener todas las películas próximas.
+- `GET /api/future-releases/:id`: Obtener película próxima por ID.
+- `POST /api/future-releases`: Agregar una nueva película próxima (Solo administrador).
+- `PUT /api/future-releases/:id`: Actualizar una película próxima (Solo administrador).
+- `DELETE /api/future-releases/:id`: Eliminar una película próxima (Solo administrador).
 
-### 🏛️ Rooms
+### 🏛️ Salas
 
-- `GET /api/rooms`: Get all rooms.
-- `GET /api/rooms/:id`: Get room by ID.
-- `POST /api/rooms`: Add a new room (Admin only).
-- `PUT /api/rooms/:id`: Update a room (Admin only).
-- `DELETE /api/rooms/:id`: Delete a room (Admin only).
+- `GET /api/rooms`: Obtener todas las salas.
+- `GET /api/rooms/:id`: Obtener sala por ID.
+- `POST /api/rooms`: Agregar una nueva sala (Solo administrador).
+- `PUT /api/rooms/:id`: Actualizar una sala (Solo administrador).
+- `DELETE /api/rooms/:id`: Eliminar una sala (Solo administrador).
 
-### 🕒 Showtimes
+### 🕒 Horarios de Proyección
 
-- `GET /api/showtimes`: Get all showtimes.
-- `GET /api/showtimes/:id`: Get a showtime by ID.
-- `GET /api/showtimes/movie/:movieId`: Get showtimes by movie ID.
-- `POST /api/showtimes`: Add a new showtime (Admin only).
-- `PUT /api/showtimes/:id`: Update a showtime (Admin only).
-- `DELETE /api/showtimes/:id`: Delete a showtime (Admin only).
+- `GET /api/showtimes`: Obtener todos los horarios de proyección.
+- `GET /api/showtimes/:id`: Obtener un horario de proyección por ID.
+- `GET /api/showtimes/movie/:movieId`: Obtener horarios de proyección por ID de película.
+- `POST /api/showtimes`: Agregar un nuevo horario de proyección (Solo administrador).
+- `PUT /api/showtimes/:id`: Actualizar un horario de proyección (Solo administrador).
+- `DELETE /api/showtimes/:id`: Eliminar un horario de proyección (Solo administrador).
 
-### 🎟️ Reservations
+### 🎟️ Reservas
 
-- `GET /api/reservations`: Get all reservations (Admin only).
-- `GET /api/reservations/:id`: Get a reservation by ID.
-- `GET /api/reservations/user/:userId`: Get reservations by user ID.
-- `POST /api/reservations`: Add a new reservation.
-- `DELETE /api/reservations/:id`: Delete a reservation.
+- `GET /api/reservations`: Obtener todas las reservas (Solo administrador).
+- `GET /api/reservations/:id`: Obtener una reserva por ID.
+- `GET /api/reservations/user/:userId`: Obtener reservas por ID de usuario.
+- `POST /api/reservations`: Agregar una nueva reserva.
+- `DELETE /api/reservations/:id`: Eliminar una reserva.
 
 ### 👑 Roles
 
-- `POST /api/roles/assign-role`: Assign a role to a user (Admin only).
-- `GET /api/roles`: Get all roles (Admin only).
-- `GET /api/roles/:id`: Get a role by ID.
-- `PUT /api/roles/:id`: Update an existing role (Admin only).
-- `DELETE /api/roles/:id`: Delete a role (Admin only).
+- `POST /api/roles/assign-role`: Asignar un rol a un usuario (Solo administrador).
+- `GET /api/roles`: Obtener todos los roles (Solo administrador).
+- `GET /api/roles/:id`: Obtener un rol por ID.
+- `PUT /api/roles/:id`: Actualizar un rol existente (Solo administrador).
+- `DELETE /api/roles/:id`: Eliminar un rol (Solo administrador).
 
-### 💺 Seats
+### 💺 Asientos
 
-- `GET /api/seats`: Get all seats.
-- `GET /api/seats/:id`: Get a seat by ID.
-- `GET /api/seats/room/:name`: Get seats by room.
-- `POST /api/seats`: Add a new seat.
-- `PUT /api/seats/:id`: Update a seat.
-- `DELETE /api/seats/:id`: Delete a seat.
+- `GET /api/seats`: Obtener todos los asientos.
+- `GET /api/seats/:id`: Obtener un asiento por ID.
+- `GET /api/seats/room/:name`: Obtener asientos por sala.
+- `POST /api/seats`: Agregar un nuevo asiento.
+- `PUT /api/seats/:id`: Actualizar un asiento.
+- `DELETE /api/seats/:id`: Eliminar un asiento.
 
-### 👥 Users
+### 👥 Usuarios
 
-- `GET /api/users`: Retrieve all users (Admin only).
-- `GET /api/users/:id`: Retrieve a user by ID.
-- `PUT /api/users/:id`: Update a user's information (Admin only).
-- `DELETE /api/users/:id`: Delete a user (Admin only).
+- `GET /api/users`: Recuperar todos los usuarios (Solo administrador).
+- `GET /api/users/:id`: Recuperar un usuario por ID.
+- `PUT /api/users/:id`: Actualizar la información de un usuario (Solo administrador).
+- `DELETE /api/users/:id`: Eliminar un usuario (Solo administrador).
 
-### 📚 Categories
+### 📚 Categorías
 
-- `GET /api/categories`: Get all categories.
-- `GET /api/categories/:id`: Get a category by ID.
-- `POST /api/categories`: Add a new category (Admin only).
-- `PUT /api/categories/:id`: Update a category (Admin only).
-- `DELETE /api/categories/:id`: Delete a category (Admin only).
+- `GET /api/categories`: Obtener todas las categorías.
+- `GET /api/categories/:id`: Obtener una categoría por ID.
+- `POST /api/categories`: Agregar una nueva categoría (Solo administrador).
+- `PUT /api/categories/:id`: Actualizar una categoría (Solo administrador).
+- `DELETE /api/categories/:id`: Eliminar una categoría (Solo administrador).
 
-### 👥 Movie Cast
+### 👥 Reparto de Película
 
-- `GET /api/movie-cast`: Get all movie cast relations.
-- `GET /api/movie-cast/movie/:movieId`: Get all cast for a specific movie.
-- `GET /api/movie-cast/:movie/:actor`: Get a specific movie-actor relation.
-- `POST /api/movie-cast`: Add a new movie-actor relation (Admin only).
-- `DELETE /api/movie-cast/:movie/:actor`: Delete a movie-actor relation (Admin only).
+- `GET /api/movie-cast`: Obtener todas las relaciones de reparto de películas.
+- `GET /api/movie-cast/movie/:movieId`: Obtener todo el reparto para una película específica.
+- `GET /api/movie-cast/:movie/:actor`: Obtener una relación específica película-actor.
+- `POST /api/movie-cast`: Agregar una nueva relación película-actor (Solo administrador).
+- `DELETE /api/movie-cast/:movie/:actor`: Eliminar una relación película-actor (Solo administrador).
