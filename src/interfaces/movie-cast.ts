@@ -1,7 +1,16 @@
+// -----------------------------------------------------------------------------
+// Representa la relación entre una película y un actor.
+// Contiene información tanto de los IDs como de los nombres involucrados.
+// -----------------------------------------------------------------------------
 export interface MovieCast {
-  movie: number; // id de la película
-  actor: number; // id del actor
-  movieTitle: string; // título de la película
-  actorFirstName: string; // nombre del actor
-  actorLastName: string;  // apellido del actor
+  /** ID numérico de la película */
+  movie: number;
+  /** ID numérico del actor */
+  actor: number;
+  /** Título de la película */
+  movieTitle: string;
+  /** Nombre del actor */
+  actorFirstName: string;
+  /** Apellido del actor */
+  actorLastName: string;
 }

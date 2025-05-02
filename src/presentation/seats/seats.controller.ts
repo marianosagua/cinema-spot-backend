@@ -2,6 +2,19 @@ import { Request, Response } from "express";
 import { SeatsService } from "./seats.service";
 import { handleError } from "../../domain/errors";
 
+/**
+ * Controlador de asientos.
+ * Gestiona la consulta, creación, actualización y eliminación de asientos en salas.
+ * Utiliza SeatsService para la lógica de negocio.
+ *
+ * Métodos:
+ * - getSeats: Lista todos los asientos.
+ * - getSeatById: Obtiene un asiento por ID.
+ * - getSeatsByRoom: Lista asientos por sala.
+ * - updateSeat: Actualiza un asiento por ID.
+ * - createSeat: Crea un nuevo asiento.
+ * - deleteSeat: Elimina un asiento por ID.
+ */
 export class SeatsController {
   constructor(private seatsService: SeatsService) {}
 

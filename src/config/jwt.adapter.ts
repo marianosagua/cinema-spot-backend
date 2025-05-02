@@ -1,23 +1,25 @@
+// Adaptador para generación y verificación de JWT en CinemaSpot.
+//
+// Este archivo centraliza la lógica para crear y verificar tokens JWT usando la librería 'jsonwebtoken'.
+// Utiliza la clave secreta definida en las variables de entorno.
+//
+// Exportaciones:
+// - JwtAdapter: Clase con métodos estáticos para generar y verificar JWT.
+//
+// Métodos:
+// - generateToken(payload: object, duration: string = "2h"): string
+//   Genera un token JWT firmado con el payload y duración especificados.
+// - verifyToken(token: string): string | object
+//   Verifica la validez de un token JWT y retorna el payload si es válido.
+//
+// Ejemplo de uso:
+// import { JwtAdapter } from "../config/jwt.adapter";
+// const token = JwtAdapter.generateToken({ userId: 1 });
+// const payload = JwtAdapter.verifyToken(token);
+
 import jwt from "jsonwebtoken";
 import { envs } from "./envs";
 
-/**
- * A utility adapter class that provides helper functions to generate and verify JSON Web Tokens (JWT).
- *
- * @remarks
- * The JwtAdapter class abstracts the interaction with the JSON Web Token mechanism by offering
- * static methods to sign payloads into tokens and verify tokens using a secret key from the environment
- * configuration. This enables a standardized approach to JWT management throughout the application.
- *
- * @example
- * ```typescript
- * // Generate a token with default expiration of 2 hours
- * const token = JwtAdapter.generateToken({ userId: 123 });
- *
- * // Verify the token and retrieve the parsed payload
- * const decoded = JwtAdapter.verifyToken(token);
- * ```
- */
 export class JwtAdapter {
   static generateToken(payload: object, duration: string = "2h") {
     return jwt.sign(payload, envs.jwt_secret_key, { expiresIn: duration });

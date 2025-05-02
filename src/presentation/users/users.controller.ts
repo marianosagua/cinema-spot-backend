@@ -1,3 +1,15 @@
+/**
+ * Controlador de usuarios.
+ * Gestiona la consulta, creación, actualización y eliminación de usuarios.
+ * Utiliza UsersService para la lógica de negocio.
+ *
+ * Métodos:
+ * - getUsers: Lista todos los usuarios.
+ * - getUserById: Obtiene un usuario por ID.
+ * - createUser: Crea un nuevo usuario.
+ * - updateUser: Actualiza un usuario existente.
+ * - deleteUser: Elimina un usuario por ID.
+ */
 import { handleError } from "../../domain/errors";
 import { UsersService } from "./users.service";
 import { Request, Response } from "express";

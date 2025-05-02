@@ -1,31 +1,16 @@
+// Entidad que representa una función (showtime) en el dominio de la aplicación.
+// Incluye validaciones y método de construcción a partir de datos crudos.
 import { CustomError } from "../errors";
 
-/**
- * Represents a showtime entity within the Movie Reservation System.
- *
- * This class encapsulates all properties related to a movie showtime, including the movie
- * identifier, start time, end time, and the room where the showtime will take place. Optional
- * properties include an identifier and a flag to indicate whether the showtime is full.
- *
- * @remarks
- * The static {@link create} method validates the input by ensuring that the movie, start time,
- * end time, and room are provided. If any of these required fields are missing, it throws a
- * {@link CustomError} with an appropriate error message. Optional properties are given default
- * values when not provided (an empty string for the id and false for is_full).
- *
- * @example
- * ```typescript
- * const showtime = ShowtimeEntity.create({
- *   movie: "Inception",
- *   start_time: "2022-01-01T09:00:00",
- *   end_time: "2022-01-01T12:00:00",
- *   room: "A1"
- * });
- * ```
- *
- * @public
- */
 export class ShowtimeEntity {
+  /**
+   * @param movie ID de la película asociada a la función
+   * @param start_time Hora de inicio de la función (formato string)
+   * @param end_time Hora de fin de la función (formato string)
+   * @param room ID de la sala donde se proyecta
+   * @param id Identificador único de la función (opcional)
+   * @param is_full Indica si la función está llena (opcional)
+   */
   constructor(
     public readonly movie: string,
     public readonly start_time: string,
@@ -35,6 +20,12 @@ export class ShowtimeEntity {
     public readonly is_full?: boolean
   ) {}
 
+  /**
+   * Crea una instancia de Showtime validando los datos requeridos.
+   * @param params Objeto con los datos de la función
+   * @returns Instancia de ShowtimeEntity
+   * @throws CustomError si falta algún campo obligatorio
+   */
   static create({
     movie,
     start_time,
@@ -46,19 +37,15 @@ export class ShowtimeEntity {
     if (!movie) {
       throw CustomError.badRequest("Movie is required");
     }
-
     if (!start_time) {
       throw CustomError.badRequest("Start time is required");
     }
-
     if (!end_time) {
       throw CustomError.badRequest("End time is required");
     }
-
     if (!room) {
       throw CustomError.badRequest("Room is required");
     }
-
     return new ShowtimeEntity(
       movie,
       start_time,

@@ -1,3 +1,28 @@
+// dataSeed.ts - Datos de ejemplo para inicialización y pruebas de CinemaSpot Backend
+//
+// Este archivo exporta un objeto con datos de ejemplo (seed) para poblar la base de datos del sistema CinemaSpot.
+// Es utilizado principalmente en scripts de seed para desarrollo, pruebas o despliegue inicial.
+//
+// Estructura del objeto exportado:
+// - users: Lista de usuarios iniciales (nombre, email, contraseña, rol).
+// - movies: Películas con detalles completos (título, descripción, categoría, duración, etc.).
+// - rooms: Salas de cine disponibles.
+// - categories: Categorías/genres de películas.
+// - roles: Tipos de roles de usuario (ADMIN, USER).
+// - showtimes: Funciones programadas (película, horario, sala).
+// - seats: Asientos disponibles por sala.
+// - futureReleases: Próximos estrenos con fecha futura.
+// - actors: Actores disponibles para el reparto de películas.
+// - movieCast: Relación película-actor para el reparto.
+//
+// Uso típico:
+// import { dataSeed } from "../data/seed/dataSeed";
+// await prismaClient.users.createMany({ data: dataSeed.users });
+//
+// Cada campo está diseñado para reflejar la estructura de la base de datos y facilitar la carga masiva de datos.
+//
+// Modifica este archivo para agregar, quitar o actualizar datos de ejemplo según las necesidades del proyecto.
+
 export const dataSeed = {
   users: [
     {

@@ -1,70 +1,65 @@
+/**
+ * Configuración central de rutas para la aplicación CinemaSpot
+ *
+ * Este archivo actúa como punto central para la configuración y registro
+ * de todas las rutas de la API del backend. Reúne todas las rutas específicas
+ * de cada módulo y las expone a través de un único Router de Express.
+ */
+
 import { Router } from "express";
 import { AuthRoutes } from "./auth/auth.routes";
-import { RolesRoutes } from "./roles/roles.routes";
+import { UsersRoutes } from "./users/users.routes";
+import { RoomsRoutes } from "./rooms/rooms.routes";
+import { CategoriesRoutes } from "./categories/categories.routes";
 import { MoviesRoutes } from "./movies/movies.routes";
-import { ReservationsRoutes } from "./reservations/reservations.routes";
+import { RolesRoutes } from "./roles/roles.routes";
 import { ShowtimesRoutes } from "./showtimes/showtimes.routes";
 import { SeatsRoutes } from "./seats/seats.routes";
-import { RoomsRoutes } from "./rooms/rooms.routes";
-import { UsersRoutes } from "./users/users.routes";
+import { ReservationsRoutes } from "./reservations/reservations.routes";
 import { FutureReleasesRoutes } from "./future-releases/future-releases.routes";
-import { CategoriesRoutes } from "./categories/categories.routes";
 import { MovieCastRoutes } from "./movie-cast/movie-cast.routes";
 
 /**
- * Regroups all API routes for the movie reservation system backend.
+ * Clase AppRoutes que centraliza todas las rutas de la aplicación
  *
- * This static method creates and configures an Express Router by mounting various sub-route modules,
- * each handling specific functionalities of the system. The modular design assigns unique URL prefixes
- * to each group of routes, ensuring a clean and organized API structure.
- *
- * @remarks
- * The integrated sub-routes include:
- * - "/api/auth": Manages authentication operations.
- * - "/api/roles": Controls user roles and permissions.
- * - "/api/movies": Handles movie-related data and operations.
- * - "/api/showtimes": Manages scheduling for movie showtimes.
- * - "/api/reservations": Handles reservation processes.
- * - "/api/seats": Manages seating arrangements and related endpoints.
- * - "/api/rooms": Oversees room configuration and management.
- * - "/api/users": Manages user-related functionalities.
- *
- * @example
- * The following example shows how to incorporate the app routes into an Express application:
- *
- * import express from "express";
- * import { AppRoutes } from "./presentation/app.routes";
- *
- * const app = express();
- * app.use(AppRoutes.getRoutes());
- *
- * @returns {Router} A fully configured Express Router instance with all mounted API routes.
+ * Esta clase estática proporciona un método que configura y devuelve
+ * un Router de Express con todas las rutas de la API organizadas por módulos.
  */
 export class AppRoutes {
+  /**
+   * Método estático que configura y devuelve todas las rutas de la aplicación
+   *
+   * @returns Router de Express con todas las rutas registradas
+   */
   static getRoutes(): Router {
     const router = Router();
 
-    router.use("/api/auth", AuthRoutes.getRoutes());
+    /**
+     * Ruta raíz de la API que devuelve un mensaje de bienvenida
+     */
+    router.get("/", (req, res) => {
+      res.status(200).json({
+        msg: "API for Cinema",
+      });
+    });
 
-    router.use("/api/roles", RolesRoutes.getRoutes());
-
-    router.use("/api/movies", MoviesRoutes.getRoutes());
-
-    router.use("/api/future-releases", FutureReleasesRoutes.getRoutes());
-
-    router.use("/api/showtimes", ShowtimesRoutes.getRoutes());
-
-    router.use("/api/reservations", ReservationsRoutes.getRoutes());
-
-    router.use("/api/seats", SeatsRoutes.getRoutes());
-
-    router.use("/api/rooms", RoomsRoutes.getRoutes());
-
-    router.use("/api/users", UsersRoutes.getRoutes());
-
-    router.use("/api/categories", CategoriesRoutes.getRoutes());
-
-    router.use("/api/movie-cast", MovieCastRoutes.getRoutes());
+    /**
+     * Registro de rutas específicas para cada módulo de la aplicación
+     *
+     * Cada módulo tiene su propio Router que maneja las rutas específicas
+     * relacionadas con esa funcionalidad (autenticación, usuarios, salas, etc.)
+     */
+    router.use("/api/auth", AuthRoutes.routes);
+    router.use("/api/users", UsersRoutes.routes);
+    router.use("/api/rooms", RoomsRoutes.routes);
+    router.use("/api/categories", CategoriesRoutes.routes);
+    router.use("/api/movies", MoviesRoutes.routes);
+    router.use("/api/roles", RolesRoutes.routes);
+    router.use("/api/showtimes", ShowtimesRoutes.routes);
+    router.use("/api/seats", SeatsRoutes.routes);
+    router.use("/api/reservations", ReservationsRoutes.routes);
+    router.use("/api/future-releases", FutureReleasesRoutes.routes);
+    router.use("/api/movie-cast", MovieCastRoutes.routes);
 
     return router;
   }

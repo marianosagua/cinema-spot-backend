@@ -1,47 +1,16 @@
+// ----------------------------------------------------------------------------------
+// DTO para la creación de funciones de cine (showtimes)
+// Valida y transforma los datos recibidos para crear una función en la base de datos
+// ----------------------------------------------------------------------------------
 import { prismaClient } from "../../../data/postgres/client-connection";
 import { Showtime } from "../../../interfaces";
 
 /**
- * Data Transfer Object (DTO) for creating a new showtime.
- *
- * This class encapsulates the data required to create a showtime,
- * including the identifiers for the movie and room, as well as the
- * start and end times for the showtime.
- *
- * The constructor accepts the following parameters:
- * @param movieId - The numeric identifier of the movie, retrieved from the database.
- * @param startTime - The start time of the showtime in string format.
- * @param endTime - The end time of the showtime in string format.
- * @param roomId - The UUID of the room where the showtime will take place.
- *
- * The static method {@link CreateShowtimeDto.fromRequest} is responsible for:
- *  - Validating the incoming request body to ensure that the required fields are present:
- *    - movie: The title of the movie.
- *    - start_time: The starting time for the showtime.
- *    - end_time: The ending time for the showtime.
- *    - room: The name of the room.
- *  - Querying the database for a movie that matches the provided title.
- *  - Querying the database for a room that matches the provided name.
- *  - If both the movie and room are found, the method returns a tuple containing:
- *      - Undefined as the first element, indicating the absence of an error.
- *      - A new instance of {@link CreateShowtimeDto} with the corresponding movieId, startTime, endTime, and roomId as the second element.
- *
- * In case any of the required fields are missing, the method immediately returns a tuple with an 
- * appropriate error message as the first element.
- *
- * If the movie or room is not found in the database, the method throws an error.
- *
- * @example
- * ```typescript
- * const [error, showtimeDto] = await CreateShowtimeDto.fromRequest(requestBody);
- * if (error) {
- *   // Handle the error (e.g., return a 400 response)
- * } else {
- *   // Proceed with creating the showtime using showtimeDto
- * }
- * ```
- *
- * @public
+ * Data Transfer Object para la creación de una función de cine.
+ * @property movieId ID de la película.
+ * @property startTime Hora de inicio de la función.
+ * @property endTime Hora de fin de la función.
+ * @property roomId ID de la sala donde se proyecta la función.
  */
 export class CreateShowtimeDto {
   constructor(
@@ -51,6 +20,12 @@ export class CreateShowtimeDto {
     public roomId: string
   ) {}
 
+  /**
+   * Crea una instancia de CreateShowtimeDto a partir de los datos recibidos en la petición.
+   * Valida la existencia de los campos requeridos y busca los IDs en la base de datos.
+   * @param body Objeto con los datos de la función (Showtime)
+   * @returns Una tupla con un mensaje de error o la instancia creada
+   */
   static async fromRequest(
     body: Showtime
   ): Promise<[string?, CreateShowtimeDto?]> {

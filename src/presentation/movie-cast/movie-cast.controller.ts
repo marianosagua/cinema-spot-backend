@@ -2,6 +2,18 @@ import { Request, Response } from "express";
 import { MovieCastService } from "./movie-cast.service";
 import { handleError } from "../../domain/errors/HandleError";
 
+/**
+ * Controlador de reparto de películas.
+ * Gestiona la relación entre películas y actores.
+ * Utiliza MovieCastService para la lógica de negocio.
+ *
+ * Métodos:
+ * - getAll: Lista todas las relaciones película-actor.
+ * - getById: Obtiene la relación específica entre una película y un actor.
+ * - getByMovieId: Lista el reparto de una película específica.
+ * - create: Crea una relación película-actor.
+ * - delete: Elimina una relación película-actor.
+ */
 export class MovieCastController {
   constructor(private movieCastService: MovieCastService) {}
 

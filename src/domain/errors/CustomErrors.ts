@@ -1,26 +1,13 @@
-/**
- * CustomError is a custom error class that extends the built-in Error class to include an HTTP status code.
- *
- * @remarks
- * This class provides a cohesive mechanism for throwing errors with standardized HTTP status codes and messages.
- * It offers static factory methods for common error scenarios:
- * - {@link CustomError.badRequest} creates a 400 Bad Request error.
- * - {@link CustomError.unauthorized} creates a 401 Unauthorized error.
- * - {@link CustomError.forbidden} creates a 403 Forbidden error.
- * - {@link CustomError.notFound} creates a 404 Not Found error.
- *
- * These methods enable you to generate errors in a clear and expressive manner, making error handling
- * and debugging easier in your application.
- *
- * @example
- * ```typescript
- * // Throw a 400 Bad Request error with a descriptive message
- * throw CustomError.badRequest("The provided input is invalid.");
- * ```
- *
- * @public
- */
+// -----------------------------------------------------------------------------
+// Clase de error personalizado para el dominio de la aplicación CinemaSpot
+// Permite lanzar errores con códigos de estado HTTP y mensajes personalizados
+// -----------------------------------------------------------------------------
 export class CustomError extends Error {
+  /**
+   * Constructor de CustomError
+   * @param statusCode Código de estado HTTP asociado al error
+   * @param message Mensaje descriptivo del error
+   */
   constructor(
     public readonly statusCode: number,
     public readonly message: string
@@ -28,18 +15,38 @@ export class CustomError extends Error {
     super(message);
   }
 
+  /**
+   * Error 400 - Solicitud incorrecta
+   * @param message Mensaje descriptivo
+   * @returns Instancia de CustomError
+   */
   static badRequest(message: string) {
     return new CustomError(400, message);
   }
 
+  /**
+   * Error 401 - No autorizado
+   * @param message Mensaje descriptivo
+   * @returns Instancia de CustomError
+   */
   static unauthorized(message: string) {
     return new CustomError(401, message);
   }
 
+  /**
+   * Error 403 - Prohibido
+   * @param message Mensaje descriptivo
+   * @returns Instancia de CustomError
+   */
   static forbidden(message: string) {
     return new CustomError(403, message);
   }
 
+  /**
+   * Error 404 - No encontrado
+   * @param message Mensaje descriptivo
+   * @returns Instancia de CustomError
+   */
   static notFound(message: string) {
     return new CustomError(404, message);
   }

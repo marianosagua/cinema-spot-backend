@@ -1,34 +1,28 @@
+/**
+ * Rutas del módulo de roles (Roles)
+ *
+ * Este archivo define las rutas para la gestión de roles de usuario en el sistema.
+ * Incluye:
+ *   - Asignación de roles a usuarios (solo admin)
+ *   - Listado de roles (solo admin)
+ *   - Consulta, actualización y eliminación de roles
+ *
+ * Middlewares:
+ *   - AuthMiddleware.isAdmin: Protege las rutas de administración de roles.
+ *
+ * Estructura de rutas:
+ *   POST   /assign-role   -> Asignar rol a usuario (admin)
+ *   GET    /              -> Listar todos los roles (admin)
+ *   GET    /:id           -> Obtener rol por ID
+ *   PUT    /:id           -> Actualizar rol (admin)
+ *   DELETE /:id           -> Eliminar rol (admin)
+ */
+
 import { Router } from "express";
 import { RolesController } from "./roles.controller";
 import { RolesService } from "./roles.service";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
 
-/**
- * Provides the routing configuration for role-related API endpoints.
- *
- * This static class method initializes an Express Router along with the associated RolesService and RolesController,
- * configuring the following endpoints:
- *
- * - POST "/assign-role": Assigns a role to a user. This endpoint is secured with administrative privileges
- *   (using AuthMiddleware.isAdmin) and is handled by the RolesController.assignRole method.
- *
- * - GET "/": Retrieves all available roles. This endpoint is secured with administrative privileges
- *   (using AuthMiddleware.isAdmin) and is handled by the RolesController.getAllRoles method.
- *
- * - GET "/:id": Retrieves a specific role based on its unique identifier. This endpoint is handled by
- *   the RolesController.getRoleById method.
- *
- * - PUT "/:id": Updates an existing role based on its unique identifier. This endpoint is secured with administrative
- *   privileges (using AuthMiddleware.isAdmin) and is handled by the RolesController.updateRole method.
- *
- * - DELETE "/:id": Deletes a specific role by its unique identifier. This endpoint is secured with administrative
- *   privileges (using AuthMiddleware.isAdmin) and is handled by the RolesController.deleteRole method.
- *
- * @example
- * const router = RolesRoutes.getRoutes();
- *
- * @public
- */
 export class RolesRoutes {
   static getRoutes(): Router {
     const router = Router();

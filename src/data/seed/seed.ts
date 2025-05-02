@@ -1,46 +1,60 @@
+// seed.ts - Script de inicialización (seeding) de la base de datos para CinemaSpot Backend
+//
+// Este archivo ejecuta el proceso de seeding para poblar la base de datos PostgreSQL con datos de ejemplo y configuración inicial.
+// Utiliza Prisma ORM y los datos definidos en dataSeed.ts. Es útil para entornos de desarrollo, pruebas o despliegue inicial.
+//
+// Funcionalidades principales:
+// - Limpia todas las tablas relevantes y resetea las secuencias de IDs.
+// - Inserta categorías, películas, próximos estrenos, salas, roles, usuarios, funciones, asientos, actores y el reparto de películas.
+// - Hashea las contraseñas de los usuarios antes de insertarlas.
+//
+// Estructura del archivo:
+// - Ejecución automática (IIFE) que conecta, ejecuta el seed y desconecta Prisma.
+// - Función seed(): Orquesta el proceso de borrado, reseteo e inserción de datos.
+// - Función deleteAllData(): Elimina todos los registros de las tablas principales.
+// - Función resetSequences(): Reinicia los contadores de secuencias de IDs en la base de datos.
+//
+// Uso:
+// Ejecutar este archivo con Node.js para poblar la base de datos:
+//   npx ts-node src/data/seed/seed.ts
+//
+// Modifica dataSeed.ts para cambiar los datos de ejemplo según las necesidades del proyecto.
+//
+// Recomendación:
+// No ejecutar en entornos de producción, ya que elimina todos los datos existentes.
+
 import { bcryptAdapter } from "../../config/bcrypt.adapter";
 import { prismaClient } from "../postgres/client-connection";
 import { dataSeed } from "./dataSeed";
 
 (async () => {
   try {
-    console.log("Starting database seeding...");
+    console.log("Iniciando el seed de la base de datos...");
     await prismaClient.$connect();
     await seed();
-    console.log("Seeding completed successfully");
+    console.log("Seed completado exitosamente");
   } catch (error) {
-    console.error("Error seeding database:", error);
+    console.error("Error al ejecutar el seed de la base de datos:", error);
     process.exit(1);
   } finally {
     await prismaClient.$disconnect();
   }
 })();
 
-/**
- * Seeds the database with initial data for the Movie Reservation System.
- *
- * This function creates all necessary records in the database, maintaining proper
- * relationship integrity and optimizing for performance with batch operations
- * and efficient lookups.
- */
 async function seed() {
   try {
-    // Clean up existing data - order matters due to foreign key constraints
-    console.log("Cleaning up existing data...");
+    console.log("Eliminando datos existentes...");
     await deleteAllData();
 
-    // Reset sequences for primary keys
-    console.log("Resetting sequences...");
+    console.log("Reseteando secuencias...");
     await resetSequences();
 
-    // Create categories
-    console.log("Creating categories...");
+    console.log("Creando categorías...");
     await prismaClient.categories.createMany({
       data: dataSeed.categories,
     });
 
-    // Create movies
-    console.log("Creating movies...");
+    console.log("Creando películas...");
     const movies = await Promise.all(
       dataSeed.movies.map((movie) =>
         prismaClient.movies.create({
@@ -61,8 +75,7 @@ async function seed() {
       )
     );
 
-    // Create future releases
-    console.log("Creating future releases...");
+    console.log("Creando próximos estrenos...");
     await Promise.all(
       dataSeed.futureReleases.map((release) =>
         prismaClient.future_releases.create({
@@ -83,23 +96,19 @@ async function seed() {
       )
     );
 
-    // Create rooms
-    console.log("Creating rooms...");
+    console.log("Creando salas...");
     await prismaClient.rooms.createMany({
       data: dataSeed.rooms,
     });
 
-    // Create roles
-    console.log("Creating roles...");
+    console.log("Creando roles...");
     await prismaClient.roles.createMany({
       data: dataSeed.roles,
     });
 
-    // Create users
-    console.log("Creating users...");
-    // Fetch roles from the database
+    console.log("Creando usuarios...");
     const roles = await prismaClient.roles.findMany();
-    // Create users with hashed passwords
+
     await Promise.all(
       dataSeed.users.map((user) =>
         prismaClient.users.create({
@@ -114,8 +123,7 @@ async function seed() {
       )
     );
 
-    // Create showtimes
-    console.log("Creating showtimes...");
+    console.log("Creando funciones...");
     const moviesFetch = await prismaClient.movies.findMany();
     const rooms = await prismaClient.rooms.findMany();
     await Promise.all(
@@ -133,8 +141,7 @@ async function seed() {
       )
     );
 
-    // Create seats
-    console.log("Creating seats...");
+    console.log("Creando asientos...");
     await Promise.all(
       dataSeed.seats.map((seat) =>
         prismaClient.seats.create({
@@ -147,14 +154,12 @@ async function seed() {
       )
     );
 
-    // Create actors
-    console.log("Creating actors...");
+    console.log("Creando actores...");
     await prismaClient.actors.createMany({
       data: dataSeed.actors,
     });
 
-    // Create movie cast
-    console.log("Creating movie cast...");
+    console.log("Creando reparto de películas...");
     const actors = await prismaClient.actors.findMany();
 
     await Promise.all(
@@ -172,37 +177,36 @@ async function seed() {
       )
     );
 
-    console.log("Seed completed");
+    console.log("Seed finalizado");
   } catch (error) {
-    console.error("Error during seeding:", error);
+    console.error("Error durante el seed:", error);
     throw error;
   }
 }
 
-/**
- * Deletes all existing data from the database tables.
- */
 async function deleteAllData() {
-  await prismaClient.reservations.deleteMany();
-  await prismaClient.showtimes.deleteMany();
-  await prismaClient.seats.deleteMany();
-  await prismaClient.users.deleteMany();
-  await prismaClient.movie_cast.deleteMany();
-  await prismaClient.movies.deleteMany();
-  await prismaClient.rooms.deleteMany();
-  await prismaClient.roles.deleteMany();
-  await prismaClient.future_releases.deleteMany();
-  await prismaClient.categories.deleteMany();
-  await prismaClient.actors.deleteMany();
+  await prismaClient.movie_cast.deleteMany({});
+  await prismaClient.actors.deleteMany({});
+  await prismaClient.reservations.deleteMany({});
+  await prismaClient.seats.deleteMany({});
+  await prismaClient.showtimes.deleteMany({});
+  await prismaClient.future_releases.deleteMany({});
+  await prismaClient.movies.deleteMany({});
+  await prismaClient.users.deleteMany({});
+  await prismaClient.categories.deleteMany({});
+  await prismaClient.rooms.deleteMany({});
+  await prismaClient.roles.deleteMany({});
 }
 
-/**
- * Resets the sequences.
- */
 async function resetSequences() {
-  await prismaClient.$executeRaw`ALTER SEQUENCE "movies_id_seq" RESTART WITH 1;`;
-  await prismaClient.$executeRaw`ALTER SEQUENCE "actors_id_seq" RESTART WITH 1;`;
-  await prismaClient.$executeRaw`ALTER SEQUENCE "future_releases_id_seq" RESTART WITH 1;`;
-  await prismaClient.$executeRaw`ALTER SEQUENCE "categories_id_seq" RESTART WITH 1;`;
-  await prismaClient.$executeRaw`ALTER SEQUENCE "roles_id_seq" RESTART WITH 1;`;
+  try {
+    await prismaClient.$queryRaw`SELECT setval('"actors_id_seq"', 1, false)`;
+    await prismaClient.$queryRaw`SELECT setval('"categories_id_seq"', 1, false)`;
+    await prismaClient.$queryRaw`SELECT setval('"future_releases_id_seq"', 1, false)`;
+    await prismaClient.$queryRaw`SELECT setval('"movies_id_seq"', 1, false)`;
+    await prismaClient.$queryRaw`SELECT setval('"roles_id_seq"', 1, false)`;
+  } catch (error) {
+    console.error("Error reseteando secuencias:", error);
+    throw error;
+  }
 }

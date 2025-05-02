@@ -3,7 +3,17 @@ import { CreateShowtimeDto } from "../../domain/dtos/showtimes/create-showtime.d
 import { CustomError } from "../../domain/errors";
 import { Showtime } from "../../interfaces";
 
+/**
+ * Servicio para la gestión de funciones (showtimes) de películas.
+ * Proporciona métodos para consultar, crear, actualizar y eliminar funciones en la base de datos.
+ * Utiliza Prisma Client para interactuar con la base de datos.
+ */
 export class ShowtimesService {
+  /**
+   * Obtiene todas las funciones existentes.
+   * @returns {Promise<any[]>} Lista de funciones con detalles de película y sala.
+   * @throws {CustomError} Si no se encuentran funciones.
+   */
   async getShowtimes() {
     const showtimes = await prismaClient.showtimes.findMany({
       select: {
@@ -40,6 +50,12 @@ export class ShowtimesService {
     return transformedShowtimes;
   }
 
+  /**
+   * Obtiene una función por su ID.
+   * @param {string} id - ID de la función.
+   * @returns {Promise<any>} Función encontrada con detalles.
+   * @throws {CustomError} Si la función no existe.
+   */
   async getShowtimesById(id: string) {
     const showtime = await prismaClient.showtimes.findUnique({
       where: {
@@ -87,6 +103,12 @@ export class ShowtimesService {
     };
   }
 
+  /**
+   * Obtiene todas las funciones de una película por su ID.
+   * @param {string} movieId - ID de la película.
+   * @returns {Promise<any[]>} Lista de funciones de la película.
+   * @throws {CustomError} Si no se encuentran funciones.
+   */
   async getShowtimesByMovie(movieId: string) {
     const showtimes = await prismaClient.showtimes.findMany({
       where: {
@@ -120,6 +142,12 @@ export class ShowtimesService {
     return transformedShowtimes;
   }
 
+  /**
+   * Crea una nueva función.
+   * @param {CreateShowtimeDto} showtime - Datos de la función.
+   * @returns {Promise<void>} No retorna valor, lanza error si falla.
+   * @throws {Error} Si ocurre un error al crear la función.
+   */
   async createShowtime(showtime: CreateShowtimeDto) {
     const movieCreated = await prismaClient.showtimes.create({
       data: {
@@ -135,6 +163,13 @@ export class ShowtimesService {
     }
   }
 
+  /**
+   * Actualiza una función existente por su ID.
+   * @param {string} id - ID de la función.
+   * @param {Showtime} showtimeUpdated - Datos actualizados de la función.
+   * @returns {Promise<void>} No retorna valor, lanza error si falla.
+   * @throws {CustomError} Si la función no existe.
+   */
   async updateShowtime(id: string, showtimeUpdated: Showtime) {
     const showtime = await prismaClient.showtimes.update({
       where: {
@@ -153,6 +188,12 @@ export class ShowtimesService {
     }
   }
 
+  /**
+   * Elimina una función por su ID.
+   * @param {string} id - ID de la función.
+   * @returns {Promise<void>} No retorna valor, lanza error si falla.
+   * @throws {CustomError} Si la función no existe.
+   */
   async deleteShowtime(id: string) {
     const showtimeDeleted = await prismaClient.showtimes.delete({
       where: {

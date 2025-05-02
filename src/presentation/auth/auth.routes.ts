@@ -1,39 +1,29 @@
+/**
+ * Rutas del módulo de autenticación (Auth)
+ *
+ * Este archivo define las rutas relacionadas con la autenticación y gestión de credenciales de usuario.
+ * Permite a los usuarios iniciar sesión, registrarse, validar su correo electrónico y recuperar su contraseña.
+ * Cada ruta está asociada a un método del AuthController, que utiliza AuthService y EmailService para la lógica de negocio.
+ *
+ * Estructura de rutas:
+ *   POST   /login                    -> Iniciar sesión con email y contraseña
+ *   POST   /register                 -> Registrar un nuevo usuario
+ *   GET    /validate-email/:token    -> Validar el correo electrónico mediante token
+ *   POST   /forgot-password          -> Solicitar recuperación de contraseña (envía email)
+ *   POST   /reset-password/:token    -> Restablecer contraseña usando token recibido por email
+ *   GET    /reset-password/:token    -> Obtener formulario de restablecimiento de contraseña
+ *   GET    /reset-password-success   -> Página de éxito tras restablecer contraseña
+ *
+ * Notas:
+ *   - No requiere autenticación previa, ya que son rutas públicas para el flujo de acceso y recuperación.
+ *   - El flujo de recuperación de contraseña y validación de email utiliza tokens enviados por correo electrónico.
+ */
+
 import { Router } from "express";
 import { AuthController } from "./auth.controller";
 import { EmailService } from "./email.service";
 import { AuthService } from "./auth.service";
 
-/**
- * The AuthRoutes class encapsulates the routing configuration for authentication-related endpoints.
- *
- * This class defines a static method to construct and return an Express Router that handles API routes for user
- * authentication operations such as login, registration, and email validation. The router is configured with
- * the following endpoints:
- *
- * - POST "/login": Authenticates a user with provided login credentials.
- * - POST "/register": Registers a new user and triggers an email confirmation process.
- * - GET "/validate-email/:token": Validates the user's email using a token provided in the URL.
- * - POST "/forgot-password": Initiates the password recovery process for a user.
- * - POST "/reset-password/:token": Resets the user's password using a token provided in the URL.
- * - GET "/reset-password/:token": Serves the password reset form using a token provided in the URL.
- * - GET "/reset-password-success": Serves the success view after resetting the password.
- *
- * The method initializes required service dependencies:
- * - An EmailService instance to handle email sending tasks.
- * - An AuthService instance that manages the core business logic for authentication.
- * - An AuthController instance which defines handler methods for the endpoints.
- *
- * @example
- * ```typescript
- * import express from 'express';
- * import { AuthRoutes } from './auth.routes';
- *
- * const app = express();
- * app.use('/api/auth', AuthRoutes.getRoutes());
- * ```
- *
- * @public
- */
 export class AuthRoutes {
   static getRoutes(): Router {
     const router = Router();

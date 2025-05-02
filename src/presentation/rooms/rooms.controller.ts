@@ -2,6 +2,18 @@ import { Request, Response } from "express";
 import { handleError } from "../../domain/errors";
 import { RoomsService } from "./rooms.service";
 
+/**
+ * Controlador de salas.
+ * Gestiona la consulta, creación, actualización y eliminación de salas de cine.
+ * Utiliza RoomsService para la lógica de negocio.
+ *
+ * Métodos:
+ * - getRooms: Lista todas las salas.
+ * - getRoomById: Obtiene una sala por ID.
+ * - createRoom: Crea una nueva sala.
+ * - updateRoom: Actualiza una sala existente.
+ * - deleteRoom: Elimina una sala por ID.
+ */
 export class RoomsController {
   constructor(private roomsService: RoomsService) {}
 

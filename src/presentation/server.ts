@@ -1,11 +1,12 @@
 /**
- * Express server configuration module for CinemaSpot backend application.
+ * Servidor Express para CinemaSpot Backend
  *
- * This module defines the Server class which encapsulates the Express application setup,
- * configures necessary middleware, view engine, and handles HTTP request listening.
- *
- * @module server
+ * Este archivo define la clase Server que configura y ejecuta el servidor Express
+ * para la aplicación CinemaSpot. Provee funcionalidad para inicializar el servidor
+ * con configuraciones esenciales como middleware CORS, procesamiento de JSON,
+ * motor de plantillas Handlebars y enrutamiento.
  */
+
 import express from "express";
 import { Router } from "express";
 import cors from "cors";
@@ -13,11 +14,10 @@ import { engine } from "express-handlebars";
 import path from "path";
 
 /**
- * Configuration options for the Server instance.
+ * Interfaz que define las opciones de configuración requeridas para el servidor
  *
- * @interface Options
- * @property {number} port - The port number on which the server will listen.
- * @property {Router} routes - The Express Router instance containing the application routes.
+ * @property port - Número de puerto en el que el servidor escuchará
+ * @property routes - Router de Express con todas las rutas definidas de la aplicación
  */
 interface Options {
   port: number;
@@ -25,12 +25,10 @@ interface Options {
 }
 
 /**
- * Represents an HTTP server for the CinemaSpot backend application.
+ * Clase Server que encapsula toda la lógica del servidor Express
  *
- * The Server class is responsible for configuring and starting an Express-based web server.
- * It sets up essential middleware such as CORS handling, JSON and URL-encoded parsers, and
- * configures the view engine to use Handlebars (.hbs). Additionally, it mounts the provided
- * routing definitions and initiates the listener on the specified port.
+ * Esta clase se encarga de configurar y arrancar el servidor web con
+ * todas las configuraciones necesarias para el funcionamiento del backend.
  */
 export class Server {
   private readonly app = express();
@@ -38,11 +36,9 @@ export class Server {
   private readonly routes: Router;
 
   /**
-   * Creates a new Server instance.
+   * Constructor que inicializa el servidor con las opciones proporcionadas
    *
-   * @param {Options} options - Configuration options for the server
-   * @param {number} options.port - The port number on which the server will listen
-   * @param {Router} options.routes - The Express Router instance containing the application routes
+   * @param options - Objeto con el puerto y las rutas a configurar
    */
   constructor(options: Options) {
     const { port, routes } = options;
@@ -51,32 +47,32 @@ export class Server {
   }
 
   /**
-   * Starts the server by applying middleware, configuring the view engine, mounting routes,
-   * and beginning to listen on the provided port.
+   * Método que inicia el servidor con todas las configuraciones
    *
-   * This method applies the following middleware:
-   *   - CORS middleware via cors()
-   *   - JSON parser via express.json()
-   *   - URL-encoded parser via express.urlencoded({ extended: true })
-   *
-   * It also sets the views directory and configures Handlebars as the templating engine before
-   * mounting the defined routes. Once the server begins listening on the configured port, it logs a
-   * confirmation message to the console.
-   *
-   * @returns {void}
+   * Este método:
+   * 1. Configura CORS para permitir peticiones de otros orígenes
+   * 2. Configura el middleware para procesar JSON y datos de formularios
+   * 3. Configura el motor de plantillas Handlebars para renderizar vistas
+   * 4. Registra las rutas definidas en la aplicación
+   * 5. Inicia el servidor en el puerto especificado
    */
   start(): void {
+    // Configura CORS para permitir peticiones de otros orígenes
     this.app.use(cors());
 
+    // Configura el middleware para procesar JSON y datos de formularios
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
 
+    // Configura el motor de plantillas Handlebars
     this.app.set("views", path.join(__dirname, "views"));
     this.app.engine("hbs", engine({ extname: ".hbs", defaultLayout: false }));
     this.app.set("view engine", "hbs");
 
+    // Registra todas las rutas de la aplicación
     this.app.use(this.routes);
 
+    // Inicia el servidor en el puerto especificado
     this.app.listen(this.port, () => {
       console.log(`Server is running on port ${this.port}`);
     });

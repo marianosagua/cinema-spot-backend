@@ -1,24 +1,24 @@
+// Adaptador para operaciones de hash y comparación de contraseñas usando bcryptjs.
+//
+// Este archivo proporciona una interfaz centralizada para el uso de bcryptjs en la aplicación CinemaSpot.
+// Permite hashear contraseñas y compararlas de forma segura.
+//
+// Exportaciones:
+// - bcryptAdapter: Objeto con métodos para hashear y comparar contraseñas.
+//
+// Métodos:
+// - hash(password: string): string
+//   Genera un hash seguro para la contraseña proporcionada.
+// - compare(password: string, hashedPassword: string): boolean
+//   Compara una contraseña en texto plano con un hash.
+//
+// Ejemplo de uso:
+// import { bcryptAdapter } from "../config/bcrypt.adapter";
+// const hash = bcryptAdapter.hash("miPassword");
+// const isValid = bcryptAdapter.compare("miPassword", hash);
+
 import { compareSync, genSaltSync, hashSync } from "bcryptjs";
 
-/**
- * An adapter module that provides utility functions for bcrypt hashing and comparison.
- *
- * This module exposes two primary functions:
- *
- * - hash: Generates a salt synchronously and hashes the provided password using bcrypt.
- * - compare: Compares a plaintext password with a hashed password synchronously using bcrypt.
- *
- * @remarks
- * The module utilizes bcrypt's synchronous functions (genSaltSync, hashSync, and compareSync) to ensure that all operations are performed in a blocking manner.
- * This may be suitable for use cases where simplicity is preferred over non-blocking asynchronous code.
- *
- * @example
- * // Hashing a password
- * const hashedPassword = bcryptAdapter.hash("mySecretPassword");
- *
- * // Comparing a password with its hashed version
- * const isMatch = bcryptAdapter.compare("mySecretPassword", hashedPassword);
- */
 export const bcryptAdapter = {
   hash(password: string) {
     const salt = genSaltSync();

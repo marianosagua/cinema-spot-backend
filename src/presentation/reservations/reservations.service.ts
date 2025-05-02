@@ -2,7 +2,17 @@ import { prismaClient } from "../../data/postgres/client-connection";
 import { CustomError } from "../../domain/errors";
 import { Reservation } from "../../interfaces";
 
+/**
+ * Servicio para la gestión de reservas de asientos.
+ * Proporciona métodos para consultar, crear y eliminar reservas en la base de datos.
+ * Utiliza Prisma Client para interactuar con la base de datos.
+ */
 export class ReservationsService {
+  /**
+   * Obtiene todas las reservas existentes.
+   * @returns {Promise<any[]>} Lista de reservas con datos de usuario, función y asiento.
+   * @throws {CustomError} Si no se encuentran reservas.
+   */
   getReservations = async () => {
     const reservations = await prismaClient.reservations.findMany({
       select: {
@@ -91,6 +101,12 @@ export class ReservationsService {
     return transformedReservations;
   };
 
+  /**
+   * Obtiene una reserva por su ID.
+   * @param {string} id - ID de la reserva.
+   * @returns {Promise<any>} Reserva encontrada con datos de usuario, función y asiento.
+   * @throws {CustomError} Si la reserva no existe.
+   */
   getReservation = async (id: string) => {
     const reservation = await prismaClient.reservations.findUnique({
       where: { id },
@@ -178,6 +194,12 @@ export class ReservationsService {
     };
   };
 
+  /**
+   * Obtiene todas las reservas de un usuario.
+   * @param {string} userId - ID del usuario.
+   * @returns {Promise<any[]>} Lista de reservas del usuario.
+   * @throws {CustomError} Si no se encuentran reservas.
+   */
   getReservationsByUser = async (userId: string) => {
     const reservations = await prismaClient.reservations.findMany({
       where: {
@@ -269,6 +291,12 @@ export class ReservationsService {
     return transformedReservations;
   };
 
+  /**
+   * Crea una nueva reserva de asiento(s) para un usuario y función.
+   * @param {Reservation} reservation - Datos de la reserva.
+   * @returns {Promise<void>} No retorna valor, lanza error si falla.
+   * @throws {CustomError} Si la función está llena o hay error en la reserva.
+   */
   addReservation = async (reservation: Reservation) => {
     const showtime = await prismaClient.showtimes.findFirst({
       where: {
@@ -304,6 +332,11 @@ export class ReservationsService {
     }
   };
 
+  /**
+   * Elimina una reserva por su ID.
+   * @param {string} id - ID de la reserva.
+   * @returns {Promise<void>} No retorna valor.
+   */
   deleteReservation = async (id: string) => {
     await prismaClient.reservations.delete({
       where: { id },

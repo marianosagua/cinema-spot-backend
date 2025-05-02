@@ -1,3 +1,11 @@
+/**
+ * Rutas del módulo de categorías (Categories)
+ *
+ * Este archivo define las rutas para la gestión de categorías de películas.
+ * Incluye rutas públicas y rutas protegidas para administración.
+ * Utiliza AuthMiddleware.isAdmin para proteger rutas de creación, edición y borrado.
+ */
+
 import { Router } from "express";
 import { CategoriesController } from "./categories.controller";
 import { CategoriesService } from "./categories.service";

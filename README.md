@@ -114,7 +114,7 @@ src/
 - `GET /api/movies`: Obtener todas las películas.
 - `GET /api/movies/:id`: Obtener una película por ID.
 - `POST /api/movies`: Agregar una nueva película (Solo administrador).
-- `PUT /api/movies`: Actualizar una película (Solo administrador).
+- `PUT /api/movies/:id`: Actualizar una película (Solo administrador).
 - `DELETE /api/movies/:id`: Eliminar una película (Solo administrador).
 
 ### 🍿 Próximos Estrenos

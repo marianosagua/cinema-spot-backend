@@ -1,34 +1,29 @@
+/**
+ * Rutas del módulo de reservas (Reservations)
+ *
+ * Este archivo define las rutas para la gestión de reservas de asientos en funciones.
+ * Incluye:
+ *   - Listado de todas las reservas (solo admin)
+ *   - Consulta de reserva por ID
+ *   - Consulta de reservas por usuario
+ *   - Creación y eliminación de reservas
+ *
+ * Middlewares:
+ *   - AuthMiddleware.isAdmin: Protege el listado general de reservas.
+ *
+ * Estructura de rutas:
+ *   GET    /              -> Listar todas las reservas (admin)
+ *   GET    /:id           -> Obtener reserva por ID
+ *   GET    /user/:userId  -> Obtener reservas de un usuario
+ *   POST   /              -> Crear una reserva
+ *   DELETE /:id           -> Eliminar una reserva
+ */
+
 import { Router } from "express";
 import { ReservationsController } from "./reservations.controller";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
 import { ReservationsService } from "./reservations.service";
 
-/**
- * ReservationsRoutes class encapsulates the routing configuration for reservation-related endpoints.
- *
- * This class provides a static method that returns an Express Router instance configured with RESTful routes
- * for managing movie reservations. The following endpoints are defined:
- *
- * - GET "/" - Retrieves all reservations. This route is protected by the admin authorization middleware.
- * - GET "/:id" - Retrieves the details of a specific reservation identified by its unique ID.
- * - GET "/user/:userId" - Retrieves all reservations for a given user identified by user ID.
- * - POST "/" - Creates a new reservation.
- * - DELETE "/:id" - Deletes an existing reservation identified by its unique ID.
- *
- * The getRoutes() method sets up the necessary service and controller layers, applies middleware where required,
- * and returns the configured Router instance for integration with the main application routes.
- *
- * @example
- * ```typescript
- * import express from "express";
- * import { ReservationsRoutes } from "./reservations.routes";
- *
- * const app = express();
- * app.use("/api/reservations", ReservationsRoutes.getRoutes());
- * ```
- *
- * @returns {Router} A fully configured Express Router for reservation management.
- */
 export class ReservationsRoutes {
   static getRoutes(): Router {
     const router = Router();

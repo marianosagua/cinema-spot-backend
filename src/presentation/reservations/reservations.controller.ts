@@ -2,6 +2,18 @@ import { Request, Response } from "express";
 import { handleError } from "../../domain/errors";
 import { ReservationsService } from "./reservations.service";
 
+/**
+ * Controlador de reservas.
+ * Gestiona la consulta, creación y eliminación de reservas de asientos.
+ * Utiliza ReservationsService para la lógica de negocio.
+ *
+ * Métodos:
+ * - getReservations: Lista todas las reservas.
+ * - getReservationById: Obtiene una reserva por ID.
+ * - getReservationsByUser: Lista reservas de un usuario.
+ * - addReservation: Crea una nueva reserva.
+ * - deleteReservation: Elimina una reserva por ID.
+ */
 export class ReservationsController {
   constructor(private reservationsService: ReservationsService) {}
 

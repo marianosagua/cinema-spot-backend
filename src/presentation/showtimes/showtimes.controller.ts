@@ -1,3 +1,16 @@
+/**
+ * Controlador de funciones/horarios.
+ * Gestiona la consulta, creación, actualización y eliminación de funciones de películas.
+ * Utiliza ShowtimesService y CreateShowtimeDto para la lógica de negocio y validación.
+ *
+ * Métodos:
+ * - getShowtimes: Lista todas las funciones.
+ * - getShowtimeById: Obtiene una función por ID.
+ * - getShowtimesByMovie: Lista funciones por película.
+ * - createShowtime: Crea una nueva función validando los datos recibidos.
+ * - updateShowtime: Actualiza una función existente.
+ * - deleteShowtime: Elimina una función por ID.
+ */
 import { Request, Response } from "express";
 import { ShowtimesService } from "./showtimes.service";
 import { handleError } from "../../domain/errors";

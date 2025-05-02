@@ -1,65 +1,43 @@
+/**
+ * Controlador de próximos estrenos.
+ * Permite consultar, crear, actualizar y eliminar próximos estrenos de películas.
+ * Utiliza FutureReleasesService para la lógica de negocio.
+ *
+ * Métodos:
+ * - getFutureReleases: Lista todos los próximos estrenos.
+ * - getFutureReleaseById: Obtiene un próximo estreno por ID.
+ * - createFutureRelease: Crea un nuevo próximo estreno.
+ * - updateFutureRelease: Actualiza un próximo estreno existente.
+ * - deleteFutureRelease: Elimina un próximo estreno.
+ */
+
 import { Request, Response } from "express";
 import { handleError } from "../../domain/errors";
 import { FutureReleasesService } from "./future-releases.service";
 
-/**
- * Controller class for handling HTTP requests related to future movie releases.
- *
- * This class provides methods to process incoming requests and generate appropriate responses
- * for operations on future movie releases data. It relies on FutureReleasesService to perform
- * the actual business logic and data access operations.
- *
- * The controller implements the following operations:
- * - Retrieving all future releases
- * - Retrieving a specific future release by ID
- * - Creating a new future release record
- * - Updating an existing future release
- * - Deleting a future release
- *
- * @remarks
- * All methods utilize the handleError utility to ensure consistent error handling across the application.
- */
 export class FutureReleasesController {
   constructor(private futureReleasesService: FutureReleasesService) {}
 
-  /**
-   * Retrieves all future movie releases.
-   *
-   * @param req - The Express request object
-   * @param res - The Express response object
-   */
   getFutureReleases = async (req: Request, res: Response) => {
     try {
-      const futureReleases =
-        await this.futureReleasesService.getFutureReleases();
+      const futureReleases = await this.futureReleasesService.getFutureReleases();
       res.status(200).json(futureReleases);
     } catch (error) {
       handleError(error, res);
     }
   };
 
-  /**
-   * Retrieves a specific future movie release by its unique identifier.
-   *
-   * @param req - The Express request object containing the release ID as a URL parameter
-   * @param res - The Express response object
-   */
   getFutureReleaseById = async (req: Request, res: Response) => {
     try {
-      const futureRelease =
-        await this.futureReleasesService.getFutureReleaseById(req.params.id);
+      const futureRelease = await this.futureReleasesService.getFutureReleaseById(
+        req.params.id
+      );
       res.status(200).json(futureRelease);
     } catch (error) {
       handleError(error, res);
     }
   };
 
-  /**
-   * Creates a new future movie release record.
-   *
-   * @param req - The Express request object containing the new release data in the body
-   * @param res - The Express response object
-   */
   createFutureRelease = async (req: Request, res: Response) => {
     try {
       const futureRelease =
@@ -73,12 +51,6 @@ export class FutureReleasesController {
     }
   };
 
-  /**
-   * Updates an existing future movie release record.
-   *
-   * @param req - The Express request object containing the release ID as a URL parameter and updated data in the body
-   * @param res - The Express response object
-   */
   updateFutureRelease = async (req: Request, res: Response) => {
     try {
       const futureRelease =
@@ -95,12 +67,6 @@ export class FutureReleasesController {
     }
   };
 
-  /**
-   * Deletes a future movie release record.
-   *
-   * @param req - The Express request object containing the release ID as a URL parameter
-   * @param res - The Express response object
-   */
   deleteFutureRelease = async (req: Request, res: Response) => {
     try {
       await this.futureReleasesService.deleteFutureRelease(req.params.id);

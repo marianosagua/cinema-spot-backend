@@ -2,6 +2,18 @@ import { Request, Response } from "express";
 import { RolesService } from "./roles.service";
 import { handleError } from "../../domain/errors";
 
+/**
+ * Controlador de roles.
+ * Gestiona la asignación, consulta, actualización y eliminación de roles de usuario.
+ * Utiliza RolesService para la lógica de negocio.
+ *
+ * Métodos:
+ * - assignRole: Asigna un rol a un usuario.
+ * - getAllRoles: Lista todos los roles.
+ * - getRoleById: Obtiene un rol por ID.
+ * - updateRole: Actualiza un rol existente.
+ * - deleteRole: Elimina un rol por ID.
+ */
 export class RolesController {
   constructor(private rolesService: RolesService) {}
 

@@ -1,41 +1,17 @@
+// Entidad que representa una película en el dominio de la aplicación.
+// Incluye validaciones y método de construcción a partir de datos crudos.
 import { prismaClient } from "../../data/postgres/client-connection";
-import { Movie } from "../../interfaces/movie";
 import { CustomError } from "../errors";
+import { Showtime } from "../../interfaces";
 
-/**
- * Represents a movie entity with its associated properties, including title, description, poster, and category.
- *
- * @remarks
- * The MovieEntity class encapsulates the logic for validating input data and creating a movie record.
- * The static create method validates that all required properties (title, description, poster, and category)
- * are provided in the data object. It then retrieves the corresponding category from the database using the Prisma Client.
- *
- * If any required field is missing, a custom BadRequest error is thrown. Likewise, if the category is not found
- * in the database, an Error is thrown to indicate the absence of a valid category. On successful validation and retrieval
- * of the category, the method returns an object adhering to the expected Movie interface, where the category is represented
- * by its database identifier.
- *
- * @example
- * ```typescript
- * const movieData = {
- *   id: 1,
- *   title: "Inception",
- *   description: "A mind-bending thriller about dream invasion.",
- *   poster: "https://example.com/inception-poster.jpg",
- *   category: "Science Fiction"
- * };
- *
- * try {
- *   const movie = await MovieEntity.create(movieData);
- *   console.log("Movie created successfully:", movie);
- * } catch (error) {
- *   console.error("Error creating movie:", error);
- * }
- * ```
- *
- * @public
- */
 export class MovieEntity {
+  /**
+   * @param id Identificador único de la película
+   * @param title Título de la película
+   * @param description Descripción de la película
+   * @param poster URL del póster de la película
+   * @param category Categoría (nombre o id) de la película
+   */
   constructor(
     public id: number,
     public title: string,
@@ -44,63 +20,52 @@ export class MovieEntity {
     public category: string
   ) {}
 
+  /**
+   * Crea una instancia de Movie validando los datos y resolviendo la categoría.
+   * @param data Objeto con los datos de la película
+   * @returns Objeto Movie validado y listo para usar
+   * @throws CustomError si falta algún campo obligatorio
+   */
   static async create(data: { [key: string]: any }): Promise<Movie> {
-    let category;
-
-    if (!data.title) {
-      throw CustomError.badRequest("Title is required");
-    }
-
-    if (!data.description) {
-      throw CustomError.badRequest("Description is required");
-    }
-
-    if (!data.poster) {
-      throw CustomError.badRequest("Poster is required");
-    }
-
-    if (!data.category) {
-      throw CustomError.badRequest("Category is required");
-    }
-
-    category = await prismaClient.categories.findFirst({
+    const category = await prismaClient.categories.findFirst({
       where: {
-        name: data.category,
+        id: data.category,
       },
     });
 
-    if (!category) {
-      throw new Error("Category not found in DB");
+    if(!data.title){
+      throw CustomError.badRequest("Title is required");
     }
-
+    if(!data.description){
+      throw CustomError.badRequest("Description is required");
+    }
+    if(!data.poster){
+      throw CustomError.badRequest("Poster is required");
+    }
+    if(!data.category){
+      throw CustomError.badRequest("Category is required");
+    }
     if(!data.duration){
       throw CustomError.badRequest("Duration is required");
     }
-
     if(!data.banner){
       throw CustomError.badRequest("Banner is required");
     }
-
     if(!data.synopsis){
       throw CustomError.badRequest("Synopsis is required");
     }
-
     if(!data.trailer){
       throw CustomError.badRequest("Trailer is required");
     }
-
     if(!data.director){
       throw CustomError.badRequest("Director is required");
     }
-
     if(!data.rating){
       throw CustomError.badRequest("Rating is required");
     }
-
     if(!data.review){
       throw CustomError.badRequest("Review is required");
     }
-
     if(!data.showtimes){
       throw CustomError.badRequest("Showtimes is required");
     }
@@ -121,4 +86,21 @@ export class MovieEntity {
       showtimes: data.showtimes,
     };
   }
+}
+
+// Interfaz que define la estructura de un objeto Movie
+interface Movie {
+  id: number;
+  title: string;
+  description: string;
+  poster: string;
+  category: number;
+  duration: string;
+  banner: string;
+  synopsis: string;
+  trailer: string;
+  director: string;
+  rating: string;
+  review: number;
+  showtimes: Showtime[];
 }

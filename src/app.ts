@@ -1,11 +1,9 @@
 /**
- * Entry point for the CinemaSpot backend application.
+ * app.ts - Punto de entrada principal de la aplicación CinemaSpot Backend
  *
- * This file bootstraps the Express server application by initializing the server
- * with the appropriate configuration and routes.
- *
- * @file This file is the main entry point that starts the CinemaSpot backend server.
- * @author Mariano Sagua
+ * Este archivo es responsable de inicializar el servidor de la aplicación.
+ * Importa las configuraciones necesarias y arranca el servidor HTTP
+ * con las rutas definidas en el sistema.
  */
 
 import { envs } from "./config/envs";
@@ -13,19 +11,16 @@ import { AppRoutes } from "./presentation/app.routes";
 import { Server } from "./presentation/server";
 
 /**
- * Initializes and starts the server application.
+ * Función principal que inicializa la aplicación
  *
- * Creates a new Server instance configured with:
- * - Port: Retrieved from environment variables via the envs object
- * - Routes: Configured API routes from the AppRoutes static method
- *
- * @function main
- * @returns {void}
+ * @description Crea una instancia del servidor con la configuración del puerto
+ * desde las variables de entorno y configura las rutas de la aplicación.
+ * Finalmente inicia el servidor para comenzar a escuchar peticiones.
  */
 const main = () => {
   const server = new Server({ port: envs.port, routes: AppRoutes.getRoutes() });
   server.start();
 };
 
-// Bootstrap the application by executing the main function
+// Ejecuta la función principal para iniciar la aplicación
 main();

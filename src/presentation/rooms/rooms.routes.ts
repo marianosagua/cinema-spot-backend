@@ -1,25 +1,28 @@
+/**
+ * Rutas del módulo de salas (Rooms)
+ *
+ * Este archivo define las rutas para la gestión de salas de cine.
+ * Incluye:
+ *   - Listado de salas
+ *   - Consulta de sala por ID
+ *   - Creación, actualización y eliminación de salas (solo admin)
+ *
+ * Middlewares:
+ *   - AuthMiddleware.isAdmin: Protege las rutas de administración de salas.
+ *
+ * Estructura de rutas:
+ *   GET    /        -> Listar todas las salas
+ *   GET    /:id     -> Obtener sala por ID
+ *   POST   /        -> Crear sala (admin)
+ *   PUT    /:id     -> Actualizar sala (admin)
+ *   DELETE /:id     -> Eliminar sala (admin)
+ */
+
 import { Router } from "express";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
 import { RoomsController } from "./rooms.controller";
 import { RoomsService } from "./rooms.service";
 
-/**
- * Configures and returns an Express router for managing room-related endpoints.
- *
- * This static method instantiates the necessary service and controller objects, and sets up the following RESTful endpoints:
- *
- * - GET "/"         : Retrieves a list of all available rooms.
- * - GET "/:id"      : Retrieves details of a specific room by its unique identifier.
- * - POST "/"        : Creates a new room. This route is secured with admin authorization.
- * - PUT "/:id"      : Updates an existing room identified by its unique identifier. This route is secured with admin authorization.
- * - DELETE "/:id"   : Deletes a room specified by its unique identifier. This route is secured with admin authorization.
- *
- * The admin authorization is enforced using the AuthMiddleware on routes that modify data (POST, PUT, DELETE).
- *
- * @public
- * @static
- * @returns {Router} A fully configured Express Router instance containing all room management routes.
- */
 export class RoomsRoutes {
   static getRoutes(): Router {
     const router = Router();
