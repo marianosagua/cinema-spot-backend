@@ -35,31 +35,22 @@ export class AppRoutes {
     const router = Router();
 
     /**
-     * Ruta raíz de la API que devuelve un mensaje de bienvenida
-     */
-    router.get("/", (req, res) => {
-      res.status(200).json({
-        msg: "API for Cinema",
-      });
-    });
-
-    /**
      * Registro de rutas específicas para cada módulo de la aplicación
      *
      * Cada módulo tiene su propio Router que maneja las rutas específicas
      * relacionadas con esa funcionalidad (autenticación, usuarios, salas, etc.)
      */
-    router.use("/api/auth", AuthRoutes.routes);
-    router.use("/api/users", UsersRoutes.routes);
-    router.use("/api/rooms", RoomsRoutes.routes);
-    router.use("/api/categories", CategoriesRoutes.routes);
-    router.use("/api/movies", MoviesRoutes.routes);
-    router.use("/api/roles", RolesRoutes.routes);
-    router.use("/api/showtimes", ShowtimesRoutes.routes);
-    router.use("/api/seats", SeatsRoutes.routes);
-    router.use("/api/reservations", ReservationsRoutes.routes);
-    router.use("/api/future-releases", FutureReleasesRoutes.routes);
-    router.use("/api/movie-cast", MovieCastRoutes.routes);
+    router.use("/api/auth", AuthRoutes.getRoutes());
+    router.use("/api/users", UsersRoutes.getRoutes());
+    router.use("/api/rooms", RoomsRoutes.getRoutes());
+    router.use("/api/categories", CategoriesRoutes.getRoutes());
+    router.use("/api/movies", MoviesRoutes.getRoutes());
+    router.use("/api/roles", RolesRoutes.getRoutes());
+    router.use("/api/showtimes", ShowtimesRoutes.getRoutes());
+    router.use("/api/seats", SeatsRoutes.getRoutes());
+    router.use("/api/reservations", ReservationsRoutes.getRoutes());
+    router.use("/api/future-releases", FutureReleasesRoutes.getRoutes());
+    router.use("/api/movie-cast", MovieCastRoutes.getRoutes());
 
     return router;
   }
