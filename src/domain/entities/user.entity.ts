@@ -82,7 +82,7 @@ export class UserEntity {
       last_name,
       email,
       password,
-      role: roles?.id || role,
+      role: roles?.name,
       created_at: created_at || userData?.created_at || new Date(),
       updated_at: updated_at || userData?.updated_at || new Date(),
       email_validated: email_validated ?? userData?.email_validated ?? false,
