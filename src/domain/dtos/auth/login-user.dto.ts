@@ -22,19 +22,19 @@ export class LoginUserDto {
     const { email, password } = object;
 
     if (!email) {
-      return ["Email is required"];
+      return ["El email es requerido"];
     }
 
     if (!password) {
-      return ["Password is required"];
+      return ["La contraseña es requerida"];
     }
 
     if (!regularExps.email.test(email)) {
-      return ["Email is not valid"];
+      return ["El email no es válido"];
     }
 
     if (password.length < 6) {
-      return ["Password too short"];
+      return ["La contraseña es muy corta"];
     }
 
     return [undefined, new LoginUserDto(email, password)];

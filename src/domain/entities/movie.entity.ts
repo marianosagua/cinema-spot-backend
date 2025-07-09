@@ -34,40 +34,40 @@ export class MovieEntity {
     });
 
     if(!data.title){
-      throw CustomError.badRequest("Title is required");
+      throw CustomError.badRequest("El título es requerido");
     }
     if(!data.description){
-      throw CustomError.badRequest("Description is required");
+      throw CustomError.badRequest("La descripción es requerida");
     }
     if(!data.poster){
-      throw CustomError.badRequest("Poster is required");
+      throw CustomError.badRequest("El póster es requerido");
     }
     if(!data.category){
-      throw CustomError.badRequest("Category is required");
+      throw CustomError.badRequest("La categoría es requerida");
     }
     if(!data.duration){
-      throw CustomError.badRequest("Duration is required");
+      throw CustomError.badRequest("La duración es requerida");
     }
     if(!data.banner){
-      throw CustomError.badRequest("Banner is required");
+      throw CustomError.badRequest("El banner es requerido");
     }
     if(!data.synopsis){
-      throw CustomError.badRequest("Synopsis is required");
+      throw CustomError.badRequest("La sinopsis es requerida");
     }
     if(!data.trailer){
-      throw CustomError.badRequest("Trailer is required");
+      throw CustomError.badRequest("El trailer es requerido");
     }
     if(!data.director){
-      throw CustomError.badRequest("Director is required");
+      throw CustomError.badRequest("El director es requerido");
     }
     if(!data.rating){
-      throw CustomError.badRequest("Rating is required");
+      throw CustomError.badRequest("La calificación es requerida");
     }
     if(!data.review){
-      throw CustomError.badRequest("Review is required");
+      throw CustomError.badRequest("La reseña es requerida");
     }
     if(!data.showtimes){
-      throw CustomError.badRequest("Showtimes is required");
+      throw CustomError.badRequest("Los horarios son requeridos");
     }
 
     return {

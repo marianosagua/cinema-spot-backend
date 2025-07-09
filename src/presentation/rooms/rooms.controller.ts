@@ -38,7 +38,7 @@ export class RoomsController {
   createRoom = async (req: Request, res: Response) => {
     try {
       const room = await this.roomsService.createRoom(req.body);
-      res.status(201).json({ message: "Room created successfully", room });
+      res.status(201).json({ message: "Sala creada exitosamente", room });
     } catch (error) {
       handleError(error, res);
     }
@@ -47,7 +47,7 @@ export class RoomsController {
   updateRoom = async (req: Request, res: Response) => {
     try {
       const room = await this.roomsService.updateRoom(req.params.id, req.body);
-      res.status(200).json({ message: "Room updated successfully", room });
+      res.status(200).json({ message: "Sala actualizada exitosamente", room });
     } catch (error) {
       handleError(error, res);
     }
@@ -56,7 +56,7 @@ export class RoomsController {
   deleteRoom = async (req: Request, res: Response) => {
     try {
       await this.roomsService.deleteRoom(req.params.id);
-      res.status(200).json({ message: "Room deleted successfully" });
+      res.status(200).json({ message: "Sala eliminada exitosamente" });
     } catch (error) {
       handleError(error, res);
     }

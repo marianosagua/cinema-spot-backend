@@ -48,7 +48,7 @@ export class MovieCastController {
   create = async (req: Request, res: Response) => {
     try {
       const cast = await this.movieCastService.create(req.body);
-      res.status(201).json({ message: "Movie cast created successfully", cast });
+      res.status(201).json({ message: "Reparto de película creado exitosamente", cast });
     } catch (error) {
       handleError(error, res);
     }
@@ -58,7 +58,7 @@ export class MovieCastController {
     try {
       const { movie, actor } = req.params;
       await this.movieCastService.delete(Number(movie), Number(actor));
-      res.status(200).json({ message: "Movie cast deleted successfully" });
+      res.status(200).json({ message: "Reparto de película eliminado exitosamente" });
     } catch (error) {
       handleError(error, res);
     }

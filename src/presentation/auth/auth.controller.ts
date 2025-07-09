@@ -77,7 +77,7 @@ export class AuthController {
     }
     try {
       await this.authService.forgotPassword(forgotDto!);
-      res.status(200).json({ message: "Password reset email sent" });
+      res.status(200).json({ message: "Email de restablecimiento de contraseña enviado" });
     } catch (error) {
       handleError(error, res);
     }
@@ -95,7 +95,7 @@ export class AuthController {
     try {
       await this.authService.resetPassword(resetDto!);
       // Redirige a la vista de éxito
-      res.redirect("/api/auth/reset-password-success");
+      res.redirect("/api/auth/restablecer-password-exito");
     } catch (error) {
       handleError(error, res);
     }

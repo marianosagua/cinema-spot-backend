@@ -29,27 +29,27 @@ export class RegisterUserDto {
     const { email, password, first_name, last_name } = object;
 
     if (!first_name) {
-      return ["First name is required"];
+      return ["El nombre es requerido"];
     }
 
     if (!last_name) {
-      return ["Last name is required"];
+      return ["El apellido es requerido"];
     }
 
     if (!email) {
-      return ["Email is required"];
+      return ["El email es requerido"];
     }
 
     if (!password) {
-      return ["Password is required"];
+      return ["La contraseña es requerida"];
     }
 
     if (!regularExps.email.test(email)) {
-      return ["Email is not valid"];
+      return ["El email no es válido"];
     }
 
     if (password.length < 6) {
-      return ["Password too short"];
+      return ["La contraseña es muy corta"];
     }
 
     return [

@@ -31,13 +31,13 @@ export class AuthRoutes {
     const authService = new AuthService(emailService);
     const authController = new AuthController(authService);
 
-    router.post("/login", authController.login);
+    router.post("/iniciar-sesion", authController.login);
     router.post("/registro", authController.register);
-    router.get("/validate-email/:token", authController.validateEmail);
-    router.post("/forgot-password", authController.forgotPassword);
-    router.post("/reset-password/:token", authController.resetPassword);
-    router.get("/reset-password/:token", authController.getResetPasswordForm);
-    router.get("/reset-password-success", authController.resetPasswordSuccess);
+    router.get("/validar-correo/:token", authController.validateEmail);
+    router.post("/olvide-password", authController.forgotPassword);
+    router.post("/restablecer-password/:token", authController.resetPassword);
+    router.get("/restablecer-password/:token", authController.getResetPasswordForm);
+    router.get("/restablecer-password-exito", authController.resetPasswordSuccess);
 
     return router;
   }

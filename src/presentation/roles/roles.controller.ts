@@ -22,7 +22,7 @@ export class RolesController {
 
     try {
       await this.rolesService.assignRole(userId, newRole);
-      res.status(200).json({ message: "Role assigned !!!" });
+      res.status(200).json({ message: "Rol asignado exitosamente" });
     } catch (error) {
       handleError(error, res);
     }
@@ -65,7 +65,7 @@ export class RolesController {
 
     try {
       await this.rolesService.deleteRole(Number(id));
-      res.status(200).json({ message: "Role deleted !!!" });
+      res.status(200).json({ message: "Rol eliminado exitosamente" });
     } catch (error) {
       handleError(error, res);
     }

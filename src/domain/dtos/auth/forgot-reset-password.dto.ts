@@ -19,8 +19,8 @@ export class ForgotPasswordDto {
    */
   static create(object: { [key: string]: any }): [string?, ForgotPasswordDto?] {
     const { email } = object;
-    if (!email) return ["Email is required"];
-    if (!regularExps.email.test(email)) return ["Email is not valid"];
+    if (!email) return ["El email es requerido"];
+    if (!regularExps.email.test(email)) return ["El email no es válido"];
     return [undefined, new ForgotPasswordDto(email)];
   }
 }
@@ -41,9 +41,9 @@ export class ResetPasswordDto {
    */
   static create(object: { [key: string]: any }): [string?, ResetPasswordDto?] {
     const { token, password } = object;
-    if (!token) return ["Token is required"];
-    if (!password) return ["Password is required"];
-    if (password.length < 6) return ["Password too short"];
+    if (!token) return ["El token es requerido"];
+    if (!password) return ["La contraseña es requerida"];
+    if (password.length < 6) return ["La contraseña es muy corta"];
     return [undefined, new ResetPasswordDto(token, password)];
   }
 }

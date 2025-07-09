@@ -19,5 +19,5 @@ export const handleError = (error: unknown, res: Response) => {
   }
 
   console.log(`${error}`);
-  return res.status(500).json({ error: "Internal server error" });
+  return res.status(500).json({ error: "Error interno del servidor" });
 };

@@ -258,7 +258,7 @@ export class MoviesService {
     });
 
     if (!deletedMovie) {
-      throw new Error("Movie not deleted");
+      throw new Error("La película no fue eliminada");
     }
   }
 }

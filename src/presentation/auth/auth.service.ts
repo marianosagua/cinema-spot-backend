@@ -118,7 +118,7 @@ export class AuthService {
     const token = JwtAdapter.generateToken({ email });
     if (!token) throw new Error("Error al generar el token");
 
-    const url = `${envs.app_url}/api/auth/validate-email/${token}`;
+    const url = `${envs.app_url}/api/auth/validar-correo/${token}`;
     const message = await this.compileTemplate("emailValidation", {
       validationUrl: url,
       email,
@@ -169,7 +169,7 @@ export class AuthService {
     const token = JwtAdapter.generateToken({ email: user.email }, "1h");
     if (!token) throw new Error("Error al generar el token");
 
-    const url = `${envs.app_url}/api/auth/reset-password/${token}`;
+    const url = `${envs.app_url}/api/auth/restablecer-password/${token}`;
     const message = await this.compileTemplate("resetPassword", {
       resetUrl: url,
       email: user.email,

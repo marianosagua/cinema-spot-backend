@@ -38,7 +38,7 @@ export class CategoriesController {
   createCategory = async (req: Request, res: Response) => {
     try {
       const category = await this.categoriesService.createCategory(req.body);
-      res.status(201).json({ message: "Category created successfully", category });
+      res.status(201).json({ message: "Categoría creada exitosamente", category });
     } catch (error) {
       handleError(error, res);
     }
@@ -47,7 +47,7 @@ export class CategoriesController {
   updateCategory = async (req: Request, res: Response) => {
     try {
       const category = await this.categoriesService.updateCategory(Number(req.params.id), req.body);
-      res.status(200).json({ message: "Category updated successfully", category });
+      res.status(200).json({ message: "Categoría actualizada exitosamente", category });
     } catch (error) {
       handleError(error, res);
     }
@@ -56,7 +56,7 @@ export class CategoriesController {
   deleteCategory = async (req: Request, res: Response) => {
     try {
       await this.categoriesService.deleteCategory(Number(req.params.id));
-      res.status(200).json({ message: "Category deleted successfully" });
+      res.status(200).json({ message: "Categoría eliminada exitosamente" });
     } catch (error) {
       handleError(error, res);
     }

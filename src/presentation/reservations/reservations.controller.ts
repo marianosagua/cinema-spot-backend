@@ -51,7 +51,7 @@ export class ReservationsController {
   addReservation = async (req: Request, res: Response) => {
     try {
       await this.reservationsService.addReservation(req.body);
-      res.json({ message: "Reservation added successfully" });
+      res.json({ message: "Reserva agregada exitosamente" });
     } catch (error) {
       handleError(error, res);
     }
@@ -60,7 +60,7 @@ export class ReservationsController {
   deleteReservation = async (req: Request, res: Response) => {
     try {
       await this.reservationsService.deleteReservation(req.params.id);
-      res.json({ message: "Reservation deleted successfully" });
+      res.json({ message: "Reserva eliminada exitosamente" });
     } catch (error) {
       handleError(error, res);
     }
