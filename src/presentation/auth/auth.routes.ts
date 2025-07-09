@@ -7,7 +7,7 @@
  *
  * Estructura de rutas:
  *   POST   /login                    -> Iniciar sesión con email y contraseña
- *   POST   /register                 -> Registrar un nuevo usuario
+ *   POST   /registro                 -> Registrar un nuevo usuario
  *   GET    /validate-email/:token    -> Validar el correo electrónico mediante token
  *   POST   /forgot-password          -> Solicitar recuperación de contraseña (envía email)
  *   POST   /reset-password/:token    -> Restablecer contraseña usando token recibido por email
@@ -32,7 +32,7 @@ export class AuthRoutes {
     const authController = new AuthController(authService);
 
     router.post("/login", authController.login);
-    router.post("/register", authController.register);
+    router.post("/registro", authController.register);
     router.get("/validate-email/:token", authController.validateEmail);
     router.post("/forgot-password", authController.forgotPassword);
     router.post("/reset-password/:token", authController.resetPassword);

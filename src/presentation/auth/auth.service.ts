@@ -39,15 +39,15 @@ export class AuthService {
       where: { email: loginDto.email },
     });
 
-    if (!user) throw CustomError.unauthorized("User not found");
+    if (!user) throw CustomError.unauthorized("Usuario no encontrado");
 
     if (!bcryptAdapter.compare(loginDto.password, user.password))
-      throw CustomError.unauthorized("Invalid email or password");
+      throw CustomError.unauthorized("Email o contraseña incorrectos");
 
     const { password, ...userData } = await UserEntity.create(user);
 
     const token = JwtAdapter.generateToken({ id: user.id }, "24h");
-    if (!token) throw new Error("Error generating token");
+    if (!token) throw new Error("Error al generar el token");
 
     return {
       user: userData,
@@ -69,7 +69,7 @@ export class AuthService {
       where: { email: registerDto.email },
     });
 
-    if (existUser) throw CustomError.unauthorized("User already exists");
+    if (existUser) throw CustomError.unauthorized("Usuario ya existe");
 
     const data = { ...registerDto };
     data.password = bcryptAdapter.hash(data.password);
@@ -81,7 +81,7 @@ export class AuthService {
     const { password, ...userEntity } = await UserEntity.create(user);
 
     const token = JwtAdapter.generateToken({ id: user.id }, "24h");
-    if (!token) throw new Error("Error generating token");
+    if (!token) throw new Error("Error al generar el token");
 
     return { user: userEntity, token };
   }
@@ -116,7 +116,7 @@ export class AuthService {
    */
   private async sendEmailConfirmation(email: string): Promise<void> {
     const token = JwtAdapter.generateToken({ email });
-    if (!token) throw new Error("Error generating token");
+    if (!token) throw new Error("Error al generar el token");
 
     const url = `${envs.app_url}/api/auth/validate-email/${token}`;
     const message = await this.compileTemplate("emailValidation", {
@@ -126,10 +126,10 @@ export class AuthService {
 
     const isSent = await this.emailService.sendEmail({
       email,
-      subject: "Validate your email",
+      subject: "Valida tu email",
       message,
     });
-    if (!isSent) throw new Error("Error sending email");
+    if (!isSent) throw new Error("Error al enviar el email");
   }
 
   /**
@@ -140,13 +140,13 @@ export class AuthService {
    */
   public async validateEmail(token: string): Promise<void> {
     const payload = JwtAdapter.verifyToken(token);
-    if (!payload) throw new Error("Invalid token");
+    if (!payload) throw new Error("Token inválido");
 
     const { email } = payload as { email: string };
-    if (!email) throw new Error("Email not in token");
+    if (!email) throw new Error("Email no está en el token");
 
     const user = await prismaClient.users.findFirst({ where: { email } });
-    if (!user) throw CustomError.unauthorized("User not found");
+    if (!user) throw CustomError.unauthorized("Usuario no encontrado");
 
     await prismaClient.users.update({
       data: { email_validated: true },
@@ -164,10 +164,10 @@ export class AuthService {
     const user = await prismaClient.users.findFirst({
       where: { email: dto.email },
     });
-    if (!user) throw CustomError.unauthorized("User not found");
+    if (!user) throw CustomError.unauthorized("Usuario no encontrado");
 
     const token = JwtAdapter.generateToken({ email: user.email }, "1h");
-    if (!token) throw new Error("Error generating token");
+    if (!token) throw new Error("Error al generar el token");
 
     const url = `${envs.app_url}/api/auth/reset-password/${token}`;
     const message = await this.compileTemplate("resetPassword", {
@@ -180,7 +180,7 @@ export class AuthService {
       subject: "Restablece tu contraseña",
       message,
     });
-    if (!isSent) throw new Error("Error sending email");
+    if (!isSent) throw new Error("Error al enviar el email");
   }
 
   /**
@@ -191,13 +191,13 @@ export class AuthService {
    */
   public async resetPassword(dto: ResetPasswordDto): Promise<void> {
     const payload = JwtAdapter.verifyToken(dto.token);
-    if (!payload) throw new Error("Invalid or expired token");
+    if (!payload) throw new Error("Token inválido o expirado");
 
     const { email } = payload as { email: string };
-    if (!email) throw new Error("Email not in token");
+    if (!email) throw new Error("Email no está en el token");
 
     const user = await prismaClient.users.findFirst({ where: { email } });
-    if (!user) throw CustomError.unauthorized("User not found");
+    if (!user) throw CustomError.unauthorized("Usuario no encontrado");
 
     const hashedPassword = bcryptAdapter.hash(dto.password);
 

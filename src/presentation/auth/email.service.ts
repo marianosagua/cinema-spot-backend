@@ -36,7 +36,7 @@ export class EmailService {
 
     try {
       await resend.emails.send({
-        from: "Movie Reservation System <onboarding@resend.dev>",
+        from: "CinemaSpot <onboarding@resend.dev>",
         to: [email],
         subject,
         html: message,
