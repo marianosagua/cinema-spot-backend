@@ -13,3 +13,5 @@ export type * from "./seat";
 export type * from "./room";
 
 export type * from "./movie-cast";
+
+export type * from "./actor";

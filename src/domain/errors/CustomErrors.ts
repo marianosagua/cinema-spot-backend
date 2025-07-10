@@ -50,4 +50,13 @@ export class CustomError extends Error {
   static notFound(message: string) {
     return new CustomError(404, message);
   }
+
+  /**
+   * Error 500 - Error interno del servidor
+   * @param message Mensaje descriptivo
+   * @returns Instancia de CustomError
+   */
+  static internal(message: string) {
+    return new CustomError(500, message);
+  }
 }

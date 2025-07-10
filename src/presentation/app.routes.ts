@@ -1,9 +1,8 @@
 /**
  * Configuración central de rutas para la aplicación CinemaSpot
  *
- * Este archivo actúa como punto central para la configuración y registro
- * de todas las rutas de la API del backend. Reúne todas las rutas específicas
- * de cada módulo y las expone a través de un único Router de Express.
+ * Este archivo centraliza todas las rutas de la API del backend.
+ * Cada línea registra un módulo específico con su prefijo de ruta.
  */
 
 import { Router } from "express";
@@ -18,39 +17,38 @@ import { SeatsRoutes } from "./seats/seats.routes";
 import { ReservationsRoutes } from "./reservations/reservations.routes";
 import { FutureReleasesRoutes } from "./future-releases/future-releases.routes";
 import { MovieCastRoutes } from "./movie-cast/movie-cast.routes";
+import { ActorsRoutes } from "./actors/actors.routes";
 
 /**
- * Clase AppRoutes que centraliza todas las rutas de la aplicación
- *
- * Esta clase estática proporciona un método que configura y devuelve
- * un Router de Express con todas las rutas de la API organizadas por módulos.
+ * Clase que centraliza todas las rutas de la aplicación
  */
 export class AppRoutes {
   /**
-   * Método estático que configura y devuelve todas las rutas de la aplicación
-   *
-   * @returns Router de Express con todas las rutas registradas
+   * Configura y devuelve todas las rutas de la aplicación
+   * @returns Router con todas las rutas registradas
    */
   static getRoutes(): Router {
     const router = Router();
 
-    /**
-     * Registro de rutas específicas para cada módulo de la aplicación
-     *
-     * Cada módulo tiene su propio Router que maneja las rutas específicas
-     * relacionadas con esa funcionalidad (autenticación, usuarios, salas, etc.)
-     */
-    router.use("/api/auth", AuthRoutes.getRoutes());
-    router.use("/api/users", UsersRoutes.getRoutes());
-    router.use("/api/rooms", RoomsRoutes.getRoutes());
-    router.use("/api/categories", CategoriesRoutes.getRoutes());
-    router.use("/api/movies", MoviesRoutes.getRoutes());
-    router.use("/api/roles", RolesRoutes.getRoutes());
-    router.use("/api/showtimes", ShowtimesRoutes.getRoutes());
-    router.use("/api/seats", SeatsRoutes.getRoutes());
-    router.use("/api/reservations", ReservationsRoutes.getRoutes());
-    router.use("/api/future-releases", FutureReleasesRoutes.getRoutes());
-    router.use("/api/movie-cast", MovieCastRoutes.getRoutes());
+    // Autenticación y gestión de usuarios
+    router.use("/api/auth", AuthRoutes.getRoutes()); // Login, registro, validación de email, reset password
+    router.use("/api/users", UsersRoutes.getRoutes()); // CRUD de usuarios, perfiles, gestión de cuentas
+    router.use("/api/roles", RolesRoutes.getRoutes()); // Gestión de roles y permisos
+
+    // Gestión de contenido cinematográfico
+    router.use("/api/movies", MoviesRoutes.getRoutes()); // CRUD de películas, información, trailers
+    router.use("/api/categories", CategoriesRoutes.getRoutes()); // Géneros cinematográficos
+    router.use("/api/actors", ActorsRoutes.getRoutes()); // CRUD de actores (solo admin)
+    router.use("/api/movie-cast", MovieCastRoutes.getRoutes()); // Relación películas-actores
+    router.use("/api/future-releases", FutureReleasesRoutes.getRoutes()); // Próximos estrenos
+
+    // Gestión de salas y proyecciones
+    router.use("/api/rooms", RoomsRoutes.getRoutes()); // CRUD de salas de cine
+    router.use("/api/showtimes", ShowtimesRoutes.getRoutes()); // Horarios de proyección
+    router.use("/api/seats", SeatsRoutes.getRoutes()); // Gestión de asientos por sala
+
+    // Sistema de reservas
+    router.use("/api/reservations", ReservationsRoutes.getRoutes()); // Reservas de asientos para funciones
 
     return router;
   }

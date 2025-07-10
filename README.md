@@ -9,6 +9,7 @@ CinemaSpot es una aplicación backend que gestiona reservas de películas, auten
 - 🔐 **Autenticación Completa**: Inicio de sesión, registro, validación de email, recuperación de contraseña
 - 👥 **Gestión de Roles**: Administrador y usuario con permisos diferenciados
 - 🎬 **Gestión de Películas**: Operaciones CRUD completas con categorías y reparto
+- 🎭 **Gestión de Actores**: CRUD completo de actores con búsqueda por nombre
 - 🏛️ **Gestión de Salas**: Configuración de salas de cine y asientos
 - ⏰ **Horarios de Proyección**: Programación de funciones de películas
 - 🎟️ **Sistema de Reservas**: Reserva de asientos para funciones específicas
@@ -227,6 +228,15 @@ src/
 - `POST /api/movie-cast`: Agregar una nueva relación película-actor (Solo administrador).
 - `DELETE /api/movie-cast/:movie/:actor`: Eliminar una relación película-actor (Solo administrador).
 
+### 🎭 Actores
+
+- `GET /api/actors`: Obtener todos los actores (Solo administrador).
+- `GET /api/actors/search?q=termino`: Buscar actores por nombre o apellido (Solo administrador).
+- `GET /api/actors/:id`: Obtener un actor por ID (Solo administrador).
+- `POST /api/actors`: Crear un nuevo actor (Solo administrador).
+- `PUT /api/actors/:id`: Actualizar un actor existente (Solo administrador).
+- `DELETE /api/actors/:id`: Eliminar un actor (Solo administrador).
+
 ## 🔒 Autenticación y Autorización
 
 ### Roles de Usuario
@@ -235,6 +245,11 @@ src/
 
 ### Endpoints Protegidos
 Los endpoints marcados con "(Solo administrador)" requieren autenticación con rol de administrador.
+
+**Módulos completamente protegidos:**
+- **Actores**: Todas las operaciones requieren permisos de administrador
+- **Roles**: Gestión completa solo para administradores
+- **Usuarios**: Consultas y gestión solo para administradores
 
 ### Headers de Autenticación
 ```http
@@ -261,6 +276,52 @@ La aplicación incluye configuración de CORS para permitir peticiones desde el 
 - **Servicio**: Resend
 - **Templates**: Handlebars
 - **Personalización**: Variables dinámicas
+
+## 📝 Ejemplos de Uso
+
+### Crear un Actor
+```bash
+curl -X POST http://localhost:3000/api/actors \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <token_admin>" \
+  -d '{
+    "first_name": "Tom",
+    "last_name": "Hanks",
+    "age": 67,
+    "nationality": "Estadounidense"
+  }'
+```
+
+### Buscar Actores
+```bash
+curl -X GET "http://localhost:3000/api/actors/search?q=tom" \
+  -H "Authorization: Bearer <token_admin>"
+```
+
+### Obtener Todos los Actores
+```bash
+curl -X GET http://localhost:3000/api/actors \
+  -H "Authorization: Bearer <token_admin>"
+```
+
+### Estructura de Datos de Actor
+```json
+{
+  "id": 1,
+  "first_name": "Tom",
+  "last_name": "Hanks",
+  "age": 67,
+  "nationality": "Estadounidense",
+  "created_at": "2024-01-15T10:30:00Z",
+  "updated_at": "2024-01-15T10:30:00Z"
+}
+```
+
+**Validaciones:**
+- `first_name`: String, 2-50 caracteres, requerido
+- `last_name`: String, 2-50 caracteres, requerido
+- `age`: Number, 1-120, requerido
+- `nationality`: String, 2-50 caracteres, requerido
 
 ## 🚀 Despliegue
 
