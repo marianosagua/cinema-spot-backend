@@ -6,47 +6,59 @@ CinemaSpot es una aplicación backend que gestiona reservas de películas, auten
 
 ## ✨ Características
 
-- Autenticación de Usuarios (Inicio de Sesión, Registro, Validación de Correo)
-- Gestión de Roles (Administrador, Usuario)
-- Gestión de Películas (operaciones CRUD)
-- Gestión de Salas y Asientos
-- Gestión de Horarios de Proyección
-- Gestión de Reservas
-- Notificaciones por Correo
-- Gestión de Próximos Estrenos
+- 🔐 **Autenticación Completa**: Inicio de sesión, registro, validación de email, recuperación de contraseña
+- 👥 **Gestión de Roles**: Administrador y usuario con permisos diferenciados
+- 🎬 **Gestión de Películas**: Operaciones CRUD completas con categorías y reparto
+- 🏛️ **Gestión de Salas**: Configuración de salas de cine y asientos
+- ⏰ **Horarios de Proyección**: Programación de funciones de películas
+- 🎟️ **Sistema de Reservas**: Reserva de asientos para funciones específicas
+- 📧 **Notificaciones por Email**: Validación de cuenta y recuperación de contraseña
+- 🍿 **Próximos Estrenos**: Gestión de películas próximas a estrenar
+- 🛡️ **Seguridad**: JWT, encriptación de contraseñas, CORS configurado
+- 🌐 **API RESTful**: Endpoints bien estructurados y documentados
 
 ## 🛠 Tecnologías Utilizadas
 
-- **TypeScript**: Para JavaScript con tipado seguro.
-- **Express.js**: Framework web para Node.js.
-- **Prisma ORM**: ORM para base de datos PostgreSQL.
-- **PostgreSQL**: Base de datos relacional.
-- **JWT**: JSON Web Tokens para autenticación.
-- **Bcrypt**: Hash de contraseñas.
-- **Handlebars**: Plantillas HTML para correos.
-- **Docker**: Contenedorización.
+- **TypeScript**: JavaScript con tipado estático para mayor seguridad
+- **Express.js**: Framework web minimalista y flexible para Node.js
+- **Prisma ORM**: ORM moderno para base de datos con migraciones automáticas
+- **PostgreSQL**: Base de datos relacional robusta y escalable
+- **JWT**: JSON Web Tokens para autenticación stateless
+- **Bcrypt**: Encriptación segura de contraseñas
+- **Handlebars**: Motor de plantillas para emails personalizados
+- **CORS**: Configuración de Cross-Origin Resource Sharing
+- **Docker**: Contenedorización para despliegue consistente
+- **Resend**: Servicio de envío de emails transaccionales
 
 ## 📁 Estructura del Proyecto
 
 ```
 src/
-├── config/                 # Archivos de configuración (incluida configuración de entorno)
-├── data/                   # Conexión a la base de datos y datos de prueba
-├── domain/                 # Lógica de negocio y entidades
-├── interfaces/             # Interfaces de TypeScript
-├── presentation/           # Controladores, rutas y middlewares
-│   ├── views/              # Plantillas de Handlebars
-│   └── ...
-└── app.ts                  # Punto de entrada de la aplicación
+├── config/                 # Configuraciones (entorno, JWT, bcrypt, CORS)
+├── data/                   # Conexión a BD, seeders y migraciones
+├── domain/                 # Lógica de negocio, entidades y DTOs
+│   ├── dtos/              # Data Transfer Objects para validación
+│   ├── entities/          # Entidades del dominio
+│   └── errors/            # Manejo de errores personalizados
+├── interfaces/             # Interfaces TypeScript
+├── presentation/           # Capa de presentación
+│   ├── auth/              # Autenticación y autorización
+│   ├── movies/            # Gestión de películas
+│   ├── showtimes/         # Horarios de proyección
+│   ├── reservations/      # Sistema de reservas
+│   ├── middlewares/       # Middlewares personalizados
+│   └── views/             # Plantillas Handlebars para emails
+└── app.ts                  # Punto de entrada principal
 ```
 
 ## 🚀 Primeros Pasos
 
 ### Prerrequisitos
 
-- Node.js
-- Docker (con Docker Compose)
-- PostgreSQL
+- **Node.js** (versión 18 o superior)
+- **Docker** (con Docker Compose)
+- **PostgreSQL** (o usar Docker)
+- **Cuenta en Resend** (para envío de emails)
 
 ### Instalación
 
@@ -68,13 +80,21 @@ src/
    Crear un archivo `.env` en el directorio raíz con el siguiente contenido:
 
    ```env
+   # Base de datos
+   DATABASE_URL="postgresql://cinemaspot-user:your_password@localhost:5433/cinemaspot-db?schema=public"
+   
+   # Servidor
    PORT=3000
    APP_URL=http://localhost:3000
+   
+   # Frontend
+   FRONTEND_URL=http://localhost:3001
+   
+   # Autenticación
    JWT_SECRET_KEY=your_jwt_secret_key
-   POSTGRES_USER=cinemaspot-user
-   POSTGRES_PASSWORD=your_password
-   POSTGRES_DB=cinemaspot-db
-   DATABASE_URL="postgresql://cinemaspot-user:your_password@localhost:5433/cinemaspot-db?schema=public"
+   
+   # Email (Resend)
+   RESEND_API_KEY=your_resend_api_key
    ```
 
 4. Iniciar PostgreSQL usando Docker Compose:
@@ -101,6 +121,19 @@ src/
    npm run dev
    ```
 
+8. Verificar que la aplicación esté funcionando:
+
+   ```sh
+   curl http://localhost:3000/api/movies
+   ```
+
+## 🔧 Scripts Disponibles
+
+- `npm run dev`: Inicia el servidor en modo desarrollo con hot reload
+- `npm run build`: Compila el proyecto TypeScript
+- `npm run start`: Compila y ejecuta en modo producción
+- `npm run seed`: Pobla la base de datos con datos de ejemplo
+
 ## 🔌 Endpoints de la API
 
 ### 🔐 Autenticación
@@ -108,6 +141,10 @@ src/
 - `POST /api/auth/login`: Inicio de sesión de usuario.
 - `POST /api/auth/register`: Registro de usuario.
 - `GET /api/auth/validate-email/:token`: Validación de correo electrónico.
+- `POST /api/auth/forgot-password`: Solicitar recuperación de contraseña.
+- `POST /api/auth/reset-password/:token`: Restablecer contraseña.
+- `GET /api/auth/reset-password/:token`: Formulario de restablecimiento de contraseña.
+- `GET /api/auth/reset-password-success`: Página de éxito tras restablecer contraseña.
 
 ### 🎥 Películas
 
@@ -189,3 +226,68 @@ src/
 - `GET /api/movie-cast/:movie/:actor`: Obtener una relación específica película-actor.
 - `POST /api/movie-cast`: Agregar una nueva relación película-actor (Solo administrador).
 - `DELETE /api/movie-cast/:movie/:actor`: Eliminar una relación película-actor (Solo administrador).
+
+## 🔒 Autenticación y Autorización
+
+### Roles de Usuario
+- **Administrador**: Acceso completo a todas las funcionalidades
+- **Usuario**: Acceso limitado a consultas y reservas
+
+### Endpoints Protegidos
+Los endpoints marcados con "(Solo administrador)" requieren autenticación con rol de administrador.
+
+### Headers de Autenticación
+```http
+Authorization: Bearer <jwt_token>
+```
+
+## 🌐 Configuración de CORS
+
+La aplicación incluye configuración de CORS para permitir peticiones desde el frontend:
+
+- **Desarrollo**: Permite cualquier origen
+- **Producción**: Configurable mediante variables de entorno
+- **Credenciales**: Habilitadas para autenticación
+- **Métodos**: GET, POST, PUT, DELETE, PATCH, OPTIONS
+
+## 📧 Sistema de Emails
+
+### Templates Disponibles
+- **Validación de Email**: Confirmación de registro
+- **Recuperación de Contraseña**: Restablecimiento seguro
+- **Formularios**: Interfaces para restablecer contraseña
+
+### Configuración
+- **Servicio**: Resend
+- **Templates**: Handlebars
+- **Personalización**: Variables dinámicas
+
+## 🚀 Despliegue
+
+### Variables de Entorno de Producción
+```env
+# Base de datos
+DATABASE_URL="postgresql://user:password@host:port/database"
+
+# Servidor
+PORT=3000
+APP_URL="https://api.tudominio.com"
+
+# Frontend
+FRONTEND_URL="https://tudominio.com"
+
+# Autenticación
+JWT_SECRET_KEY="clave_super_secreta_produccion"
+
+# Email
+RESEND_API_KEY="re_tu_api_key_de_resend"
+```
+
+### Docker
+```sh
+# Construir imagen
+docker build -t cinemaspot-backend .
+
+# Ejecutar contenedor
+docker run -p 3000:3000 --env-file .env cinemaspot-backend
+```

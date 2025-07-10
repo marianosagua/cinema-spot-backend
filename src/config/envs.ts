@@ -24,4 +24,6 @@ export const envs = {
   app_url: get("APP_URL").required().asString(),
   // Clave secreta utilizada para firmar y verificar JWT
   jwt_secret_key: get("JWT_SECRET_KEY").required().asString(),
+  // URL del frontend para redirecciones y enlaces
+  frontend_url: get("FRONTEND_URL").default("https://cinemaspot.vercel.app").asString(),
 };

@@ -7,6 +7,7 @@ import {
   ResetPasswordDto,
 } from "../../domain/dtos/auth";
 import { AuthService } from "./auth.service";
+import { envs } from "../../config/envs";
 
 /**
  * Controlador de autenticación.
@@ -62,7 +63,7 @@ export class AuthController {
     try {
       await this.authService.validateEmail(token);
       res.render("successEmailValidation", {
-        urlHomePage: "https://cinemaspot.vercel.app/",
+        urlHomePage: envs.frontend_url,
       });
     } catch (error) {
       handleError(error, res);
@@ -77,7 +78,9 @@ export class AuthController {
     }
     try {
       await this.authService.forgotPassword(forgotDto!);
-      res.status(200).json({ message: "Email de restablecimiento de contraseña enviado" });
+      res
+        .status(200)
+        .json({ message: "Email de restablecimiento de contraseña enviado" });
     } catch (error) {
       handleError(error, res);
     }
@@ -103,7 +106,7 @@ export class AuthController {
 
   resetPasswordSuccess = async (req: Request, res: Response) => {
     res.render("resetPasswordSuccess", {
-      loginUrl: "https://cinemaspot.vercel.app/auth/login",
+      loginUrl: `${envs.frontend_url}/auth/login`,
     });
   };
 
