@@ -36,8 +36,14 @@ export class AuthRoutes {
     router.get("/validar-correo/:token", authController.validateEmail);
     router.post("/olvide-password", authController.forgotPassword);
     router.post("/restablecer-password/:token", authController.resetPassword);
-    router.get("/restablecer-password/:token", authController.getResetPasswordForm);
-    router.get("/restablecer-password-exito", authController.resetPasswordSuccess);
+    router.get(
+      "/restablecer-password/:token",
+      authController.getResetPasswordForm
+    );
+    router.get(
+      "/restablecer-password-exito",
+      authController.resetPasswordSuccess
+    );
 
     return router;
   }

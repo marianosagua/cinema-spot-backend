@@ -1,17 +1,8 @@
-// Entidad que representa una película en el dominio de la aplicación.
-// Incluye validaciones y método de construcción a partir de datos crudos.
 import { prismaClient } from "../../data/postgres/client-connection";
 import { CustomError } from "../errors";
 import { Showtime } from "../../interfaces";
 
 export class MovieEntity {
-  /**
-   * @param id Identificador único de la película
-   * @param title Título de la película
-   * @param description Descripción de la película
-   * @param poster URL del póster de la película
-   * @param category Categoría (nombre o id) de la película
-   */
   constructor(
     public id: number,
     public title: string,
@@ -20,12 +11,6 @@ export class MovieEntity {
     public category: string
   ) {}
 
-  /**
-   * Crea una instancia de Movie validando los datos y resolviendo la categoría.
-   * @param data Objeto con los datos de la película
-   * @returns Objeto Movie validado y listo para usar
-   * @throws CustomError si falta algún campo obligatorio
-   */
   static async create(data: { [key: string]: any }): Promise<Movie> {
     const category = await prismaClient.categories.findFirst({
       where: {
@@ -88,7 +73,6 @@ export class MovieEntity {
   }
 }
 
-// Interfaz que define la estructura de un objeto Movie
 interface Movie {
   id: number;
   title: string;

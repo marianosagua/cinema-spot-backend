@@ -1,20 +1,7 @@
-// Entidad que representa a un usuario en el dominio de la aplicación.
-// Incluye validaciones y método de construcción a partir de datos crudos.
 import { regularExps } from "../../config";
 import { prismaClient } from "../../data/postgres/client-connection";
 
 export class UserEntity {
-  /**
-   * @param id Identificador único del usuario
-   * @param first_name Nombre del usuario
-   * @param last_name Apellido del usuario
-   * @param email Correo electrónico del usuario
-   * @param password Contraseña hasheada del usuario
-   * @param role Rol del usuario (opcional)
-   * @param emailValidated Indica si el email fue validado (opcional)
-   * @param created_at Fecha de creación (opcional)
-   * @param updated_at Fecha de actualización (opcional)
-   */
   constructor(
     public id: string,
     public first_name: string,
@@ -27,12 +14,6 @@ export class UserEntity {
     public updated_at?: Date
   ) {}
 
-  /**
-   * Crea una instancia de usuario validando los datos y resolviendo el rol.
-   * @param data Objeto con los datos del usuario
-   * @returns Objeto usuario validado y listo para usar
-   * @throws Error si falta algún campo obligatorio o el formato es incorrecto
-   */
   static async create(data: { [key: string]: any }) {
     const { id, first_name, last_name, email, password, role, created_at, updated_at, email_validated } = data;
 

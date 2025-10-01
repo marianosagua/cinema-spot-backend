@@ -1,10 +1,3 @@
-/**
- * Rutas del módulo de películas (Movies)
- *
- * Este archivo define las rutas para consultar, crear, actualizar y eliminar películas.
- * Las rutas de creación, edición y borrado están protegidas por AuthMiddleware.isAdmin.
- */
-
 import { Router } from "express";
 import { MoviesController } from "./movies.controller";
 import { AuthMiddleware } from "../middlewares/auth.middleware";

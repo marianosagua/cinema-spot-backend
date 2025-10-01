@@ -1,16 +1,3 @@
-/**
- * Controlador de películas.
- * Gestiona la consulta, creación, actualización y eliminación de películas.
- * Utiliza MoviesService y MovieEntity para la lógica de negocio y validación.
- *
- * Métodos:
- * - getMovies: Lista todas las películas.
- * - getMovie: Obtiene una película por ID.
- * - addMovie: Crea una nueva película validando los datos recibidos.
- * - updateMovie: Actualiza una película existente validando los datos recibidos.
- * - deleteMovie: Elimina una película por ID.
- */
-
 import { Response, Request } from "express";
 import { MoviesService } from "./movies.service";
 import { MovieEntity } from "../../domain/entities";

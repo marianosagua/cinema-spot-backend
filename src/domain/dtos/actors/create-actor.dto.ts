@@ -1,12 +1,3 @@
-// -----------------------------------------------------------------------------
-// DTO para la creación de actores
-// Valida y transforma los datos recibidos para crear un nuevo actor
-// -----------------------------------------------------------------------------
-
-/**
- * Data Transfer Object para la creación de un actor.
- * Valida que todos los campos requeridos estén presentes y tengan el formato correcto.
- */
 export class CreateActorDto {
   constructor(
     public first_name: string,
@@ -15,12 +6,6 @@ export class CreateActorDto {
     public nationality: string
   ) {}
 
-  /**
-   * Crea una instancia de CreateActorDto a partir de los datos recibidos.
-   * Valida la existencia y formato de los campos requeridos.
-   * @param object Objeto con los datos del actor
-   * @returns Una tupla con un mensaje de error o la instancia creada
-   */
   static create(object: { [key: string]: any }): [string?, CreateActorDto?] {
     const { first_name, last_name, age, nationality } = object;
 

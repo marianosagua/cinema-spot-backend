@@ -2,17 +2,7 @@ import { prismaClient } from "../../data/postgres/client-connection";
 import { CustomError } from "../../domain/errors";
 import { Movie } from "../../interfaces";
 
-/**
- * Servicio para la gestión de películas.
- * Proporciona métodos para consultar, crear, actualizar y eliminar películas en la base de datos.
- * Utiliza Prisma Client para interactuar con la base de datos.
- */
 export class MoviesService {
-  /**
-   * Obtiene todas las películas existentes.
-   * @returns {Promise<any[]>} Lista de películas con sus detalles y funciones.
-   * @throws {CustomError} Si no se encuentran películas.
-   */
   async getMovies() {
     const movies = await prismaClient.movies.findMany({
       select: {
@@ -81,12 +71,6 @@ export class MoviesService {
     return transformedMovies.sort((a, b) => a.id - b.id);
   }
 
-  /**
-   * Obtiene una película por su ID.
-   * @param {string} id - ID de la película.
-   * @returns {Promise<any>} Película encontrada con detalles y funciones.
-   * @throws {CustomError} Si la película no existe.
-   */
   async getMovie(id: string) {
     const movie = await prismaClient.movies.findFirst({
       where: {
@@ -156,12 +140,6 @@ export class MoviesService {
     };
   }
 
-  /**
-   * Crea una nueva película y sus funciones.
-   * @param {Movie} movie - Objeto película con datos y funciones.
-   * @returns {Promise<void>} No retorna valor, lanza error si falla.
-   * @throws {Error} Si ocurre un error al crear la película.
-   */
   async addMovie(movie: Movie) {
     const movieCreated = await prismaClient.movies.create({
       data: {
@@ -196,12 +174,6 @@ export class MoviesService {
     }
   }
 
-  /**
-   * Actualiza una película existente y sus funciones.
-   * @param {Movie} movie - Objeto película con datos y funciones actualizadas.
-   * @returns {Promise<void>} No retorna valor, lanza error si falla.
-   * @throws {Error} Si ocurre un error al actualizar la película.
-   */
   async updateMovie(movie: Movie) {
     const movieUpdated = await prismaClient.movies.update({
       where: {
@@ -244,12 +216,6 @@ export class MoviesService {
     }
   }
 
-  /**
-   * Elimina una película por su ID.
-   * @param {string} id - ID de la película.
-   * @returns {Promise<void>} No retorna valor, lanza error si falla.
-   * @throws {Error} Si ocurre un error al eliminar la película.
-   */
   async deleteMovie(id: string) {
     const deletedMovie = await prismaClient.movies.delete({
       where: {

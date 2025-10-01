@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// Archivo de barril para las interfaces del dominio
-// Permite importar todas las interfaces desde un solo archivo
-// -----------------------------------------------------------------------------
 export type * from "./movie";
 
 export type * from "./showtime";

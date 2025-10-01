@@ -1,28 +1,3 @@
-// seed.ts - Script de inicialización (seeding) de la base de datos para CinemaSpot Backend
-//
-// Este archivo ejecuta el proceso de seeding para poblar la base de datos PostgreSQL con datos de ejemplo y configuración inicial.
-// Utiliza Prisma ORM y los datos definidos en dataSeed.ts. Es útil para entornos de desarrollo, pruebas o despliegue inicial.
-//
-// Funcionalidades principales:
-// - Limpia todas las tablas relevantes y resetea las secuencias de IDs.
-// - Inserta categorías, películas, próximos estrenos, salas, roles, usuarios, funciones, asientos, actores y el reparto de películas.
-// - Hashea las contraseñas de los usuarios antes de insertarlas.
-//
-// Estructura del archivo:
-// - Ejecución automática (IIFE) que conecta, ejecuta el seed y desconecta Prisma.
-// - Función seed(): Orquesta el proceso de borrado, reseteo e inserción de datos.
-// - Función deleteAllData(): Elimina todos los registros de las tablas principales.
-// - Función resetSequences(): Reinicia los contadores de secuencias de IDs en la base de datos.
-//
-// Uso:
-// Ejecutar este archivo con Node.js para poblar la base de datos:
-//   npx ts-node src/data/seed/seed.ts
-//
-// Modifica dataSeed.ts para cambiar los datos de ejemplo según las necesidades del proyecto.
-//
-// Recomendación:
-// No ejecutar en entornos de producción, ya que elimina todos los datos existentes.
-
 import { bcryptAdapter } from "../../config/bcrypt.adapter";
 import { prismaClient } from "../postgres/client-connection";
 import { dataSeed } from "./dataSeed";
