@@ -1,6 +1,7 @@
 import { Resend } from "resend";
+import { envs } from "../../config";
 
-const resend = new Resend("re_ZDhXQPMp_JwgctN94c85hJExAvPMgRBEJ");
+const resend = new Resend(envs.resend);
 
 interface Options {
   email: string;
